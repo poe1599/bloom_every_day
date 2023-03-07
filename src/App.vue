@@ -1,7 +1,19 @@
+<template>
+  <header>
+    <VueLoading v-model:active="isLoading"></VueLoading>
+
+    <RouterLink to="/">Home</RouterLink> |
+    <RouterLink to="/about">About</RouterLink>
+  </header>
+
+  <RouterView />
+</template>
+
+
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 
-
+const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
   data() {
@@ -15,34 +27,22 @@ export default {
   },
 
   mounted() {
-    this.isLoading = true
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1000)
+    // this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
+    // .then((res)=>{
+    //   console.log(res)
+    // })
+    // 此處為測試用，之後要移除
+    // this.isLoading = true
+    // setTimeout(() => {
+    //   this.isLoading = false
+    // }, 1000)
   }
 }
 </script>
 
-<template>
-  <header>
-    <VueLoading v-model:active="isLoading"></VueLoading>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
 
 <style scoped>
-header {
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -75,7 +75,7 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
+} */
 
 @media (min-width: 1024px) {
   header {
