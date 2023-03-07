@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap');
+
+// 定義 h1~h6 字體大小和字體
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, .nav_ul {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+}
+
+h1{
+    line-height: 3.6rem, //57.6px
+}
+
+h2{
+    line-height: 2.4rem, //38.4px
+}
+
+h3{
+    line-height: 2.1rem, //33.6px  
+}
+
+h4{
+    line-height:1.8rem, //28.8px
+}
+
+h5{
+    line-height: 1.5rem, //24px
+}
+
+h6{
+    line-height: 1.2rem, //19.2px
+}
+
+
+
+.fs-1 {
+    font-size: 2rem !important; //32px
+}
+
+.fs-2 {
+    font-size: 1.75rem !important; //28px
+}
+
+.fs-3{
+    font-size: 1.5rem !important;  //24px
+}
+
+.fs-4{
+    font-size: 1.25rem !important; //20px
+}
+
+.fs-5{
+    font-size: 1.125rem !important; // 18px
+}
+
+.fs-6{
+    font-size: 1rem !important;
+}
+
+.caption{
+    font-size: 0.875rem !important;
+
+}
+
+// $headings: (
+//   h1: (
+//     font-family: "Noto Serif TC, serif",
+//     font-size: 3rem, //48px
+//     font-weight: 600,
+//     line-height: 3.6rem, //57.6px
+
+//   ),
+//   h2: (
+//     font-family: "Noto Serif TC, serif",
+//     font-size: 2rem, //32px
+//     font-weight: 600,
+//     line-height: 2.4rem, //38.4px
+
+//   ),
+//   h3: (
+//     font-family: "Noto Serif TC, serif",
+//     font-size: 1.75rem, //28px
+//     font-weight: 600,
+//     line-height: 2.1rem, //33.6px
+
+//   ),
+//   h4: (
+//     font-family: "Noto Serif TC, serif",
+//     font-size: 1.5rem,  //24px
+//     font-weight: 600,
+//     line-height:1.8rem, //28.8px
+
+//   ),
+//   h5: (
+//     font-family: "Noto Serif TC, serif",
+//     font-size: 1.25rem, //20px
+//     font-weight: 600,
+//     line-height: 1.5rem, //24px
+
+//   ),
+//   h6: (
+//     font-family: "Noto Serif TC, serif",
+//     font-size: 1rem,  //16px
+//     font-weight: 600,
+//     line-height: 1.2rem, //19.2px
+
+//   )
+// );

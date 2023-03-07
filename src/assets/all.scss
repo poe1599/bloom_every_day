@@ -2,4 +2,9 @@
 
 @import "./variables"; // assets 中自訂義的變數檔案
 
+
 @import "bootstrap/scss/bootstrap.scss"; // 將 node_modules 中的 bootstrap.scss 引入
+
+@import "./fontStyle.scss"; // 自訂義字體
+@import "./_viewport.scss";       // 容器
+@import "./_base.scss";     // 通用設定

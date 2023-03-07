@@ -298,8 +298,13 @@ $cyans: (
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-$primary:       $blue !default;
-$secondary:     $gray-600 !default;
+$primary:       $blue !default; // #FF3D33;
+$secondary:     #FFCD49; // $gray-600 !default;
+$bg-1:          #F5F1EE;
+$bg-2:          #F2E7E8;
+$dark-text:     #121212; // 內文、navbar、敘述性文字
+$neutral:       #808080;
+
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
@@ -310,14 +315,18 @@ $dark:          $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
+  "primary":    #FF3D33,
+  "secondary":  #FFCD49,  // $secondary,
   "success":    $success,
   "info":       $info,
   "warning":    $warning,
   "danger":     $danger,
   "light":      $light,
-  "dark":       $dark
+  "dark":       $dark,
+  "bg-1":       #F5F1EE,
+  "bg-2":       #F2E7E8,
+  "dark-text":  #121212, // 內文、navbar、敘述性文字
+  "neutral":    #808080
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -566,13 +575,16 @@ $line-height-base:            1.5 !default;
 $line-height-sm:              1.25 !default;
 $line-height-lg:              2 !default;
 
-$h1-font-size:                $font-size-base * 2.5 !default;
+
+// 定義 h1~h6 字體大小和字體
+$h1-font-size:                $font-size-base * 3 !default; //2.5
 $h2-font-size:                $font-size-base * 2 !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default;
 // scss-docs-end font-variables
+
 
 // scss-docs-start font-sizes
 $font-sizes: (
