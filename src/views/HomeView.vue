@@ -25,7 +25,7 @@
           <div class="col-lg-6 promote_img">
             <img src="../assets/img/ImgSec2-2.png" alt="" />
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6 promote_text">
             <div class="promote_col_text">
               <h3 class="text-primary promote_col_h3">今天開始走入有花的日子裡...</h3>
 
@@ -189,6 +189,21 @@
   .bgSec1 {
     left: 136px;
     top: 376px;
+  }
+
+  .promote_img {
+    margin-bottom: 0;
+  }
+
+  .promote_text {
+    display: flex;
+    align-items: center;
+  }
+
+  .promote_col_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
