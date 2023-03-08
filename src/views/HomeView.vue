@@ -23,7 +23,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 promote_img">
-            <img src="../assets/img/ImgSec2-2.png" alt="" />
+            <img src="../assets/img/ImgSec-pc-2-2.png" alt="" />
           </div>
           <div class="col-lg-6 promote_text">
             <div class="promote_col_text">
@@ -113,7 +113,7 @@
   padding: 0 0 72px 0;
 }
 .promote_img {
-  // padding: 0;
+  padding: 0;
   margin-bottom: 72px;
 }
 
@@ -192,6 +192,7 @@
   }
 
   .promote_img {
+    padding:0 15px;
     margin-bottom: 0;
   }
 
