@@ -7,8 +7,8 @@ const router = createRouter({
       path:'/',
       component:()=>import ('../views/FrontLayout.vue'),
       children:[
-        {
-          path:'/home',
+        { //首頁內容區
+          path:'',
           component:()=>import('../views/HomeView.vue')
         }
       ]

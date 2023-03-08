@@ -2,8 +2,6 @@
   <header>
     <VueLoading v-model:active="isLoading"></VueLoading>
 
-    <RouterLink to="/">Home</RouterLink> |
-    <RouterLink to="/about">About</RouterLink>
   </header>
 
   <RouterView />
