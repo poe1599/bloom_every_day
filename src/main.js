@@ -12,8 +12,9 @@ import 'vue-loading-overlay/dist/css/index.css';
 // 匯入自訂義 all.scss 檔
 import './assets/all.scss'
 
-// 引入 bootstrap.js
-// import 'bootstrap'
+// 引入 bootstrap.js & bs icon
+import 'bootstrap'
+
 
 // 引入 VeeValidate 元件跟功能
 import {
@@ -32,7 +33,9 @@ import App from './App.vue'
 Object.keys(AllRules).forEach((rule) => {
     defineRule(rule, AllRules[rule]);
   });
-  
+
+
+
 
 import router from './router'
 
