@@ -44,8 +44,51 @@
         </div>
       </div>
     </section>
-    <section></section>
-    <section></section>
+
+    <section class="intro">
+      <div class="container">
+        <div class="intro_text text-center">
+          <h3 class="text-primary h3_mobile">我們是 日日是好日</h3>
+          <h3 class="text-primary h3_mobile">讓我們用一朵花 一株草 一片葉 來打造你的新生活</h3>
+          <h2 class="text-primary h2_pc">我們是 日日是好日</h2>
+          <h2 class="text-primary h2_pc">
+            讓我們用一朵花 一株草 一片葉
+            <br />
+            來打造你的新生活
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="container about_container">
+        <div class="row">
+          <div class="col-lg-8 about_img">
+            <img src="../assets/img/ImgSec4.png" alt="" />
+          </div>
+          <div class="col-lg-6 about_text bg-bg-2">
+            <h6 class="about_text_title_en">about us</h6>
+            <!--大寫-->
+            <div class="about_text_pc">
+              <h2 class="text-primary about_text_title_ch">關於我們</h2>
+              <div class="fs-5 py-2">
+                繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
+              </div>
+              <div class="fs-5 py-2">我們提供的乾燥花商品比新鮮花草更易照顧，也更能延續美好的氛圍。</div>
+              <div class="fs-5">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
+            </div>
+            <div class="about_text_mobile">
+              <h3 class="text-primary about_text_title_ch">關於我們</h3>
+              <div class="fs-6 py-2">
+                繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
+              </div>
+              <div class="fs-6 py-2">我們提供的乾燥花商品比新鮮花草更易照顧，也更能延續美好的氛圍。</div>
+              <div class="fs-6">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section></section>
     <section></section>
   </div>
@@ -136,6 +179,66 @@
   right: -14px;
 }
 
+// intro section
+.intro {
+  padding: 24px 12px;
+  background: url('../assets/img/ImgSec3.png') center center no-repeat;
+}
+
+.intro_text {
+  border: 1px solid white;
+  padding: 64px 12px;
+}
+
+.h2_pc {
+  display: none;
+}
+
+// about section
+.about {
+  height: 780px;
+  padding: 74px 0;
+  background: #f5f5f5;
+}
+
+.about_container {
+  position: relative;
+}
+
+.about_img {
+  padding: 0;
+  position: absolute;
+  left: -15px;
+}
+
+.about_img > img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: 0% 50%;
+}
+
+.about_text {
+  position: absolute;
+  padding: 24px 12px;
+  border-radius: 8px 0px 0px 8px;
+  top: 200px;
+  right: -15px;
+}
+
+.about_text_title_en {
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.about_text_pc {
+  display: none;
+}
+
+.about_text_title_ch_mobile {
+  margin-bottom: 24px;
+}
+
 @media screen and (min-width: 576px) {
   .promote_col_text {
     padding: 0 20px;
@@ -191,8 +294,12 @@
     top: 376px;
   }
 
+  .promote {
+    padding: 0 0 120px 0;
+  }
+
   .promote_img {
-    padding:0 15px;
+    padding: 0 15px;
     margin-bottom: 0;
   }
 
@@ -205,6 +312,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .h3_mobile {
+    display: none;
+  }
+  .h2_pc {
+    display: block;
+  }
+
+  .about {
+    padding: 120px 0;
+  }
+  .about_text_mobile {
+    display: none;
+  }
+  .about_text_pc {
+    display: block;
   }
 }
 
