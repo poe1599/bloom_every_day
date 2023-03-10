@@ -29,7 +29,7 @@
             <div class="promote_col_text">
               <h3 class="text-primary promote_col_h3">今天開始走入有花的日子裡...</h3>
 
-              <p class="fs-5">
+              <p class="fs-5 promote_col_p">
                 你已經看厭灰色城市的色調了嗎？
                 <br />
                 你渴望將自然的元素帶到你家嗎？
@@ -171,6 +171,11 @@
 
 .promote_col_h3 {
   margin-bottom: 24px;
+  z-index:1;
+}
+
+.promote_col_p{
+  z-index: 1;
 }
 
 .BgSec2 {
