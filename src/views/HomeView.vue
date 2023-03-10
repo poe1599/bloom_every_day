@@ -22,8 +22,10 @@
     <section class="promote">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 promote_img">
-            <img src="../assets/img/ImgSec-pc-2-2.png" alt="" />
+          <div class="col-lg-6 promote_col_6">
+            <div class="promote_img">
+              <img src="../assets/img/ImgSec-pc-2-2.png" alt="" />
+            </div>
           </div>
           <div class="col-lg-6 promote_text">
             <div class="promote_col_text">
@@ -60,35 +62,44 @@
       </div>
     </section>
 
-    <section class="about">
+    <!-- <section class="about">
       <div class="container about_container">
         <div class="row">
-          <div class="col-lg-8 about_img">
-            <img src="../assets/img/ImgSec4.png" alt="" />
-          </div>
-          <div class="col-lg-6 about_text bg-bg-2">
-            <h6 class="about_text_title_en">about us</h6>
-            <!--大寫-->
-            <div class="about_text_pc">
-              <h2 class="text-primary about_text_title_ch">關於我們</h2>
-              <div class="fs-5 py-2">
-                繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
-              </div>
-              <div class="fs-5 py-2">我們提供的乾燥花商品比新鮮花草更易照顧，也更能延續美好的氛圍。</div>
-              <div class="fs-5">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
+          <div class="col-lg-10">
+            <div class="about_img">
+              <img src="../assets/img/ImgSec4.png" alt="" />
             </div>
-            <div class="about_text_mobile">
-              <h3 class="text-primary about_text_title_ch">關於我們</h3>
-              <div class="fs-6 py-2">
-                繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
+          </div>
+
+          <div class="col-lg-6 about_col_6">
+            <div class="about_text bg-bg-2">
+              <h6 class="about_text_title_en">about us</h6>
+
+              <div class="about_text_pc">
+                <h2 class="text-primary about_text_title_ch">關於我們</h2>
+                <div class="fs-5 py-2">
+                  繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
+                </div>
+                <div class="fs-5 py-2">
+                  我們提供的乾燥花商品比新鮮花草更易照顧，也更能延續美好的氛圍。
+                </div>
+                <div class="fs-5">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
               </div>
-              <div class="fs-6 py-2">我們提供的乾燥花商品比新鮮花草更易照顧，也更能延續美好的氛圍。</div>
-              <div class="fs-6">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
+              <div class="about_text_mobile">
+                <h3 class="text-primary about_text_title_ch">關於我們</h3>
+                <div class="fs-6 py-2">
+                  繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
+                </div>
+                <div class="fs-6 py-2">
+                  我們提供的乾燥花商品比新鮮花草更易照顧，也更能延續美好的氛圍。
+                </div>
+                <div class="fs-6">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <section></section>
     <section></section>
   </div>
@@ -155,8 +166,13 @@
   background: #f5f5f5;
   padding: 0 0 72px 0;
 }
+
+// .promote_col_6 {
+//   padding: 0;
+// }
+
 .promote_img {
-  padding: 0;
+  // padding: 0;
   margin-bottom: 72px;
 }
 
@@ -171,10 +187,10 @@
 
 .promote_col_h3 {
   margin-bottom: 24px;
-  z-index:1;
+  z-index: 1;
 }
 
-.promote_col_p{
+.promote_col_p {
   z-index: 1;
 }
 
@@ -206,29 +222,32 @@
   background: #f5f5f5;
 }
 
-.about_container {
+.col-lg-10,
+.about_col_6 {
   position: relative;
 }
 
 .about_img {
-  padding: 0;
+  margin: 0 0 0 -12px;
   position: absolute;
-  left: -15px;
+  width: 363px;
+  height: 300px;
 }
 
 .about_img > img {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
   object-position: 0% 50%;
 }
 
 .about_text {
   position: absolute;
+  width: 363px;
   padding: 24px 12px;
   border-radius: 8px 0px 0px 8px;
   top: 200px;
-  right: -15px;
+  left: 12px;
 }
 
 .about_text_title_en {
@@ -245,6 +264,9 @@
 }
 
 @media screen and (min-width: 576px) {
+  // .promote_col_6{
+  //   padding: 0 15px;
+  // }
   .promote_col_text {
     padding: 0 20px;
   }
