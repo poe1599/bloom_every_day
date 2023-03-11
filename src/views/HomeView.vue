@@ -21,7 +21,7 @@
 
     <section class="promote">
       <div class="container">
-        <div class="row">
+        <div class="row mx-auto">
           <div class="col-lg-6 promote_col_6">
             <div class="promote_img">
               <img src="../assets/img/ImgSec-pc-2-2.png" alt="" />
@@ -62,9 +62,9 @@
       </div>
     </section>
 
-    <!-- <section class="about">
+    <section class="about">
       <div class="container about_container">
-        <div class="row">
+        <div class="row mx-auto">
           <div class="col-lg-10">
             <div class="about_img">
               <img src="../assets/img/ImgSec4.png" alt="" />
@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-    </section> -->
+    </section>
     <section></section>
     <section></section>
   </div>
@@ -222,16 +222,17 @@
   background: #f5f5f5;
 }
 
-.col-lg-10,
-.about_col_6 {
+.about_container {
   position: relative;
 }
 
+
 .about_img {
-  margin: 0 0 0 -12px;
+  // margin: 0 0 0 -12px;
   position: absolute;
-  width: 363px;
+  width: calc(100% - 16px);
   height: 300px;
+  left: -16px;
 }
 
 .about_img > img {
@@ -243,11 +244,11 @@
 
 .about_text {
   position: absolute;
-  width: 363px;
+  width: calc(100% - 16px);
   padding: 24px 12px;
   border-radius: 8px 0px 0px 8px;
   top: 200px;
-  left: 12px;
+  left: 16px; // 等同於 right: 0px;
 }
 
 .about_text_title_en {
@@ -274,6 +275,17 @@
     top: -54px;
     right: 20px;
   }
+
+  .about_img {
+    width: calc(100% - 32px);
+  }
+
+  .about_text {
+    padding: 24px 32px;
+    width: calc(100% - 32px);
+    right: 0;
+    left: auto;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -298,6 +310,15 @@
     left: 108px;
     top: 269px;
   }
+
+  .about_img {
+    height: 400px;
+}
+
+.about_text {
+    top: 250px;
+    width: calc(100% - 200px);
+}
 }
 
 @media screen and (min-width: 992px) {
@@ -333,6 +354,7 @@
   .promote_text {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   .promote_col_text {
@@ -351,12 +373,18 @@
   .about {
     padding: 120px 0;
   }
-  .about_text_mobile {
-    display: none;
-  }
-  .about_text_pc {
-    display: block;
-  }
+
+  .about_img {
+    left: 0;
+    width: calc(100% - 250px);
+}
+
+
+.about_text {
+    width: calc(100% - 350px);
+}
+
+  
 }
 
 @media screen and (min-width: 1200px) {
@@ -367,6 +395,21 @@
     left: 294px;
     top: 355px;
   }
+
+  .about {
+  height: 912px;
+  }
+
+  .about_text_mobile {
+    display: none;
+  }
+  .about_text_pc {
+    display: block;
+  }
+
+  .about_text {
+    width: calc(100% - 650px);
+}
 }
 </style>
 
