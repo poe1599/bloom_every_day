@@ -100,7 +100,115 @@
         </div>
       </div>
     </section>
-    <section></section>
+
+    <section class="recommend">
+      <div class="container">
+        <div class="recommend_text text-center">
+          <h6>PICK UP</h6>
+          <h2 class="recommend_h2_text_pc text-primary">推薦商品</h2>
+          <h3 class="recommend_h3_text_mobile text-primary">推薦商品</h3>
+        </div>
+
+        <!-- swiper -->
+        <div>
+          <Swiper
+            class="swiper swiper_mobile"
+            :pagination="{ 
+              clickable: true,             
+               }"
+            :slides-per-view="2"
+            :centeredSlides="true"
+            :space-between="16"
+            :breakpoints="{
+              '992':{
+                slidesPerView:3,
+                spaceBetween: 48,
+              }
+            }"
+            :modules="modules"
+          >
+            <SwiperSlide>
+              <a href="" class="mySwiper">
+                <div class="swiper_img">
+                  <img src="../assets/img/img_11.jpg" alt="" />
+                </div>
+                <div class="swiper_text text-center">
+                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
+                  <h6 class="text-primary">NT$ 1,000</h6>
+                </div>
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href="" class="mySwiper">
+                <div class="swiper_img">
+                  <img src="../assets/img/img_5.jpg" alt="" />
+                </div>
+
+                <div class="swiper_text text-center">
+                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
+                  <h6 class="text-primary">NT$ 1,000</h6>
+                </div>
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href="" class="mySwiper">
+                <div class="swiper_img">
+                  <img src="../assets/img/ImgSec5-4.png" alt="" />
+                </div>
+                <div class="swiper_text text-center">
+                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
+                  <h6 class="text-primary">NT$ 1,000</h6>
+                </div>
+              </a>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+        <!-- <div>
+          <Swiper
+            class="swiper"
+            :pagination="{ clickable: true }"
+            :slides-per-view="3"
+            :space-between="16"
+            :modules="modules"
+          >
+            <SwiperSlide>
+              <a href="" class="mySwiper">
+                <div class="swiper_img">
+                  <img src="../assets/img/img_11.jpg" alt="" />
+                </div>
+                <div class="swiper_text text-center">
+                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
+                  <h6 class="text-primary">NT$ 1,000</h6>
+                </div>
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href="" class="mySwiper">
+                <div class="swiper_img">
+                  <img src="../assets/img/img_5.jpg" alt="" />
+                </div>
+
+                <div class="swiper_text text-center">
+                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
+                  <h6 class="text-primary">NT$ 1,000</h6>
+                </div>
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href="" class="mySwiper">
+                <div class="swiper_img">
+                  <img src="../assets/img/ImgSec5-4.png" alt="" />
+                </div>
+                <div class="swiper_text text-center">
+                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
+                  <h6 class="text-primary">NT$ 1,000</h6>
+                </div>
+              </a>
+            </SwiperSlide>
+          </Swiper>
+        </div> -->
+      </div>
+    </section>
     <section></section>
   </div>
 </template>
@@ -167,10 +275,6 @@
   padding: 0 0 72px 0;
 }
 
-// .promote_col_6 {
-//   padding: 0;
-// }
-
 .promote_img {
   // padding: 0;
   margin-bottom: 72px;
@@ -226,7 +330,6 @@
   position: relative;
 }
 
-
 .about_img {
   // margin: 0 0 0 -12px;
   position: absolute;
@@ -264,10 +367,43 @@
   margin-bottom: 24px;
 }
 
+// recommend section
+.recommend {
+  background: linear-gradient(180deg, #f5f5f5 40%, #f2e7e8 60%);
+}
+.recommend_h2_text_pc {
+  display: none;
+}
+
+// swiper
+a.mySwiper {
+  display: block;
+  padding: 0 0 40px 0;
+}
+
+.swiper_img {
+  width: 100%;
+  height: 257px;
+  position: relative;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.swiper_text_h5 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
 @media screen and (min-width: 576px) {
-  // .promote_col_6{
-  //   padding: 0 15px;
-  // }
   .promote_col_text {
     padding: 0 20px;
   }
@@ -313,12 +449,12 @@
 
   .about_img {
     height: 400px;
-}
+  }
 
-.about_text {
+  .about_text {
     top: 250px;
     width: calc(100% - 200px);
-}
+  }
 }
 
 @media screen and (min-width: 992px) {
@@ -377,14 +513,15 @@
   .about_img {
     left: 0;
     width: calc(100% - 250px);
-}
+  }
 
-
-.about_text {
+  .about_text {
     width: calc(100% - 350px);
-}
+  }
 
-  
+  // .swiper_mobile{
+  //   display: none;
+  // }
 }
 
 @media screen and (min-width: 1200px) {
@@ -397,7 +534,7 @@
   }
 
   .about {
-  height: 912px;
+    height: 912px;
   }
 
   .about_text_mobile {
@@ -409,10 +546,29 @@
 
   .about_text {
     width: calc(100% - 650px);
-}
+  }
 }
 </style>
 
 <script>
-export default {}
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination } from 'swiper'
+
+// Import Swiper styles
+import 'swiper/css'
+// import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
+export default {
+  data() {
+    return {
+      modules: [Pagination]
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide
+  }
+}
 </script>
