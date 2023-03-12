@@ -104,7 +104,7 @@
     <section class="recommend">
       <div class="container">
         <div class="recommend_text text-center">
-          <h6>PICK UP</h6>
+          <h6 class="recommend_text_h6">PICK UP</h6>
           <h2 class="recommend_h2_text_pc text-primary">推薦商品</h2>
           <h3 class="recommend_h3_text_mobile text-primary">推薦商品</h3>
         </div>
@@ -113,16 +113,16 @@
         <div>
           <Swiper
             class="swiper swiper_mobile"
-            :pagination="{ 
-              clickable: true,             
-               }"
+            :pagination="{
+              clickable: true
+            }"
             :slides-per-view="2"
             :centeredSlides="true"
             :space-between="16"
             :breakpoints="{
-              '992':{
-                slidesPerView:3,
-                spaceBetween: 48,
+              '992': {
+                slidesPerView: 3,
+                spaceBetween: 48
               }
             }"
             :modules="modules"
@@ -209,6 +209,7 @@
         </div> -->
       </div>
     </section>
+    
     <section></section>
   </div>
 </template>
@@ -369,13 +370,22 @@
 
 // recommend section
 .recommend {
-  background: linear-gradient(180deg, #f5f5f5 40%, #f2e7e8 60%);
+  // background: linear-gradient(180deg, #f5f5f5 40%, #f2e7e8 60%);
+   background: #f5f5f5;
 }
 .recommend_h2_text_pc {
   display: none;
 }
 
+.recommend_text_h6{
+  margin-bottom: 12px;
+}
+
 // swiper
+.swiper{
+  background: linear-gradient(180deg, #f5f5f5 40%, #f2e7e8 60%);
+}
+
 a.mySwiper {
   display: block;
   padding: 0 0 40px 0;
@@ -518,6 +528,20 @@ a.mySwiper {
   .about_text {
     width: calc(100% - 350px);
   }
+
+  .recommend_h3_text_mobile {
+    display: none;
+  }
+
+  .recommend_h2_text_pc {
+    display: block;
+    margin-bottom: 48px;
+  }
+
+  .swiper{
+    padding: 0 141px;
+  }
+
 
   // .swiper_mobile{
   //   display: none;
