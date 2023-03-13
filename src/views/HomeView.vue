@@ -334,7 +334,7 @@
 
 // about section
 .about {
-  height: 780px;
+  height: 740px;
   padding: 74px 0;
   background: #f5f5f5;
 }
