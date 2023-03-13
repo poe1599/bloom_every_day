@@ -429,7 +429,7 @@ a.mySwiper {
 .news {
   position: relative;
   background: #f5f5f5;
-  padding: 48px 0 192px 0;
+  padding: 48px 0 120px 0;
 }
 
 .BgSec5 {
@@ -437,7 +437,7 @@ a.mySwiper {
   width: 162px;
   height: 204px;
   top: -20px;
-  right: -3px;
+  right: 3px;
   z-index: 1;
 }
 
