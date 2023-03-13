@@ -163,54 +163,67 @@
             </SwiperSlide>
           </Swiper>
         </div>
-        <!-- <div>
-          <Swiper
-            class="swiper"
-            :pagination="{ clickable: true }"
-            :slides-per-view="3"
-            :space-between="16"
-            :modules="modules"
-          >
-            <SwiperSlide>
-              <a href="" class="mySwiper">
-                <div class="swiper_img">
-                  <img src="../assets/img/img_11.jpg" alt="" />
-                </div>
-                <div class="swiper_text text-center">
-                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
-                  <h6 class="text-primary">NT$ 1,000</h6>
-                </div>
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="" class="mySwiper">
-                <div class="swiper_img">
-                  <img src="../assets/img/img_5.jpg" alt="" />
-                </div>
-
-                <div class="swiper_text text-center">
-                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
-                  <h6 class="text-primary">NT$ 1,000</h6>
-                </div>
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="" class="mySwiper">
-                <div class="swiper_img">
-                  <img src="../assets/img/ImgSec5-4.png" alt="" />
-                </div>
-                <div class="swiper_text text-center">
-                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
-                  <h6 class="text-primary">NT$ 1,000</h6>
-                </div>
-              </a>
-            </SwiperSlide>
-          </Swiper>
-        </div> -->
       </div>
     </section>
-    
-    <section></section>
+
+    <section class="news">
+      <!--por-->
+      <div class="container">
+        <div class="news_group">
+          <div class="news_title">
+            <h6 class="news_title_en">NEWS</h6>
+            <h3 class="news_title_ch_mobile text-primary">最新消息</h3>
+            <h2 class="news_title_ch_pc text-primary">最新消息</h2>
+          </div>
+
+          <div class="news_body">
+            <div class="news_body_item">
+              <div class="item_left">
+                <div class="item_time text-neutral caption">2023.02.01</div>
+                <div class="fs-6">
+                  <a href="" class="item_title text-dark-text">用桌上型迷你花束點綴你的辦公桌吧~</a>
+                </div>
+              </div>
+
+              <div class="item_right arrow_icon">
+                <img src="../assets/icon/IconChevronRight.svg" alt="" />
+              </div>
+            </div>
+            <div class="news_body_item">
+              <div class="item_left">
+                <div class="item_time text-neutral caption">2023.02.01</div>
+                <div class="fs-6">
+                  <a href="" class="item_title text-dark-text">春回大地系列花束廣受好評！</a>
+                </div>
+              </div>
+
+              <div class="item_right arrow_icon">
+                <img src="../assets/icon/IconChevronRight.svg" alt="" />
+              </div>
+            </div>
+            <div class="news_body_item">
+              <div class="item_left">
+                <div class="item_time text-neutral caption">2023.02.01</div>
+                <div class="fs-6">
+                  <a href="" class="item_title text-dark-text">適合開工的花束是...</a>
+                </div>
+              </div>
+
+              <div class="item_right arrow_icon">
+                <img src="../assets/icon/IconChevronRight.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="BgSec5">
+        <img src="../assets/img/BgSec5.svg" alt="" />
+      </div>
+
+      <div class="BgSec6">
+        <img src="../assets/img/BgSec6.svg" alt="" />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -371,19 +384,19 @@
 // recommend section
 .recommend {
   // background: linear-gradient(180deg, #f5f5f5 40%, #f2e7e8 60%);
-   background: #f5f5f5;
+  background: #f5f5f5;
 }
 .recommend_h2_text_pc {
   display: none;
 }
 
-.recommend_text_h6{
+.recommend_text_h6 {
   margin-bottom: 12px;
 }
 
 // swiper
-.swiper{
-  background: linear-gradient(180deg, #f5f5f5 40%, #f2e7e8 60%);
+.swiper {
+  background: linear-gradient(180deg, #f5f5f5 50%, #f2e7e8 50%);
 }
 
 a.mySwiper {
@@ -392,9 +405,11 @@ a.mySwiper {
 }
 
 .swiper_img {
+  position: relative;
   width: 100%;
   height: 257px;
-  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .swiper-slide img {
@@ -411,6 +426,77 @@ a.mySwiper {
 .swiper_text_h5 {
   margin-top: 24px;
   margin-bottom: 12px;
+}
+
+// span.swiper-pagination-bullet {
+//     background: #FF3D33;
+// }
+
+// news section
+.news {
+  position: relative;
+  background: #f5f5f5;
+  padding: 48px 0 192px 0;
+}
+
+.BgSec5 {
+  position: absolute;
+  width: 162px;
+  height: 204px;
+  top: -20px;
+  right: -3px;
+  z-index: 1;
+}
+
+.BgSec5 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.BgSec6 {
+  width: 120px;
+  height: 153px;
+  position: absolute;
+  top: 60%;
+  left: -20px;
+}
+
+.BgSec6 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news_title_ch_pc {
+  display: none;
+}
+
+.news_title_en {
+  margin-bottom: 12px;
+}
+
+.news_title_ch_mobile {
+  margin-bottom: 36px;
+}
+
+.news_body_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+a.item_title.text-dark-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 @media screen and (min-width: 576px) {
@@ -431,6 +517,10 @@ a.mySwiper {
     width: calc(100% - 32px);
     right: 0;
     left: auto;
+  }
+
+  .news > .container {
+    padding: 0 15px;
   }
 }
 
@@ -464,6 +554,32 @@ a.mySwiper {
   .about_text {
     top: 250px;
     width: calc(100% - 200px);
+  }
+
+  .news_group {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .news_title {
+    width: 25%;
+    padding: 0 0 0 20px;
+  }
+
+  .news_body {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .news_body_item {
+    width: 100%;
+  }
+
+  .BgSec6 {
+    top: 50%;
+    left: 20px;
   }
 }
 
@@ -538,14 +654,16 @@ a.mySwiper {
     margin-bottom: 48px;
   }
 
-  .swiper{
+  .swiper {
     padding: 0 141px;
   }
 
-
-  // .swiper_mobile{
-  //   display: none;
-  // }
+  .news_text_title_ch_mobile {
+    display: none;
+  }
+  .news_text_title_ch_pc {
+    display: block;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -570,6 +688,39 @@ a.mySwiper {
 
   .about_text {
     width: calc(100% - 650px);
+  }
+
+  .news_group {
+    margin: 0 110px;
+  }
+
+  .news_title {
+    width: 20%;
+  }
+
+  .news_body {
+    width: 636px;
+  }
+
+  .BgSec6 {
+    top: 40%;
+    left: 120px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .news {
+    padding: 120px 0 216px 0;
+  }
+  .BgSec5 {
+    top: -20px;
+    right: 120px;
+    z-index: 1;
+  }
+
+  .BgSec6 {
+    top: 40%;
+    left: 380px;
   }
 }
 </style>
