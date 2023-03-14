@@ -10,10 +10,10 @@
           </div>
 
           <ul class="nav_ul">
-            <li><a class="nav_link" href="">首頁</a></li>
-            <li><a class="nav_link" href="">最新消息</a></li>
-            <li><a class="nav_link" href="">所有商品</a></li>
-            <li><a class="nav_link" href="">購物車 </a></li>
+            <li><RouterLink class="nav_link" to="/" >首頁</RouterLink></li>
+            <li><RouterLink class="nav_link" to="/news">最新消息</RouterLink></li>
+            <li><RouterLink class="nav_link">所有商品</RouterLink></li>
+            <li><RouterLink class="nav_link">購物車 </RouterLink></li>
           </ul>
           <div class="nav_menu" @click="toggleMenu">
             <div v-if="!isOpen">

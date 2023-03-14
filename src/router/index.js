@@ -10,6 +10,10 @@ const router = createRouter({
         { //首頁內容區
           path:'',
           component:()=>import('../views/HomeView.vue')
+        },
+        {
+          path: 'news',
+          component: () => import('../views/NewsPage.vue')
         }
       ]
 
@@ -20,9 +24,7 @@ const router = createRouter({
     //   component: () => import('../views/HomeView.vue')
     // },
     // {
-    //   path: '/about',
-    //   name: 'about',
-    //   component: () => import('../views/AboutView.vue')
+    //  
     // }
   ]
 })
