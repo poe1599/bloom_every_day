@@ -10,10 +10,10 @@
           </div>
 
           <ul class="nav_ul">
-            <li><RouterLink class="nav_link" to="/" >首頁</RouterLink></li>
+            <li><RouterLink class="nav_link" to="/">首頁</RouterLink></li>
             <li><RouterLink class="nav_link" to="/news">最新消息</RouterLink></li>
-            <li><RouterLink class="nav_link">所有商品</RouterLink></li>
-            <li><RouterLink class="nav_link">購物車 </RouterLink></li>
+            <li><RouterLink class="nav_link" to="/">所有商品</RouterLink></li>
+            <li><RouterLink class="nav_link" to="/">購物車 </RouterLink></li>
           </ul>
           <div class="nav_menu" @click="toggleMenu">
             <div v-if="!isOpen">
@@ -28,10 +28,10 @@
 
       <div class="mobile_menu text-center" :class="{ show: isOpen }">
         <ul>
-          <li class="py-3"><a class="mobile_nav" href="">首頁</a></li>
-          <li class="py-3"><a class="mobile_nav" href="">最新消息</a></li>
-          <li class="py-3"><a class="mobile_nav" href="">所有商品</a></li>
-          <li class="py-3"><a class="mobile_nav" href="">購物車 </a></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/">首頁</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/news">最新消息</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/">所有商品</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/">購物車 </RouterLink></li>
         </ul>
       </div>
     </div>
@@ -60,7 +60,7 @@
 <style lang="scss" scoped>
 .navbar {
   position: relative;
-  padding: 10px;
+  // padding: 10px;
 }
 
 .nav_ul {
