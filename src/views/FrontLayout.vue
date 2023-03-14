@@ -15,23 +15,25 @@
             <li><a class="nav_link" href="">所有商品</a></li>
             <li><a class="nav_link" href="">購物車 </a></li>
           </ul>
-          <div class="nav_menu"> <!--@click="openMobileMenu"-->
-            <span class="menu_span span1"></span>
-            <span class="menu_span span2"></span>
-            <span class="menu_span span3"></span>
+          <div class="nav_menu" @click="toggleMenu">
+            <div v-if="!isOpen">
+              <img src="../assets/icon/IconMenu.svg" alt="" />
+            </div>
+
+            <div class="menu_close" v-else><img src="../assets/icon/IconClose.svg" alt="" /></div>
+            
           </div>
         </div>
       </div>
 
-      <div class="mobile_menu text-center">
+      <div class="mobile_menu text-center" :class="{ show: isOpen }">
         <ul>
-            <li class="py-3"><a class="mobile_nav" href="">首頁</a></li>
-            <li class="py-3"><a class="mobile_nav" href="">最新消息</a></li>
-            <li class="py-3"><a class="mobile_nav" href="">所有商品</a></li>
-            <li class="py-3"><a class="mobile_nav" href="">購物車 </a></li>
+          <li class="py-3"><a class="mobile_nav" href="">首頁</a></li>
+          <li class="py-3"><a class="mobile_nav" href="">最新消息</a></li>
+          <li class="py-3"><a class="mobile_nav" href="">所有商品</a></li>
+          <li class="py-3"><a class="mobile_nav" href="">購物車 </a></li>
         </ul>
       </div>
-
     </div>
     <div class="layout_content">
       <!--除 header & footer 外的內容區-->
@@ -39,73 +41,77 @@
     </div>
     <!-- footer -->
     <div id="footer">
-        <div class="footer d-flex justify-content-between container">
-            <div class="copyright" style="color: #F6F6F6;">日日是好日 @ Copyright | Kris</div>
-            <div class="social_media d-flex justify-content-between">
-                <a href="" class="fb">
-                    <i class="bi bi-facebook" style="color: white;"></i>
-                </a>
+      <div class="footer d-flex justify-content-between container">
+        <div class="copyright" style="color: #f6f6f6">日日是好日 @ Copyright | Kris</div>
+        <div class="social_media d-flex justify-content-between">
+          <a href="" class="fb">
+            <i class="bi bi-facebook" style="color: white"></i>
+          </a>
 
-                <a href="" class="ig" style="color: white;">
-                   <i class="bi bi-instagram"></i>
-                </a>
-            </div>
+          <a href="" class="ig" style="color: white">
+            <i class="bi bi-instagram"></i>
+          </a>
         </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.navbar{
-    position: relative;
-    padding: 10px;
+.navbar {
+  position: relative;
+  padding: 10px;
 }
 
 .nav_ul {
   display: none;
 }
 
-.nav_menu{
-    display: flex;
-    height: 25px;
-    flex-direction: column;
-    justify-content: space-between;
+.nav_menu {
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
 }
 
-.menu_span{
-    display: block;
-    width: 2rem;
-    height: 1px;
-    background: #FF3D33;
+.nav_menu img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-
-.mobile_menu{
-   position: absolute;
-   width: 100%;
-   top: 98px;
+.mobile_menu {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 68px;
+  z-index: 2;
+  background: white;
+  height: 300px;
 }
 
-.mobile_nav{
-    display: none;
-    // display: block;  //記得改回block
-    color: #121212; 
+.mobile_menu.show {
+  display: block;
+}
+
+a.mobile_nav {
+  display: block;
+  color: #121212;
 }
 
 .mobile_nav:hover {
   color: #ff3d33;
 }
 
-#footer{
-    background-color: #ff3d33;
-    padding: 24px 12px;
+#footer {
+  background-color: #ff3d33;
+  padding: 24px 12px;
 }
 
-.footer{
+.footer {
   padding: 0;
 }
 
-.fb{
+.fb {
   margin-right: 8px;
 }
 
@@ -126,7 +132,7 @@
     display: none;
   }
 
-  .mobile_menu{
+  .mobile_menu {
     display: none;
   }
 }
@@ -136,14 +142,14 @@
     padding: 0.5rem 1.5rem;
   }
 
-  #footer{
+  #footer {
     background-color: #ff3d33;
     padding: 36px;
-}
+  }
 
-  .fb{
-  margin-right: 28px;
-}
+  .fb {
+    margin-right: 28px;
+  }
 }
 
 .layout {
@@ -157,12 +163,8 @@
 
 .layout_content {
   margin: auto;
-//   max-width: 1296px;
+  //   max-width: 1296px;
 }
-
-
-
-
 </style>
 
 
@@ -170,8 +172,18 @@
 import { RouterView, RouterLink } from 'vue-router'
 
 export default {
-    components:{
-        RouterView,
+  data() {
+    return {
+      isOpen: false
     }
+  },
+  methods: {
+    toggleMenu() {
+      this.isOpen = !this.isOpen
+    }
+  },
+  components: {
+    RouterView
+  }
 }
 </script>
