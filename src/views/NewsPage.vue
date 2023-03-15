@@ -10,18 +10,18 @@
 
       <div class="news_body">
         <div class="row mx-auto">
-          <div class="col-md-6 col-lg-12">
+          <div class="col-md-6 col-lg-12" v-for="article in articles" :key="article.id">
             <div class="news_card_group">
               <div class="news_card_head">
-                <div class="news_img"><img src="../assets/img/img_1.jpg" alt="" /></div>
+                <div class="news_img"><img :src="article.imageUrl" alt="" /></div>
               </div>
               <div class="news_card_body">
                 <div class="card_title">
-                  <h5 class="card_title_h5">用桌上型迷你花束點綴你的辦公桌吧~</h5>
+                  <h5 class="card_title_h5">{{ article.title }}</h5>
                   <div class="card_time caption">2023.02.01</div>
                 </div>
                 <div class="card_content">
-                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
+                  {{ article.description }}
                 </div>
 
                 <div class="card_detail text-end caption">
@@ -31,27 +31,7 @@
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-12">
-            <div class="news_card_group">
-              <div class="news_card_head">
-                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
-              </div>
-              <div class="news_card_body">
-                <div class="card_title">
-                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
-                  <div class="card_time caption">2023.02.01</div>
-                </div>
-                <div class="card_content">
-                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
-                </div>
-
-                <div class="card_detail text-end caption">
-                  <a href="" class="fs-6">more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-12">
+          <!-- <div class="col-md-6 col-lg-12">
             <div class="news_card_group">
               <div class="news_card_head">
                 <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
@@ -91,6 +71,26 @@
               </div>
             </div>
           </div>
+          <div class="col-md-6 col-lg-12">
+            <div class="news_card_group">
+              <div class="news_card_head">
+                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
+              </div>
+              <div class="news_card_body">
+                <div class="card_title">
+                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
+                  <div class="card_time caption">2023.02.01</div>
+                </div>
+                <div class="card_content">
+                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
+                </div>
+
+                <div class="card_detail text-end caption">
+                  <a href="" class="fs-6">more</a>
+                </div>
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -98,16 +98,18 @@
 </template>
 
 <script>
+const { VITE_URL, VITE_PATH } = import.meta.env
+
 export default {
   data() {
     return {
-      data: {}
+      articles: []
     }
   },
   mounted() {
-    this.$http.get('https://randomuser.me/api/').then((res) => {
-      console.log(res)
-      this.data = res.data.results[0]
+    this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
+      console.log(res.data.articles)
+      this.articles = res.data.articles
     })
   }
 }
@@ -309,7 +311,7 @@ export default {
 @media screen and (min-width: 1400px) {
   .deco {
     left: 240px;
-}
+  }
   .news_card_head {
     width: 38%;
   }
@@ -318,7 +320,7 @@ export default {
     width: 360px;
     height: 280px;
     margin: 0;
-}
+  }
 
   .news_card_body {
     width: 58%;
