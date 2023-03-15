@@ -60,7 +60,7 @@
 <style lang="scss" scoped>
 .navbar {
   position: relative;
-  // padding: 10px;
+  padding: 12px;
 }
 
 .nav_ul {

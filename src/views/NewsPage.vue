@@ -3,54 +3,95 @@
     <div class="container">
       <div class="news_head">
         <h2 class="text-primary news_h2_pc">最新消息</h2>
-        <h3 class="text-primary text-center">最新消息</h3>
+        <h3 class="text-primary text-center news_h3_mobile">最新消息</h3>
       </div>
 
+      <div class="deco"><img src="../assets/img/BgSec2.svg" alt="" /></div>
+
       <div class="news_body">
-        <div class="row">
-          <div class="col-lg-6">
+        <div class="row mx-auto">
+          <div class="col-md-6 col-lg-12">
             <div class="news_card_group">
-          <div class="news_card_head">
-            <div class="news_img"><img src="../assets/img/img_1.jpg" alt="" /></div>
-          </div>
-          <div class="news_card_body">
-            <div class="card_title">
-              <h5 class="card_title_h5">用桌上型迷你花束點綴你的辦公桌吧~</h5>
-              <div class="card_time caption">2023.02.01</div>
-            </div>
-            <div class="card_content">
-              覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
-            </div>
+              <div class="news_card_head">
+                <div class="news_img"><img src="../assets/img/img_1.jpg" alt="" /></div>
+              </div>
+              <div class="news_card_body">
+                <div class="card_title">
+                  <h5 class="card_title_h5">用桌上型迷你花束點綴你的辦公桌吧~</h5>
+                  <div class="card_time caption">2023.02.01</div>
+                </div>
+                <div class="card_content">
+                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
+                </div>
 
-            <div class="card_detail text-end caption">
-              <a href="" class="fs-6">more</a>
+                <div class="card_detail text-end caption">
+                  <a href="" class="fs-6">more</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-          </div>
 
-          <div class="col-lg-6">
+          <div class="col-md-6 col-lg-12">
             <div class="news_card_group">
-          <div class="news_card_head">
-            <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
-          </div>
-          <div class="news_card_body">
-            <div class="card_title">
-              <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
-              <div class="card_time caption">2023.02.01</div>
-            </div>
-            <div class="card_content">
-              覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
-            </div>
+              <div class="news_card_head">
+                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
+              </div>
+              <div class="news_card_body">
+                <div class="card_title">
+                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
+                  <div class="card_time caption">2023.02.01</div>
+                </div>
+                <div class="card_content">
+                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
+                </div>
 
-            <div class="card_detail text-end caption">
-              <a href="" class="fs-6">more</a>
+                <div class="card_detail text-end caption">
+                  <a href="" class="fs-6">more</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-12">
+            <div class="news_card_group">
+              <div class="news_card_head">
+                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
+              </div>
+              <div class="news_card_body">
+                <div class="card_title">
+                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
+                  <div class="card_time caption">2023.02.01</div>
+                </div>
+                <div class="card_content">
+                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
+                </div>
+
+                <div class="card_detail text-end caption">
+                  <a href="" class="fs-6">more</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-12">
+            <div class="news_card_group">
+              <div class="news_card_head">
+                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
+              </div>
+              <div class="news_card_body">
+                <div class="card_title">
+                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
+                  <div class="card_time caption">2023.02.01</div>
+                </div>
+                <div class="card_content">
+                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
+                </div>
+
+                <div class="card_detail text-end caption">
+                  <a href="" class="fs-6">more</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-          </div>
-        </div>
-        
       </div>
     </div>
   </div>
@@ -74,11 +115,28 @@ export default {
 
 <style>
 .wrapper {
+  padding: 0 0 120px 0;
   background: #f5f5f5;
 }
 
 .news_head {
-  padding: 80px 0 15px 0;
+  position: relative;
+  z-index: 1;
+  padding: 80px 0 40px 0;
+}
+
+.deco {
+  position: absolute;
+  top: 120px;
+  right: 90px;
+  height: 100px;
+}
+
+.deco img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  rotate: 15deg;
 }
 
 .news_h2_pc {
@@ -97,7 +155,7 @@ export default {
 }
 
 .news_img {
-  width: 320px;
+  width: 100%;
   height: 330px;
   margin: auto;
   border-radius: 8px;
@@ -128,9 +186,148 @@ export default {
   color: #121212;
 }
 
-.card_detail a:hover{
-  color: #FF3D33;
+.card_detail a:hover {
+  color: #ff3d33;
 }
 
+@media screen and (min-width: 576px) {
+  .deco {
+    right: 160px;
+  }
+  .news_card_group {
+    width: 500px;
+    margin: 0 auto 30px auto;
+  }
 
+  .news_card_head {
+    padding: 40px 0px;
+  }
+
+  .news_img {
+    width: 420px;
+    height: 430px;
+  }
+
+  .news_card_body {
+    padding: 10px 30px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .col-md-6 {
+    margin-bottom: 30px;
+  }
+
+  .deco {
+    right: 260px;
+  }
+
+  .news_card_group {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+  }
+
+  .news_img {
+    width: 100%;
+  }
+
+  .news_card_head {
+    padding: 12px 0px;
+  }
+
+  .news_card_body {
+    padding: 10px 0;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .news_h2_pc {
+    display: block;
+    padding: 0 12px;
+  }
+  .news_h3_mobile {
+    display: none;
+  }
+
+  .deco {
+    left: 160px;
+    right: auto;
+  }
+
+  .news_card_group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .news_card_head {
+    width: 40%;
+  }
+
+  .news_img {
+    width: 288px;
+    height: 230px;
+    margin: 0;
+  }
+
+  .news_card_body {
+    width: 60%;
+  }
+
+  .card_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ff3d33;
+    padding: 0 0 10px 0;
+  }
+
+  h5.card_title_h5 {
+    border: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .card_time.caption {
+    align-self: flex-end;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .deco {
+    left: 200px;
+  }
+  .news_img {
+    width: 380px;
+    height: 280px;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .deco {
+    left: 240px;
+}
+  .news_card_head {
+    width: 38%;
+  }
+
+  .news_img {
+    width: 360px;
+    height: 280px;
+    margin: 0;
+}
+
+  .news_card_body {
+    width: 58%;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .deco {
+    left: 320px;
+  }
+}
 </style>
