@@ -25,13 +25,12 @@
                 </div>
 
                 <div class="card_detail text-end caption">
-                  <a href="" class="fs-6">more</a>
+                  <RouterLink :to="`/news/${article.id}`" class="fs-6">more</RouterLink>
+                  
                 </div>
               </div>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
@@ -39,6 +38,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
@@ -47,6 +47,11 @@ export default {
       articles: []
     }
   },
+  components:{
+    RouterLink
+
+  },
+ 
   mounted() {
     this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
       console.log(res.data.articles)
