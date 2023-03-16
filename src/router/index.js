@@ -11,9 +11,13 @@ const router = createRouter({
           path:'',
           component:()=>import('../views/HomeView.vue')
         },
-        {
+        { //最新消息
           path: 'news',
-          component: () => import('../views/NewsPage.vue')
+          component: () => import('../views/NewsViews.vue')
+        },
+        { //最新消息單頁
+          path: 'news/:id',
+          component: () => import('../views/NewsView.vue')
         }
       ]
 

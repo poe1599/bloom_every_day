@@ -31,66 +31,7 @@
             </div>
           </div>
 
-          <!-- <div class="col-md-6 col-lg-12">
-            <div class="news_card_group">
-              <div class="news_card_head">
-                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
-              </div>
-              <div class="news_card_body">
-                <div class="card_title">
-                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
-                  <div class="card_time caption">2023.02.01</div>
-                </div>
-                <div class="card_content">
-                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
-                </div>
-
-                <div class="card_detail text-end caption">
-                  <a href="" class="fs-6">more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-12">
-            <div class="news_card_group">
-              <div class="news_card_head">
-                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
-              </div>
-              <div class="news_card_body">
-                <div class="card_title">
-                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
-                  <div class="card_time caption">2023.02.01</div>
-                </div>
-                <div class="card_content">
-                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
-                </div>
-
-                <div class="card_detail text-end caption">
-                  <a href="" class="fs-6">more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-12">
-            <div class="news_card_group">
-              <div class="news_card_head">
-                <div class="news_img"><img src="../assets/img/img_30.jpg" alt="" /></div>
-              </div>
-              <div class="news_card_body">
-                <div class="card_title">
-                  <h5 class="card_title_h5">廣受好評的春回大地系列花束</h5>
-                  <div class="card_time caption">2023.02.01</div>
-                </div>
-                <div class="card_content">
-                  覺得辦公桌上缺少賞心悅目的療癒小物嗎？快來挑選迷你花束，打造你的桌上花園吧！
-                </div>
-
-                <div class="card_detail text-end caption">
-                  <a href="" class="fs-6">more</a>
-                </div>
-              </div>
-            </div>
-          </div> -->
+          
         </div>
       </div>
     </div>
