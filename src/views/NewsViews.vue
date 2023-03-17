@@ -18,7 +18,7 @@
               <div class="news_card_body">
                 <div class="card_title">
                   <h5 class="card_title_h5">{{ article.title }}</h5>
-                  <div class="card_time caption">2023.02.01</div>
+                  <div class="card_time caption">{{article.dateString}}</div>
                 </div>
                 <div class="card_content">
                   {{ article.description }}
@@ -55,8 +55,22 @@ export default {
   mounted() {
     this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
       console.log(res.data.articles)
-      this.articles = res.data.articles
+      // this.articles = res.data.articles
+      this.articles=res.data.articles.map((item)=>{
+        const time=item.create_at;
+        const date=new Date(time*1000);
+        const dateString=date.toLocaleDateString();
+        return{
+          ...item,
+          dateString
+        } 
+      })
+
+    }).catch((err)=>{
+      console.log(err)
     })
+
+    
   }
 }
 </script>

@@ -13,8 +13,7 @@
                 <div class="inner_card_title">
                   <h5 class="inner_card_title_h5">{{perNews.title}}</h5>
                   <div class="inner_sub_info">
-                    <div class="inner_card_time caption">{{perNews.create_at
-}}</div>
+                    <div class="inner_card_time caption">{{perNews.create_at}}</div>
                     <small class="inner_author caption text-neutral">{{perNews.author}}</small>
                   </div>
                 </div>
