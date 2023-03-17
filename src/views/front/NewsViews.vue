@@ -6,7 +6,7 @@
         <h3 class="text-primary text-center news_h3_mobile">最新消息</h3>
       </div>
 
-      <div class="deco"><img src="../assets/img/BgSec2.svg" alt="" /></div>
+      <div class="deco"><img src="../../assets/img/BgSec2.svg" alt="" /></div>
 
       <div class="news_body">
         <div class="row mx-auto">

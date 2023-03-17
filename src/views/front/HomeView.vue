@@ -14,17 +14,17 @@
           <i class="bi bi-chevron-right"></i>
         </button>
 
-        <div class="banner_img"><img src="../assets/img/ImgSec1.png" alt="" /></div>
+        <div class="banner_img"><img src="../../assets/img/ImgSec1.png" alt="" /></div>
       </div>
     </section>
-    <div class="bgSec1"><img src="../assets/img/BgSec1.svg" alt="" /></div>
+    <div class="bgSec1"><img src="../../assets/img/BgSec1.svg" alt="" /></div>
 
     <section class="promote">
       <div class="container">
         <div class="row mx-auto">
           <div class="col-lg-6 promote_col_6">
             <div class="promote_img">
-              <img src="../assets/img/ImgSec-pc-2-2.png" alt="" />
+              <img src="../../assets/img/ImgSec-pc-2-2.png" alt="" />
             </div>
           </div>
           <div class="col-lg-6 promote_text">
@@ -40,7 +40,7 @@
                 <br />
                 卻又希望用一些美感妝點生活呢？
               </p>
-              <div class="BgSec2"><img src="../assets/img/BgSec2.svg" alt="" /></div>
+              <div class="BgSec2"><img src="../../assets/img/BgSec2.svg" alt="" /></div>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="row mx-auto">
           <div class="col-lg-10">
             <div class="about_img">
-              <img src="../assets/img/ImgSec4.png" alt="" />
+              <img src="../../assets/img/ImgSec4.png" alt="" />
             </div>
           </div>
 
@@ -130,7 +130,7 @@
             <SwiperSlide>
               <a href="" class="mySwiper">
                 <div class="swiper_img">
-                  <img src="../assets/img/img_11.jpg" alt="" />
+                  <img src="../../assets/img/img_11.jpg" alt="" />
                 </div>
                 <div class="swiper_text text-center">
                   <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
@@ -141,7 +141,7 @@
             <SwiperSlide>
               <a href="" class="mySwiper">
                 <div class="swiper_img">
-                  <img src="../assets/img/img_5.jpg" alt="" />
+                  <img src="../../assets/img/img_5.jpg" alt="" />
                 </div>
 
                 <div class="swiper_text text-center">
@@ -153,7 +153,7 @@
             <SwiperSlide>
               <a href="" class="mySwiper">
                 <div class="swiper_img">
-                  <img src="../assets/img/ImgSec5-4.png" alt="" />
+                  <img src="../../assets/img/ImgSec5-4.png" alt="" />
                 </div>
                 <div class="swiper_text text-center">
                   <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
@@ -186,7 +186,7 @@
               </div>
 
               <div class="item_right arrow_icon">
-                <img src="../assets/icon/IconChevronRight.svg" alt="" />
+                <img src="../../assets/icon/IconChevronRight.svg" alt="" />
               </div>
             </div>
            
@@ -194,11 +194,11 @@
         </div>
       </div>
       <div class="BgSec5">
-        <img src="../assets/img/BgSec5.svg" alt="" />
+        <img src="../../assets/img/BgSec5.svg" alt="" />
       </div>
 
       <div class="BgSec6">
-        <img src="../assets/img/BgSec6.svg" alt="" />
+        <img src="../../assets/img/BgSec6.svg" alt="" />
       </div>
     </section>
   </div>

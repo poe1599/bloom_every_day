@@ -9,15 +9,20 @@ const router = createRouter({
       children:[
         { //首頁內容區
           path:'',
-          component:()=>import('../views/HomeView.vue')
+          component:()=>import('../views/front/HomeView.vue')
         },
         { //最新消息
           path: 'news',
-          component: () => import('../views/NewsViews.vue')
+          component: () => import('../views/front/NewsViews.vue')
         },
         { //最新消息單頁
           path: 'news/:id',
-          component: () => import('../views/NewsView.vue')
+          component: () => import('../views/front/NewsView.vue')
+        },
+        {
+          path:'products',
+          component:()=>import('../views/front/ProductsView.vue')
+
         }
       ]
 

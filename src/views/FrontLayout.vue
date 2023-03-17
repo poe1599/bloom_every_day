@@ -12,7 +12,7 @@
           <ul class="nav_ul">
             <li><RouterLink class="nav_link" to="/">首頁</RouterLink></li>
             <li><RouterLink class="nav_link" to="/news">最新消息</RouterLink></li>
-            <li><RouterLink class="nav_link" to="/">所有商品</RouterLink></li>
+            <li><RouterLink class="nav_link" to="/products">所有商品</RouterLink></li>
             <li><RouterLink class="nav_link" to="/">購物車 </RouterLink></li>
           </ul>
           <div class="nav_menu" @click="toggleMenu">
@@ -30,7 +30,7 @@
         <ul>
           <li class="py-3"><RouterLink class="mobile_nav" to="/">首頁</RouterLink></li>
           <li class="py-3"><RouterLink class="mobile_nav" to="/news">最新消息</RouterLink></li>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/">所有商品</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/products">所有商品</RouterLink></li>
           <li class="py-3"><RouterLink class="mobile_nav" to="/">購物車 </RouterLink></li>
         </ul>
       </div>
