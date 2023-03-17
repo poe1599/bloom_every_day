@@ -177,11 +177,11 @@
           </div>
 
           <div class="news_body">
-            <div class="news_body_item">
+            <div class="news_body_item" v-for="article in tempArticles" :key="article.id">              
               <div class="item_left">
-                <div class="item_time text-neutral caption">2023.02.01</div>
-                <div class="fs-6">
-                  <a href="" class="item_title text-dark-text">用桌上型迷你花束點綴你的辦公桌吧~</a>
+                <div class="item_time text-neutral caption">{{article.dateString}}</div>
+                <div class="fs-6 a_hover">
+                  <RouterLink :to="`/news/${article.id}`" class="item_title">{{article.title}}</RouterLink>
                 </div>
               </div>
 
@@ -189,30 +189,7 @@
                 <img src="../assets/icon/IconChevronRight.svg" alt="" />
               </div>
             </div>
-            <div class="news_body_item">
-              <div class="item_left">
-                <div class="item_time text-neutral caption">2023.02.01</div>
-                <div class="fs-6">
-                  <a href="" class="item_title text-dark-text">春回大地系列花束廣受好評！</a>
-                </div>
-              </div>
-
-              <div class="item_right arrow_icon">
-                <img src="../assets/icon/IconChevronRight.svg" alt="" />
-              </div>
-            </div>
-            <div class="news_body_item">
-              <div class="item_left">
-                <div class="item_time text-neutral caption">2023.02.01</div>
-                <div class="fs-6">
-                  <a href="" class="item_title text-dark-text">適合開工的花束是...</a>
-                </div>
-              </div>
-
-              <div class="item_right arrow_icon">
-                <img src="../assets/icon/IconChevronRight.svg" alt="" />
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -432,6 +409,14 @@ a.mySwiper {
   padding: 48px 0 120px 0;
 }
 
+.item_title{
+  color: #121212;
+}
+
+.item_title:hover{
+  color: #FF3D33;
+}
+
 .BgSec5 {
   position: absolute;
   width: 162px;
@@ -572,6 +557,16 @@ a.item_title.text-dark-text {
 
   .news_body_item {
     width: 100%;
+  }
+
+  .item_left {
+    display: flex;
+    align-items: center;
+  }
+
+  .item_time {
+    margin-right: 24px;
+    align-self: end;
   }
 
   .BgSec6 {
@@ -730,16 +725,47 @@ import { Pagination } from 'swiper'
 import 'swiper/css'
 // import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
   data() {
     return {
-      modules: [Pagination]
+      modules: [Pagination],
+      articles:[],
+      tempArticles:[]
+
     }
   },
   components: {
     Swiper,
     SwiperSlide
+  },
+  mounted(){
+    // 先取得所有最新消息
+    this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
+      // console.log(res.data.articles)
+      // 轉換時間
+      this.articles=res.data.articles.map((item)=>{
+        const time=item.create_at;
+        const date=new Date(time*1000);
+        const dateString=date.toLocaleDateString();
+        return{
+          ...item,
+          dateString
+        } 
+      }
+    )
+    // console.log(this.articles) //確認抓到資料
+
+    // 只選出最新的三筆呈現
+    this.tempArticles=this.articles.filter((item,index)=>{
+      return index<3 //篩出前三筆(最新的三筆)
+    })
+    // console.log('tempArticles', this.tempArticles)
+
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
 }
 </script>
