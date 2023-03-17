@@ -6,7 +6,7 @@
       <div class="navbar d-flex justify-content-between">
         <div class="container">
           <div class="logo align-self-start" style="width: 133px">
-            <img src="../assets/img/Logo.svg " alt="" class="logo_img" />
+            <RouterLink to="/" class="logo_link" style="display:block;"><img src="../assets/img/Logo.svg " alt="" class="logo_img" /></RouterLink>            
           </div>
 
           <ul class="nav_ul">
