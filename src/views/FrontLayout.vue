@@ -183,7 +183,8 @@ export default {
     }
   },
   components: {
-    RouterView
+    RouterView,
+    RouterLink
   }
 }
 </script>
