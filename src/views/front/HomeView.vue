@@ -9,10 +9,10 @@
             讓日日是好日
           </h1>
         </div>
-        <button class="btn btn-primary banner_btn">
+        <RouterLink to="/products" class="btn btn-primary banner_link">
           走進有花的日子
           <i class="bi bi-chevron-right"></i>
-        </button>
+        </RouterLink>
 
         <div class="banner_img"><img src="../../assets/img/ImgSec1.png" alt="" /></div>
       </div>
@@ -177,11 +177,13 @@
           </div>
 
           <div class="news_body">
-            <div class="news_body_item" v-for="article in tempArticles" :key="article.id">              
+            <div class="news_body_item" v-for="article in tempArticles" :key="article.id">
               <div class="item_left">
-                <div class="item_time text-neutral caption">{{article.dateString}}</div>
+                <div class="item_time text-neutral caption">{{ article.dateString }}</div>
                 <div class="fs-6 a_hover">
-                  <RouterLink :to="`/news/${article.id}`" class="item_title">{{article.title}}</RouterLink>
+                  <RouterLink :to="`/news/${article.id}`" class="item_title">{{
+                    article.title
+                  }}</RouterLink>
                 </div>
               </div>
 
@@ -189,7 +191,6 @@
                 <img src="../../assets/icon/IconChevronRight.svg" alt="" />
               </div>
             </div>
-           
           </div>
         </div>
       </div>
@@ -243,13 +244,16 @@
   object-fit: cover;
 }
 
-.banner_btn {
+.banner_link {
+  display: block;
   position: absolute;
   z-index: 1;
   padding: 1rem;
   font-size: 1rem;
   top: 212px;
   color: white;
+  background: #ff3d33;
+  border-radius: 8px;
 }
 
 .bgSec1 {
@@ -409,12 +413,12 @@ a.mySwiper {
   padding: 48px 0 120px 0;
 }
 
-.item_title{
+.item_title {
   color: #121212;
 }
 
-.item_title:hover{
-  color: #FF3D33;
+.item_title:hover {
+  color: #ff3d33;
 }
 
 .BgSec5 {
@@ -509,7 +513,7 @@ a.item_title.text-dark-text {
 
 @media screen and (min-width: 768px) {
   .banner_title,
-  .banner_btn {
+  .banner_link {
     left: 20px;
   }
 
@@ -585,7 +589,7 @@ a.item_title.text-dark-text {
     line-height: 3.6rem;
   }
 
-  .banner_btn {
+  .banner_link {
     top: 324px;
     font-size: 1.125rem;
   }
@@ -731,41 +735,41 @@ export default {
   data() {
     return {
       modules: [Pagination],
-      articles:[],
-      tempArticles:[]
-
+      articles: [],
+      tempArticles: []
     }
   },
   components: {
     Swiper,
     SwiperSlide
   },
-  mounted(){
+  mounted() {
     // 先取得所有最新消息
-    this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
-      // console.log(res.data.articles)
-      // 轉換時間
-      this.articles=res.data.articles.map((item)=>{
-        const time=item.create_at;
-        const date=new Date(time*1000);
-        const dateString=date.toLocaleDateString();
-        return{
-          ...item,
-          dateString
-        } 
-      }
-    )
-    // console.log(this.articles) //確認抓到資料
+    this.$http
+      .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
+      .then((res) => {
+        // console.log(res.data.articles)
+        // 轉換時間
+        this.articles = res.data.articles.map((item) => {
+          const time = item.create_at
+          const date = new Date(time * 1000)
+          const dateString = date.toLocaleDateString()
+          return {
+            ...item,
+            dateString
+          }
+        })
+        // console.log(this.articles) //確認抓到資料
 
-    // 只選出最新的三筆呈現
-    this.tempArticles=this.articles.filter((item,index)=>{
-      return index<3 //篩出前三筆(最新的三筆)
-    })
-    // console.log('tempArticles', this.tempArticles)
-
-    }).catch((err)=>{
-      console.log(err)
-    })
+        // 只選出最新的三筆呈現
+        this.tempArticles = this.articles.filter((item, index) => {
+          return index < 3 //篩出前三筆(最新的三筆)
+        })
+        // console.log('tempArticles', this.tempArticles)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
