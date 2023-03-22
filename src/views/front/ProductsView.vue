@@ -43,15 +43,16 @@
               </div>
             </a>
           </div>
-
         </div>
       </div>
     </div>
   </div>
+
+  <Pagination :pages="page"></Pagination>
+  
 </template>
 
 <style>
-
 .banner_h2_pc {
   display: none;
 }
@@ -120,7 +121,6 @@ a.products_menu_item {
   padding: 60px 0;
 }
 
-
 .products_card {
   display: block;
   border: 1px solid #f2e7e8;
@@ -133,7 +133,6 @@ a.products_menu_item {
 .products_card:hover {
   color: #121212;
 }
-
 
 .head_img {
   width: 100%;
@@ -155,13 +154,10 @@ img.img_hover {
   transition: all 0.3s ease-in-out;
 }
 
-img.img_hover:hover{
+img.img_hover:hover {
   width: 120%;
   height: 120%;
 }
-
-
-
 
 .product_title {
   margin: 0;
@@ -190,7 +186,7 @@ img.img_hover:hover{
 }
 
 .product_origin_price {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .products_card {
@@ -200,7 +196,6 @@ img.img_hover:hover{
   border-radius: 8px;
   margin-bottom: 30px;
 }
-
 
 .head_img {
   width: 100%;
@@ -304,13 +299,11 @@ img.img_hover:hover{
     padding: 20px;
   }
 
-  
   .head_img {
     height: 230px;
     margin: 0;
   }
 
-  
   h5.product_title {
     border: none;
     padding: 0;
@@ -335,35 +328,44 @@ img.img_hover:hover{
     height: 280px;
     margin: 0;
   }
-
-  
 }
 </style>
 
 <script>
+import Pagination from '../../components/PaginationComponent.vue'
 //import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
   data() {
     return {
-      products: []
+      products: [],
+      page:{} // 存入後台 pagination 的欄位資料
     }
   },
   components: {
     // RouterLink
+    Pagination
+  },
+  methods: {
+    getProducts(page=1) { 
+      // 以參數控制當前要呈現第幾頁
+      // 參數預設值為 1
+      this.$http
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}`)
+        .then((res) => {
+          // console.log(res)
+          this.products = res.data.products
+          this.page=res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
 
   mounted() {
-    this.$http
-      .get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`)
-      .then((res) => {
-        console.log(res)
-        this.products = res.data.products
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getProducts()
   }
 }
 </script>
