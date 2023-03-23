@@ -48,7 +48,10 @@
     </div>
   </div>
 
-  <Pagination :pages="page"></Pagination>
+  <Pagination 
+    :pages="page"
+    @change-page="getProducts"
+  ></Pagination>
   
 </template>
 
@@ -354,9 +357,10 @@ export default {
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}`)
         .then((res) => {
-          // console.log(res)
+          
           this.products = res.data.products
           this.page=res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
+          
         })
         .catch((err) => {
           console.log(err)

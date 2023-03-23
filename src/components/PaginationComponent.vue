@@ -1,6 +1,7 @@
 <script>
 export default {
   props: ['pages'],
+  emits:['change-page'],
   data() {
     return {}
   }
@@ -8,21 +9,30 @@ export default {
 </script>
 
 <template>
-  {{ pages }}
   <nav aria-label="Page navigation example" class="nav_block">
     <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
+
+      <li class="page-item" :class="{disabled: !pages.has_pre}">
+        <a class="page-link" href="#" aria-label="Previous"
+        @click.prevent="$emit('change-page',pages.current_page - 1)"
+        >
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      
-      <li class="page-item" v-for="page in pages.total_pages" :key="page">
-        <a class="page-link" href="#">{{page}}</a>
+
+      <li class="page-item" 
+      v-for="page in pages.total_pages" :key="page+'page'"
+      :class="{active: page===pages.current_page }"
+      >
+        <a class="page-link" href="#"
+        @click.prevent="$emit('change-page', page)"
+        >{{page}}</a>
       </li>
       
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
+      <li class="page-item" :class="{disabled: !pages.has_next}">
+        <a class="page-link" href="#" aria-label="Next"
+        @click.prevent="$emit('change-page',pages.current_page + 1)"
+        >
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
@@ -43,5 +53,10 @@ export default {
   --bs-pagination-hover-bg: #ff3d33;
   --bs-pagination-hover-border-color: #f2e7e8;
   --bs-pagination-focus-box-shadow: none;
+}
+
+.page-link.active, .active > .page-link {   
+    background-color: #FF3D33;
+    border-color: #F2E7E8;
 }
 </style>
