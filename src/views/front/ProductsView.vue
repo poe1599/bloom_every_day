@@ -16,11 +16,31 @@
     <div class="container">
       <div class="products_menu">
         <ul class="products_menu_list">
-          <li><a href="" class="products_menu_item fs-6">所有商品</a></li>
-          <li><a href="" class="products_menu_item fs-6">小型花束</a></li>
-          <li><a href="" class="products_menu_item fs-6">季節花束</a></li>
-          <li><a href="" class="products_menu_item fs-6">經典花束</a></li>
-          <li><a href="" class="products_menu_item fs-6">好日特選</a></li>
+          <li>
+            <a href="" class="products_menu_item fs-6"
+            @click.prevent="filterCategory('')"
+            >所有商品</a>
+            </li>
+          <li>
+            <a href="" class="products_menu_item fs-6"
+            @click.prevent="filterCategory('小型花束')"
+            >小型花束</a>
+            </li>
+          <li>
+            <a href="" class="products_menu_item fs-6"
+            @click.prevent="filterCategory('季節花束')"
+            >季節花束</a>
+            </li>
+          <li>
+            <a href="" class="products_menu_item fs-6"
+            @click.prevent="filterCategory('經典花束')"
+            >經典花束</a>
+            </li>
+          <li>
+            <a href="" class="products_menu_item fs-6"
+            @click.prevent="filterCategory('好日特選')"
+            >好日特選</a>
+            </li>
         </ul>
       </div>
 
@@ -343,7 +363,8 @@ export default {
   data() {
     return {
       products: [],
-      page:{} // 存入後台 pagination 的欄位資料
+      page:{}, // 存入後台 pagination 的欄位資料
+      category:''
     }
   },
   components: {
@@ -351,13 +372,13 @@ export default {
     Pagination
   },
   methods: {
-    getProducts(page=1) { 
+    getProducts(page=1, category) { 
       // 以參數控制當前要呈現第幾頁
       // 參數預設值為 1
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}`)
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}/?category=${category}`)
         .then((res) => {
-          
+          //console.log('res',res)
           this.products = res.data.products
           this.page=res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
           
@@ -365,7 +386,19 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-    }
+    },
+
+    // filterCategory(category){
+    //   if(category===''){
+    //     //this.getProducts();
+    //     console.log('全部')
+    //   }else if(category==='小型花束'){
+    //     this.category=category
+    //     //console.log(this.category);
+    //     this.getProducts();
+    //   }
+
+    // }
   },
 
   mounted() {
