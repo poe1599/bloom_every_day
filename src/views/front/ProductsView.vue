@@ -364,7 +364,9 @@ export default {
     return {
       products: [],
       page:{}, // 存入後台 pagination 的欄位資料
-      category:''
+      // category:''
+      currentCategory:'all'
+
     }
   },
   components: {
@@ -372,11 +374,11 @@ export default {
     Pagination
   },
   methods: {
-    getProducts(page=1, category) { 
-      // 以參數控制當前要呈現第幾頁
-      // 參數預設值為 1
+    getProducts(page=1) {  // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
+      const category=this.currentCategory==='all'?'all':`&category=${this.currentCategory}`
+      
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}/?category=${category}`)
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
         .then((res) => {
           //console.log('res',res)
           this.products = res.data.products
@@ -387,6 +389,13 @@ export default {
           console.log(err)
         })
     },
+
+    filterCategory(category){
+      this.currentCategory=category;
+      //console.log(this.currentCategory)
+      this.getProducts();
+
+    }
 
     // filterCategory(category){
     //   if(category===''){
@@ -399,6 +408,8 @@ export default {
     //   }
 
     // }
+
+    
   },
 
   mounted() {
