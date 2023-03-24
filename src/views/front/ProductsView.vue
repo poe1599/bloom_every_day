@@ -17,30 +17,30 @@
       <div class="products_menu">
         <ul class="products_menu_list">
           <li>
-            <a href="" class="products_menu_item fs-6"
-            @click.prevent="filterCategory('')"
-            >所有商品</a>
-            </li>
+            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('')"
+              >所有商品</a
+            >
+          </li>
           <li>
-            <a href="" class="products_menu_item fs-6"
-            @click.prevent="filterCategory('小型花束')"
-            >小型花束</a>
-            </li>
+            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('小型花束')"
+              >小型花束</a
+            >
+          </li>
           <li>
-            <a href="" class="products_menu_item fs-6"
-            @click.prevent="filterCategory('季節花束')"
-            >季節花束</a>
-            </li>
+            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('季節花束')"
+              >季節花束</a
+            >
+          </li>
           <li>
-            <a href="" class="products_menu_item fs-6"
-            @click.prevent="filterCategory('經典花束')"
-            >經典花束</a>
-            </li>
+            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('經典花束')"
+              >經典花束</a
+            >
+          </li>
           <li>
-            <a href="" class="products_menu_item fs-6"
-            @click.prevent="filterCategory('好日特選')"
-            >好日特選</a>
-            </li>
+            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('好日特選')"
+              >好日特選</a
+            >
+          </li>
         </ul>
       </div>
 
@@ -68,11 +68,7 @@
     </div>
   </div>
 
-  <Pagination 
-    :pages="page"
-    @change-page="getProducts"
-  ></Pagination>
-  
+  <Pagination :pages="page" @change-page="getProducts"></Pagination>
 </template>
 
 <style>
@@ -363,10 +359,9 @@ export default {
   data() {
     return {
       products: [],
-      page:{}, // 存入後台 pagination 的欄位資料
-      // category:''
-      currentCategory:'all'
-
+      page: {}, // 存入後台 pagination 的欄位資料
+      category: ''
+      // currentCategory:'all'
     }
   },
   components: {
@@ -374,42 +369,50 @@ export default {
     Pagination
   },
   methods: {
-    getProducts(page=1) {  // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
-      const category=this.currentCategory==='all'?'all':`&category=${this.currentCategory}`
-      
+    getProducts(page = 1) {
+      // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
+      // const category=this.currentCategory==='all'?'all':`&category=${this.currentCategory}`
+
+      const category = this.category
+      console.log(category)
+
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&category=${category}`)
         .then((res) => {
           //console.log('res',res)
           this.products = res.data.products
-          this.page=res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
-          
+          this.page = res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
         })
         .catch((err) => {
           console.log(err)
         })
     },
 
-    filterCategory(category){
-      this.currentCategory=category;
-      //console.log(this.currentCategory)
-      this.getProducts();
-
-    }
-
     // filterCategory(category){
-    //   if(category===''){
-    //     //this.getProducts();
-    //     console.log('全部')
-    //   }else if(category==='小型花束'){
-    //     this.category=category
-    //     //console.log(this.category);
-    //     this.getProducts();
-    //   }
+    //   this.currentCategory=category;
+    //   //console.log(this.currentCategory)
+    //   this.getProducts();
 
     // }
 
-    
+    filterCategory(category) {
+      if (category === '') {
+        this.category='' // 即使是空值也要重新賦值
+        this.getProducts()
+      } else if (category === '小型花束') {
+        this.category = category
+        this.getProducts()
+      } else if (category === '季節花束') {
+        this.category = category
+        this.getProducts()
+      } else if (category === '經典花束') {
+        this.category = category
+        this.getProducts()
+      } else if (category === '好日特選') {
+        this.category = category
+        this.getProducts()
+      }
+    }
   },
 
   mounted() {
