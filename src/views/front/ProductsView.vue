@@ -17,7 +17,7 @@
       <div class="products_menu">
         <ul class="products_menu_list">
           <li>
-            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('')"
+            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('all')"
               >所有商品</a
             >
           </li>
@@ -360,8 +360,7 @@ export default {
     return {
       products: [],
       page: {}, // 存入後台 pagination 的欄位資料
-      category: ''
-      // currentCategory:'all'
+      currentCategory: 'all'
     }
   },
   components: {
@@ -371,13 +370,10 @@ export default {
   methods: {
     getProducts(page = 1) {
       // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
-      // const category=this.currentCategory==='all'?'all':`&category=${this.currentCategory}`
-
-      const category = this.category
-      console.log(category)
+      const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}`
 
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&category=${category}`)
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
         .then((res) => {
           //console.log('res',res)
           this.products = res.data.products
@@ -388,30 +384,10 @@ export default {
         })
     },
 
-    // filterCategory(category){
-    //   this.currentCategory=category;
-    //   //console.log(this.currentCategory)
-    //   this.getProducts();
-
-    // }
-
     filterCategory(category) {
-      if (category === '') {
-        this.category='' // 即使是空值也要重新賦值
-        this.getProducts()
-      } else if (category === '小型花束') {
-        this.category = category
-        this.getProducts()
-      } else if (category === '季節花束') {
-        this.category = category
-        this.getProducts()
-      } else if (category === '經典花束') {
-        this.category = category
-        this.getProducts()
-      } else if (category === '好日特選') {
-        this.category = category
-        this.getProducts()
-      }
+      this.currentCategory = category
+      //console.log(this.currentCategory)
+      this.getProducts()
     }
   },
 
