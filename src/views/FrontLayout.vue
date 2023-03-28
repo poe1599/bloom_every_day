@@ -6,22 +6,28 @@
       <div class="navbar d-flex justify-content-between">
         <div class="container">
           <div class="logo align-self-start" style="width: 133px">
-            <RouterLink to="/" class="logo_link" style="display:block;"><img src="../assets/img/Logo.svg " alt="" class="logo_img" /></RouterLink>            
+            <RouterLink to="/" class="logo_link" style="display: block"
+              ><img src="../assets/img/Logo.svg " alt="" class="logo_img"
+            /></RouterLink>
           </div>
 
           <ul class="nav_ul">
             <li><RouterLink class="nav_link" to="/">首頁</RouterLink></li>
             <li><RouterLink class="nav_link" to="/news">最新消息</RouterLink></li>
             <li><RouterLink class="nav_link" to="/products">所有商品</RouterLink></li>
-            <li><RouterLink class="nav_link" to="/">購物車 </RouterLink></li>
+            <li><RouterLink class="nav_link" to="/"><i class="bi bi-cart3 nav_cart"></i></RouterLink></li>
           </ul>
+
+          <div class="cart_icon">
+            <i class="bi bi-cart3"></i>
+          </div>
+
           <div class="nav_menu" @click="toggleMenu">
             <div v-if="!isOpen">
               <img src="../assets/icon/IconMenu.svg" alt="" />
             </div>
 
             <div class="menu_close" v-else><img src="../assets/icon/IconClose.svg" alt="" /></div>
-            
           </div>
         </div>
       </div>
@@ -31,7 +37,6 @@
           <li class="py-3"><RouterLink class="mobile_nav" to="/">首頁</RouterLink></li>
           <li class="py-3"><RouterLink class="mobile_nav" to="/news">最新消息</RouterLink></li>
           <li class="py-3"><RouterLink class="mobile_nav" to="/products">所有商品</RouterLink></li>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/">購物車 </RouterLink></li>
         </ul>
       </div>
     </div>
@@ -63,8 +68,16 @@
   padding: 12px;
 }
 
+.navbar>.container{
+  padding: 0;
+}
+
 .nav_ul {
   display: none;
+}
+
+.nav_cart {
+    display: block;
 }
 
 .nav_menu {
@@ -79,6 +92,16 @@
   object-fit: cover;
 }
 
+.cart_icon {
+  position: absolute;
+  right: 90px;
+}
+
+.cart_icon>i.bi.bi-cart3 {
+  display: block;
+  font-size: 26px;
+}
+
 .mobile_menu {
   display: none;
   position: absolute;
@@ -86,7 +109,7 @@
   top: 68px;
   z-index: 2;
   background: white;
-  height: 300px;
+  height: 210px;
 }
 
 .mobile_menu.show {
@@ -130,6 +153,10 @@ a.mobile_nav {
 
   .nav_menu {
     display: none;
+  }
+
+  .cart_icon{
+    display:none;
   }
 
   .mobile_menu {
