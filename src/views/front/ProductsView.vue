@@ -43,11 +43,11 @@
           </li>
         </ul>
       </div>
-
+     
       <div class="products_group">
         <div class="row mx-auto">
           <div class="col-md-6 col-lg-4" v-for="product in products" :key="product.id">
-            <a href="" class="products_card">
+            <RouterLink :to="`/products/${product.id}`" class="products_card">
               <div class="products_card_head">
                 <div class="head_img"><img class="img_hover" :src="product.imageUrl" alt="" /></div>
               </div>
@@ -61,7 +61,7 @@
                   <h6 class="product_price text-primary">NT ${{ product.price }}</h6>
                 </div>
               </div>
-            </a>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -352,7 +352,7 @@ img.img_hover:hover {
 
 <script>
 import Pagination from '../../components/PaginationComponent.vue'
-//import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
@@ -364,7 +364,7 @@ export default {
     }
   },
   components: {
-    // RouterLink
+    RouterLink,
     Pagination
   },
   methods: {
@@ -387,12 +387,27 @@ export default {
     filterCategory(category) {
       this.currentCategory = category
       //console.log(this.currentCategory)
+      console.log('$route', this.$route)
+      this.$router.push({
+        query: {
+          category
+        }
+      })
+      //將點擊時取得的 category 的值(如 all, 小型花束…) 賦值給 $route.query (取得當前的 query string 參數)，再透過 $router.push 來動態更新網址列的參數
       this.getProducts()
     }
   },
 
   mounted() {
     this.getProducts()
+
+    // 一載入頁面就先判斷 this.currentCategory 的值，確保一定先取得所有的品，並把取得的所有商品的 query string 丟上網址列呈現
+    const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}`
+    this.$router.push({
+      query: {
+        category
+      }
+    })
   }
 }
 </script>
