@@ -43,7 +43,7 @@
           </li>
         </ul>
       </div>
-     
+
       <div class="products_group">
         <div class="row mx-auto">
           <div class="col-md-6 col-lg-4" v-for="product in products" :key="product.id">
@@ -370,14 +370,24 @@ export default {
   methods: {
     getProducts(page = 1) {
       // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
-      const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}`
+
+      const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}` // 此處 category 變數要組下列 api 用
 
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
         .then((res) => {
-          //console.log('res',res)
+          
           this.products = res.data.products
           this.page = res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
+
+          
+          //將點擊時取得的 category 的值(如 all, 小型花束…) 賦值給 this.currentCategory, 其值將作為 $route.query 中 category 屬性的值 (即取得當前的 query string 參數)，再透過 $router.push 來動態更新網址列的參數
+          this.$router.push({
+            query: {
+              page: this.page.current_page,
+              category: this.currentCategory // 將當下點擊到的分類傳至網址列
+            }
+          })
         })
         .catch((err) => {
           console.log(err)
@@ -386,14 +396,6 @@ export default {
 
     filterCategory(category) {
       this.currentCategory = category
-      //console.log(this.currentCategory)
-      console.log('$route', this.$route)
-      this.$router.push({
-        query: {
-          category
-        }
-      })
-      //將點擊時取得的 category 的值(如 all, 小型花束…) 賦值給 $route.query (取得當前的 query string 參數)，再透過 $router.push 來動態更新網址列的參數
       this.getProducts()
     }
   },
@@ -403,9 +405,11 @@ export default {
 
     // 一載入頁面就先判斷 this.currentCategory 的值，確保一定先取得所有的品，並把取得的所有商品的 query string 丟上網址列呈現
     const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}`
+
     this.$router.push({
       query: {
-        category
+        page: 1,
+        category // category: this.currentCategory('all')，可寫成 category, 就好
       }
     })
   }
