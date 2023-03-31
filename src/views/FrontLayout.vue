@@ -15,7 +15,7 @@
             <li><RouterLink class="nav_link" to="/">首頁</RouterLink></li>
             <li><RouterLink class="nav_link" to="/news">最新消息</RouterLink></li>
             <li><RouterLink class="nav_link" to="/products">所有商品</RouterLink></li>
-            <li><RouterLink class="nav_link" to="/"><i class="bi bi-cart3 nav_cart"></i></RouterLink></li>
+            <li><RouterLink class="nav_link" to="/cart"><i class="bi bi-cart3 nav_cart"></i></RouterLink></li>
           </ul>
 
           <div class="cart_icon">
