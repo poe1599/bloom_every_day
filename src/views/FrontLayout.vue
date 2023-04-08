@@ -15,12 +15,20 @@
             <li><RouterLink class="nav_link" to="/">首頁</RouterLink></li>
             <li><RouterLink class="nav_link" to="/news">最新消息</RouterLink></li>
             <li><RouterLink class="nav_link" to="/products">所有商品</RouterLink></li>
-            <li><RouterLink class="nav_link" to="/cart"><i class="bi bi-cart3 nav_cart"></i></RouterLink></li>
+            <li>
+              <RouterLink class="nav_link" to="/cart">
+                <i class="bi bi-cart3 nav_cart pc_cart_btn position-relative">
+                  <span class="position-absolute badge rounded-pill bg-danger pc_badge"> 0 </span>
+                </i>
+              </RouterLink>
+            </li>
           </ul>
 
-          <div class="cart_icon">
-            <i class="bi bi-cart3"></i>
-          </div>
+          <RouterLink class="cart_icon" to="/cart">
+            <i class="bi bi-cart3 position-relative mobile_cart_btn">
+              <span class="position-absolute badge rounded-pill bg-danger mobile_badge"> 0 </span>
+            </i>
+          </RouterLink>
 
           <div class="nav_menu" @click="toggleMenu">
             <div v-if="!isOpen">
@@ -68,7 +76,7 @@
   padding: 12px;
 }
 
-.navbar>.container{
+.navbar > .container {
   padding: 0;
 }
 
@@ -77,7 +85,7 @@
 }
 
 .nav_cart {
-    display: block;
+  display: block;
 }
 
 .nav_menu {
@@ -95,11 +103,22 @@
 .cart_icon {
   position: absolute;
   right: 90px;
+  color: #121212;
 }
 
-.cart_icon>i.bi.bi-cart3 {
+.cart_icon > i.mobile_cart_btn {
   display: block;
   font-size: 26px;
+}
+
+i.mobile_cart_btn {
+  font-style: normal;
+}
+
+.mobile_badge {
+  font-size: 10px;
+  top: -4px;
+  right: -12px;
 }
 
 .mobile_menu {
@@ -155,12 +174,22 @@ a.mobile_nav {
     display: none;
   }
 
-  .cart_icon{
-    display:none;
+  .cart_icon {
+    display: none;
   }
 
   .mobile_menu {
     display: none;
+  }
+
+  i.pc_cart_btn {
+    font-style: normal;
+  }
+
+  .pc_badge {
+    top: -6px;
+    right: -10px;
+    font-size: 10px;
   }
 }
 

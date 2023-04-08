@@ -14,8 +14,16 @@
       </div>
 
       <h5 class="cart_h5 bg-bg-2">訂單資訊</h5>
+
       <div class="cart_table">
-        <table class="table">
+        <div class="empty_cart text-center"><!-- v-if -->
+          <h6 class="m-0 py-3">購物車中目前沒有商品喔~</h6>
+          <RouterLink to="/products" class="go_shop bg-primary text-white fs-6"
+            >快來買點好東西！</RouterLink
+          >
+        </div>
+        
+        <table class="table"><!-- v-else -->
           <tr class="d-none d-md-flex cart_table_title">
             <td class="col-5">商品資訊</td>
             <td class="col-2">單價</td>
@@ -50,10 +58,12 @@
               </div>
             </td>
             <td class="col-2 col-md-1 order_2 order_md_0 cart_delete">
-              <i class="bi bi-trash3"></i>
+              <a href="" style="color: #121212;">
+                <i class="bi bi-trash3"></i>
+              </a> 
             </td>
           </tr>
-          
+
           <tr>
             <div class="cart_count">
               <div class="cart_total_text">總計：</div>
@@ -62,12 +72,10 @@
           </tr>
         </table>
         <div class="d-flex justify-content-between py-4 mb-3">
-        <a href="" class="btn btn-outline-neutral cart_btn">繼續購物</a>
-        <a href="" class="btn btn-outline-neutral cart_btn">下一步</a>
+          <RouterLink to="/products" class="btn btn-outline-neutral cart_btn">繼續購物</RouterLink>
+          <a href="" class="btn btn-outline-neutral cart_btn">下一步</a>
+        </div>
       </div>
-      </div>
-
-      
     </div>
   </div>
 </template>
@@ -107,6 +115,19 @@
 
 .step_item:last-child::after {
   content: none;
+}
+
+.empty_cart {
+  padding: 20px 0;
+  background: #f5f5f5;
+}
+
+.go_shop {
+  display: block;
+  padding: 12px;
+  width: 200px;
+  border-radius: 8px;
+  margin: 20px auto 0 auto;
 }
 
 /* table */
@@ -203,22 +224,21 @@ td {
 }
 
 .cart_count {
-    padding: 12px 15px;
-    display: flex;
-    justify-content: end;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: end;
 }
 
-
-.cart_count>.cart_total_text {
-    padding: 10px 0;
+.cart_count > .cart_total_text {
+  padding: 10px 0;
 }
 
-.cart_btn{
+.cart_btn {
   color: #121212;
 }
 
 .cart_btn:hover {
-  background:#ff3d33;
+  background: #ff3d33;
   border: 1px solid white;
   color: white;
 }
@@ -251,15 +271,15 @@ td {
 
   .cart_subtotal {
     text-align: right;
-}
+  }
 
   .cart_span {
     display: inline;
   }
 
-  .cart_count{  
+  .cart_count {
     justify-content: space-between;
-}
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -323,20 +343,20 @@ td {
 
   .cart_table {
     padding: 0 0 40px 0;
-}
+  }
 }
 </style>
 
 
 <script>
-// import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 // const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {}
   },
   components: {
-    // RouterLink
+    RouterLink
   },
   methods: {},
   mounted() {}
