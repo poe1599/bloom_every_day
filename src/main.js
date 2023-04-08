@@ -54,7 +54,7 @@ app.use(router) // 套用方法 $router, $route，但不包含元件，因此每
 app.use(VueAxios, axios) // 使用
 
 // 使用全域註冊方式註冊 vue-loading 元件
-app.component('VueLoading', Loading) 
+app.component('Loading', Loading) 
 
 // 掛載 Global 的 VeeValidate 元件
 app.component('VField', Field);

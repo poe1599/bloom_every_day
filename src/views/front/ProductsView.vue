@@ -1,4 +1,5 @@
 <template>
+  <!-- <Loading :active="isLoading"> </Loading> -->
   <div class="products_wrapper">
     <div class="products_banner">
       <div class="products_banner_position">
@@ -351,6 +352,7 @@ img.img_hover:hover {
 </style>
 
 <script>
+
 import Pagination from '../../components/PaginationComponent.vue'
 import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -360,12 +362,14 @@ export default {
     return {
       products: [],
       page: {}, // 存入後台 pagination 的欄位資料
-      currentCategory: 'all'
+      currentCategory: 'all',
+      isLoading: false
     }
   },
   components: {
     RouterLink,
-    Pagination
+    Pagination,
+    
   },
   methods: {
     getProducts(page = 1) {
@@ -376,11 +380,9 @@ export default {
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
         .then((res) => {
-          
           this.products = res.data.products
           this.page = res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
 
-          
           //將點擊時取得的 category 的值(如 all, 小型花束…) 賦值給 this.currentCategory, 其值將作為 $route.query 中 category 屬性的值 (即取得當前的 query string 參數)，再透過 $router.push 來動態更新網址列的參數
           this.$router.push({
             query: {
@@ -401,6 +403,10 @@ export default {
   },
 
   mounted() {
+    // this.isLoading = true
+    // setTimeout(() => {
+    //   this.isLoading = false
+    // }, 1000)
     this.getProducts()
 
     // 一載入頁面就先判斷 this.currentCategory 的值，確保一定先取得所有的品，並把取得的所有商品的 query string 丟上網址列呈現

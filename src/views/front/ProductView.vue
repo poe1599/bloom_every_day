@@ -33,7 +33,9 @@
               </select>
             </div>
             <div class="detail_purchase">
-              <div class="fs-6 text-center">加入購物車</div>
+              <button class="btn fs-6 text-center add_btn"
+              @click.prevent="addToCart(perProduct.id, qty)"
+              >加入購物車</button>
             </div>
           </div>
         </div>
@@ -153,11 +155,19 @@ h5.detail_title {
   box-shadow: 0 0 0 0.25rem rgba(255, 205, 73, 0.25);
 }
 
-.fs-6.text-center {
+.add_btn {
   padding: 16px 24px;
   border-radius: 8px;
-  background: #ff3d33;
+  background:#FF3D33;
   color: white;
+  transition: all .2s ease-in-out;
+  width: 100%;
+}
+
+.add_btn:hover{
+  border:1px solid #FF3D33;
+  background:white;
+  color: #FF3D33;
 }
 
 .purchase_notice {
@@ -303,34 +313,51 @@ h5.detail_title {
 </style>
 
 <script>
+import {mapState, mapActions} from 'pinia';
+import cartsStore from '../../stores/cartsStore.js';
+
 //import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {
   data() {
     return {
-      perProduct: {}
+      perProduct: {},     
     }
   },
   components: {},
+
+  computed:{
+    ...mapState(cartsStore,['carts'])
+
+  },
+
   methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0)
+    },
+
     getSingleProduct() {
       // 取得產品 id
       const { id } = this.$route.params
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/product/${id}`)
         .then((res) => {
-          console.log(res)
           this.perProduct = res.data.product
         })
         .catch((err) => {
           console.log(err)
         })
-    }
+    },
+
+    ...mapActions(cartsStore,['addToCart'])
+
   },
 
+  
   mounted() {
     this.getSingleProduct()
+    this.scrollToTop()
   }
 }
 </script>
