@@ -12,18 +12,18 @@
           <div class="caption">完成訂單</div>
         </div>
       </div>
-
+ 
       <h5 class="cart_h5 bg-bg-2">訂單資訊</h5>
 
+       
       <div class="cart_table">
-        <div class="empty_cart text-center" v-if="!carts.length"><!-- v-if -->
+        <div class="empty_cart text-center" v-if="!carts.length">
           <h6 class="m-0 py-3">購物車中目前沒有商品喔~</h6>
           <RouterLink to="/products" class="go_shop bg-primary text-white fs-6"
             >快來買點好東西！</RouterLink
           >
         </div>
-        
-        <table class="table"><!-- v-else -->
+        <table class="table" v-else>
           <tr class="d-none d-md-flex cart_table_title">
             <td class="col-5">商品資訊</td>
             <td class="col-2">單價</td>
@@ -31,18 +31,18 @@
             <td class="col-2">小計</td>
             <td class="col-1">刪除</td>
           </tr>
-          <tr class="row mx-auto order_control">
+          <tr class="row mx-auto order_control" v-for="item in carts" :key="item.id">
             <!-- 塞資料 -->
             <td class="col-10 col-md-5">
               <div class="cart_product_info">
                 <div class="cart_product_img">
-                  <img src="../../assets/img/img_11.jpg" alt="" />
+                  <img :src="item.product.imageUrl" alt="" />
                 </div>
-                <h6 class="cart_product_title">一隅花語</h6>
+                <h6 class="cart_product_title">{{item.product.title}}</h6>
               </div>
             </td>
             <td class="col-5 col-md-2 order_4 order_md_0 cart_product_price">
-              <div>NT $1050</div>
+              <div>NT ${{item.product.price}}</div>
             </td>
             <td class="col-12 col-md-2 order_3 order_md_0 cart_select">
               <select name="" id="" class="form-select">
@@ -154,13 +154,14 @@ td {
 
 .cart_product_img {
   width: 143px;
-  height: auto;
-  object-fit: cover;
-  padding: 0 10px 0 0;
+  height: 200px;
+  // padding: 0 10px 0 0;
 }
 
 .cart_product_img > img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cart_product_title {
@@ -344,6 +345,14 @@ td {
   .cart_table {
     padding: 0 0 40px 0;
   }
+
+  .cart_product_price > div{
+    margin: auto;
+  }
+
+  .cart_subtotal{
+    text-align: center;
+  }
 }
 </style>
 
@@ -363,7 +372,7 @@ export default {
     RouterLink
   },
   computed:{
-    ...mapState(cartStore,['carts'])
+    ...mapState(cartStore,['carts']) // 購物車當前列表
   },
   methods: {},
   mounted() {}
