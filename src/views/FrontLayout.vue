@@ -18,7 +18,7 @@
             <li>
               <RouterLink class="nav_link" to="/cart">
                 <i class="bi bi-cart3 nav_cart pc_cart_btn position-relative">
-                  <span class="position-absolute badge rounded-pill bg-danger pc_badge"> 0 </span>
+                  <span class="position-absolute badge rounded-pill bg-danger pc_badge"> {{carts.length}} </span>
                 </i>
               </RouterLink>
             </li>
@@ -26,7 +26,7 @@
 
           <RouterLink class="cart_icon" to="/cart">
             <i class="bi bi-cart3 position-relative mobile_cart_btn">
-              <span class="position-absolute badge rounded-pill bg-danger mobile_badge"> 0 </span>
+              <span class="position-absolute badge rounded-pill bg-danger mobile_badge"> {{carts.length}} </span>
             </i>
           </RouterLink>
 
@@ -226,6 +226,8 @@ a.mobile_nav {
 
 <script>
 import { RouterView, RouterLink } from 'vue-router'
+import {mapState} from 'pinia'
+import cartStore from '../stores/cartStore.js'
 
 export default {
   data() {
@@ -241,6 +243,9 @@ export default {
   components: {
     RouterView,
     RouterLink
+  },
+  computed:{
+    ...mapState(cartStore,['carts'])
   }
 }
 </script>

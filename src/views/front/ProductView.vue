@@ -314,7 +314,7 @@ h5.detail_title {
 
 <script>
 import {mapState, mapActions} from 'pinia';
-import cartsStore from '../../stores/cartsStore.js';
+import cartStore from '../../stores/cartStore.js';
 
 //import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -322,13 +322,14 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      perProduct: {},     
+      perProduct: {},
+           
     }
   },
   components: {},
 
   computed:{
-    ...mapState(cartsStore,['carts'])
+    ...mapState(cartStore,['carts'])
 
   },
 
@@ -350,12 +351,13 @@ export default {
         })
     },
 
-    ...mapActions(cartsStore,['addToCart'])
+    ...mapActions(cartStore,['addToCart'])
 
   },
 
   
   mounted() {
+    
     this.getSingleProduct()
     this.scrollToTop()
   }
