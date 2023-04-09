@@ -226,7 +226,7 @@ a.mobile_nav {
 
 <script>
 import { RouterView, RouterLink } from 'vue-router'
-import {mapState} from 'pinia'
+import {mapActions, mapState} from 'pinia'
 import cartStore from '../stores/cartStore.js'
 
 export default {
@@ -238,7 +238,9 @@ export default {
   methods: {
     toggleMenu() {
       this.isOpen = !this.isOpen
-    }
+    },
+
+    ...mapActions(cartStore,['getCarts'])
   },
   components: {
     RouterView,
@@ -246,6 +248,10 @@ export default {
   },
   computed:{
     ...mapState(cartStore,['carts'])
+  },
+
+  mounted(){
+    this.getCarts();
   }
 }
 </script>

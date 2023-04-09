@@ -33,9 +33,12 @@
               </select>
             </div>
             <div class="detail_purchase">
-              <button class="btn fs-6 text-center add_btn"
-              @click.prevent="addToCart(perProduct.id, qty)"
-              >加入購物車</button>
+              <button
+                class="btn fs-6 text-center add_btn"
+                @click.prevent="addToCart(perProduct.id, qty)"
+              >
+                加入購物車
+              </button>
             </div>
           </div>
         </div>
@@ -158,16 +161,16 @@ h5.detail_title {
 .add_btn {
   padding: 16px 24px;
   border-radius: 8px;
-  background:#FF3D33;
+  background: #ff3d33;
   color: white;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   width: 100%;
 }
 
-.add_btn:hover{
-  border:1px solid #FF3D33;
-  background:white;
-  color: #FF3D33;
+.add_btn:hover {
+  border: 1px solid #ff3d33;
+  background: white;
+  color: #ff3d33;
 }
 
 .purchase_notice {
@@ -313,8 +316,8 @@ h5.detail_title {
 </style>
 
 <script>
-import {mapState, mapActions} from 'pinia';
-import cartStore from '../../stores/cartStore.js';
+import { mapState, mapActions } from 'pinia'
+import cartStore from '../../stores/cartStore.js'
 
 //import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -322,15 +325,13 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      perProduct: {},
-           
+      perProduct: {}
     }
   },
   components: {},
 
-  computed:{
-    ...mapState(cartStore,['carts'])
-
+  computed: {
+    ...mapState(cartStore, ['carts'])
   },
 
   methods: {
@@ -351,13 +352,11 @@ export default {
         })
     },
 
-    ...mapActions(cartStore,['addToCart'])
-
+    ...mapActions(cartStore, ['getCarts', 'addToCart'])
   },
 
-  
   mounted() {
-    
+    this.getCarts()
     this.getSingleProduct()
     this.scrollToTop()
   }
