@@ -16,7 +16,7 @@
       <h5 class="cart_h5 bg-bg-2">訂單資訊</h5>
 
       <div class="cart_table">
-        <div class="empty_cart text-center"><!-- v-if -->
+        <div class="empty_cart text-center" v-if="!carts.length"><!-- v-if -->
           <h6 class="m-0 py-3">購物車中目前沒有商品喔~</h6>
           <RouterLink to="/products" class="go_shop bg-primary text-white fs-6"
             >快來買點好東西！</RouterLink
@@ -349,7 +349,11 @@ td {
 
 
 <script>
+import { mapState } from 'pinia'
+import cartStore from '../../stores/cartStore'
 import { RouterLink } from 'vue-router'
+
+
 // const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
@@ -357,6 +361,9 @@ export default {
   },
   components: {
     RouterLink
+  },
+  computed:{
+    ...mapState(cartStore,['carts'])
   },
   methods: {},
   mounted() {}
