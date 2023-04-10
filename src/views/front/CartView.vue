@@ -35,9 +35,9 @@
             <!-- 塞資料 -->
             <td class="col-10 col-md-5">
               <div class="cart_product_info">
-                <div class="cart_product_img">
+                <RouterLink :to="`/products/${item.product.id}`" class="cart_product_img">
                   <img :src="item.product.imageUrl" alt="" />
-                </div>
+                </RouterLink>
                 <h6 class="cart_product_title">{{item.product.title}}</h6>
               </div>
             </td>
@@ -54,7 +54,7 @@
             <td class="col-7 col-md-2 order_4 order_md_0">
               <div class="cart_subtotal">
                 <span class="d-md-none cart_span">小計：</span>
-                NT $1050
+                NT ${{item.total}}
               </div>
             </td>
             <td class="col-2 col-md-1 order_2 order_md_0 cart_delete">
@@ -67,7 +67,7 @@
           <tr>
             <div class="cart_count">
               <div class="cart_total_text">總計：</div>
-              <div class="cart_total_price">NT $1050</div>
+              <div class="cart_total_price">NT ${{final_total}}</div>
             </div>
           </tr>
         </table>
@@ -358,8 +358,8 @@ td {
 
 
 <script>
-import { mapState } from 'pinia'
-import cartStore from '../../stores/cartStore'
+import { mapActions, mapState } from 'pinia'
+import cartStore from '../../stores/cartStore.js'
 import { RouterLink } from 'vue-router'
 
 
@@ -372,9 +372,11 @@ export default {
     RouterLink
   },
   computed:{
-    ...mapState(cartStore,['carts']) // 購物車當前列表
+    ...mapState(cartStore,['carts','final_total']) // 購物車當前列表
   },
-  methods: {},
+  methods: {
+    ...mapActions(cartStore,['getCarts'])
+  },
   mounted() {}
 }
 </script>
