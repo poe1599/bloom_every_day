@@ -45,7 +45,9 @@
               <div>NT ${{item.product.price}}</div>
             </td>
             <td class="col-12 col-md-2 order_3 order_md_0 cart_select">
-              <select name="" id="" class="form-select">
+              <select name="" id="" v-model="item.qty" class="form-select"
+              @change="updateCartItem(item)"
+              >
                 <option :value="i" v-for="i in 5" :key="`${i}1235`">
                   {{ i }}
                 </option>
@@ -58,9 +60,11 @@
               </div>
             </td>
             <td class="col-2 col-md-1 order_2 order_md_0 cart_delete">
-              <a href="" style="color: #121212;">
+              <button class="btn delete_btn" style="color: #121212;"
+              @click="deleteCartItem(item)"
+              >
                 <i class="bi bi-trash3"></i>
-              </a> 
+              </button> 
             </td>
           </tr>
 
@@ -372,10 +376,13 @@ export default {
     RouterLink
   },
   computed:{
-    ...mapState(cartStore,['carts','final_total']) // 購物車當前列表
+    ...mapState(cartStore,['carts','final_total']) 
+    // 購物車當前列表 / 購物車所有商品總金額
   },
   methods: {
-    ...mapActions(cartStore,['getCarts'])
+    ...mapActions(cartStore,['getCarts','updateCartItem','deleteCartItem'])
+    // 取得購物車當前所有品項 / 調整購物車 select 數量
+    
   },
   mounted() {}
 }

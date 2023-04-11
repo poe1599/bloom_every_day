@@ -24,6 +24,7 @@
               <div class="detail_price text-primary">NT $ {{ perProduct.price }}</div>
             </div>
           </div>
+
           <div class="detail_purchase_group">
             <div class="detail_quantity">
               <select name="" id="" class="form-select">
@@ -325,7 +326,9 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      perProduct: {}
+      perProduct: {},
+      qty: 1,
+      totalQty: 0 // 如何取得 carts 物件中每筆 item 的 qty？
     }
   },
   components: {},
@@ -352,13 +355,16 @@ export default {
         })
     },
 
-    ...mapActions(cartStore, ['getCarts', 'addToCart'])
+    ...mapActions(cartStore, ['getCarts', 'addToCart']),
+
+   
   },
 
   mounted() {
     this.getCarts()
     this.getSingleProduct()
     this.scrollToTop()
+    
   }
 }
 </script>
