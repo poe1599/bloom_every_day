@@ -378,7 +378,7 @@ export default {
       const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}` // 此處 category 變數要組下列 api 用
 
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
+        .get(`${VITE_URL}/api/${VITE_PATH}/products/?page=${page}&${category}`)
         .then((res) => {
           this.products = res.data.products
           this.page = res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page

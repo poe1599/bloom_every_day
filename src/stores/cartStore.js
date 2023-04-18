@@ -65,7 +65,7 @@ export default defineStore('cart', {
             }
 
 
-            axios.post(`${VITE_URL}v2/api/${VITE_PATH}/cart`, { data })
+            axios.post(`${VITE_URL}/api/${VITE_PATH}/cart`, { data })
                 .then((res) => {
                     console.log('加入購物車', res.data);
                     this.getCarts();
@@ -80,7 +80,7 @@ export default defineStore('cart', {
 
         // 取得當前購物車中的所有品項
         getCarts() {
-            axios.get(`${VITE_URL}v2/api/${VITE_PATH}/cart`)
+            axios.get(`${VITE_URL}/api/${VITE_PATH}/cart`)
                 .then((res) => {
                     // console.log('最外層資料', res.data.data) //可看到所有商品總金額
                     console.log('當前購物車中品項', res.data.data)
@@ -108,7 +108,7 @@ export default defineStore('cart', {
 
             // console.log('data, 購物車品項 id', data, item.id)
 
-            axios.put(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`, { data })
+            axios.put(`${VITE_URL}/api/${VITE_PATH}/cart/${item.id}`, { data })
                 // api 要輸入購物車品項的 id
                 .then((res) => {
                     // 取得更新後的數量並更新 carts 的資料
@@ -123,7 +123,7 @@ export default defineStore('cart', {
 
         // 刪除購物車品項
         deleteCartItem(item) {
-            axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`)
+            axios.delete(`${VITE_URL}/api/${VITE_PATH}/cart/${item.id}`)
                 .then((res) => {
                     console.log('刪除購物車品項', res)
                     this.getCarts();

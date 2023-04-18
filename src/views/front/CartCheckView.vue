@@ -489,7 +489,14 @@ export default {
   data() {
     return {
       order:{
-        user:{} // 儲存表單購買人資料
+        // 儲存表單購買人資料
+        user:{
+          name:'',
+          email:'',
+          tel:'',
+          address:''
+        },
+        message:'' 
       } 
     }
   },
@@ -515,18 +522,24 @@ export default {
 
     onSubmit(){
       const data=this.order
-      this.$http.post(`${VITE_URL}v2/api/${VITE_PATH}/order`, {data})
+      this.$http.post(`${VITE_URL}/api/${VITE_PATH}/order`, {data})
       .then((res)=>{
         console.log('表單', res.data)
         const isOrderId=res.data.orderId
-        if(isOrderId===undefined){
+        console.log('isOrderId',isOrderId)
+        if(!isOrderId){
           Swal.fire({
-            text:'請確實填妥表單'
+            text:'請填妥表單'
+          })
+        }else{
+          Swal.fire({
+            text:'成功送單！'
           })
         }
       })
       .catch((err)=>{
         console.log(err)
+        // console.log('err.response.data.success',err.response.data.success)
       })
 
     }

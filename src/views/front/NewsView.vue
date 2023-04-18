@@ -198,7 +198,7 @@ export default {
       const{id}=this.$route.params
       console.log('id',id)
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/article/${id}`)
+        .get(`${VITE_URL}/api/${VITE_PATH}/article/${id}`)
         .then((res) => {
           console.log('res',res.data.article)
           this.perNews=res.data.article

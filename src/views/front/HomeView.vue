@@ -746,7 +746,7 @@ export default {
   mounted() {
     // 先取得所有最新消息
     this.$http
-      .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
+      .get(`${VITE_URL}/api/${VITE_PATH}/articles`)
       .then((res) => {
         // console.log(res.data.articles)
         // 轉換時間

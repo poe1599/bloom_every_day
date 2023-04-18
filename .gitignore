@@ -27,7 +27,7 @@ coverage
 *.sln
 *.sw?
 
-.env
+
 .gitignore
 
 流程.txt
