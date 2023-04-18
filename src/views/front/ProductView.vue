@@ -27,7 +27,9 @@
 
           <div class="detail_purchase_group">
             <div class="detail_quantity">
-              <select name="" id="" class="form-select">
+              <select name="" id="" class="form-select"
+              v-model="selectQty"
+              >
                 <option :value="i" v-for="i in 5" :key="`${i}1235`">
                   {{ i }}
                 </option>
@@ -36,8 +38,11 @@
             <div class="detail_purchase">
               <button
                 class="btn fs-6 text-center add_btn"
-                @click.prevent="addToCart(perProduct.id, qty)"
-              >
+                @click="addToCart(perProduct.id, selectQty)"
+                
+                >
+              
+          
                 加入購物車
               </button>
             </div>
@@ -327,8 +332,7 @@ export default {
   data() {
     return {
       perProduct: {},
-      qty: 1,
-      totalQty: 0 // 如何取得 carts 物件中每筆 item 的 qty？
+      selectQty:1, // 商品頁下拉選單數值
     }
   },
   components: {},
@@ -345,6 +349,7 @@ export default {
     getSingleProduct() {
       // 取得產品 id
       const { id } = this.$route.params
+    
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/product/${id}`)
         .then((res) => {
