@@ -77,7 +77,7 @@
         </table>
         <div class="d-flex justify-content-between py-4 mb-3">
           <RouterLink to="/products" class="btn btn-outline-neutral cart_btn">繼續購物</RouterLink>
-          <a href="" class="btn btn-outline-neutral cart_btn">下一步</a>
+          <RouterLink to="/cartCheck" class="btn btn-outline-neutral cart_btn">下一步</RouterLink>
         </div>
       </div>
     </div>
