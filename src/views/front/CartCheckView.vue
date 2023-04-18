@@ -66,9 +66,7 @@
               ></VField>
               <ErrorMessage name="姓名" class="invalid_feedback"></ErrorMessage>
             </div>
-          </VForm>
 
-          <VForm class="cart_form">
             <div class="form-group">
               <label for="tel" class="form-label label_style">電話</label>
               <VField
@@ -81,9 +79,7 @@
               ></VField>
               <ErrorMessage name="電話" class="invalid_feedback"></ErrorMessage>
             </div>
-          </VForm>
 
-          <VForm class="cart_form">
             <div class="form-group">
               <label for="email" class="form-label label_style">信箱</label>
               <VField
@@ -96,9 +92,7 @@
               ></VField>
               <ErrorMessage name="email" class="invalid_feedback"></ErrorMessage>
             </div>
-          </VForm>
 
-          <VForm class="cart_form">
             <div class="form-group">
               <label for="address" class="form-label label_style">地址</label>
               <VField
@@ -111,8 +105,20 @@
               ></VField>
               <ErrorMessage name="地址" class="invalid_feedback"></ErrorMessage>
             </div>
+
+            <div class="cart_textarea">
+              <label for="message" class="form-label label_style">備註</label>
+              <textarea
+                name="備註"
+                id="message"
+                class="w-100 form-control"
+                cols="10"
+                rows="10"
+              ></textarea>
+            </div>
           </VForm>
         </div>
+        
         <div class="d-flex justify-content-end py-4 mb-3">
           <a href="" class="btn btn-outline-neutral cart_btn">下一步</a>
         </div>
@@ -311,6 +317,16 @@ td {
 
 .invalid_feedback {
   color: #ff3d33;
+}
+
+.cart_textarea {
+  background: #f5f5f5;
+  padding: 12px 0 20px;
+}
+
+textarea {
+  resize: none;
+  height: 150px;
 }
 
 @media screen and (min-width: 576px) {
