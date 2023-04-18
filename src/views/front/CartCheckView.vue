@@ -346,6 +346,7 @@ textarea {
   height: 150px;
 }
 
+
 @media screen and (min-width: 576px) {
   .step_item {
     width: 30%;
@@ -527,18 +528,30 @@ export default {
         console.log('表單', res.data)
         const isOrderId=res.data.orderId
         console.log('isOrderId',isOrderId)
-        if(!isOrderId){
+        if(isOrderId){
           Swal.fire({
-            text:'請填妥表單'
-          })
-        }else{
-          Swal.fire({
-            text:'成功送單！'
+            toast:true,
+            position: 'top-star',
+            showConfirmButton:false,
+            timer:1500,
+            title:'成功送單！',
+            background:'#F2E7E8'
           })
         }
       })
       .catch((err)=>{
         console.log(err)
+        const errState=err.response.data.success
+        if(errState===false){
+          Swal.fire({
+            toast:true,
+            position: 'top-star',
+            showConfirmButton:false,
+            timer:1500,
+            title:'請填妥表單再按送出！',
+            background:'#F2E7E8'
+          })
+        }
         // console.log('err.response.data.success',err.response.data.success)
       })
 
