@@ -51,9 +51,14 @@
             </table>
           </div>
         </div>
+        
         <div class="buyer_form col-lg-7">
           <h5 class="cart_h5 bg-bg-2">訂購人資訊</h5>
-          <VForm class="cart_form">
+          <VForm 
+            class="cart_form"
+            v-slot="{errors}"
+            @submit="onSubmit"
+          >
             <div class="form-group">
               <label for="name" class="form-label label_style">姓名</label>
               <VField
@@ -61,8 +66,10 @@
                 name="姓名"
                 type="text"
                 class="form-control"
+                :class="{'is-invalid': errors.姓名}"
                 placeholder="請輸入姓名"
                 rules="required"
+                v-model="order.user.name"
               ></VField>
               <ErrorMessage name="姓名" class="invalid_feedback"></ErrorMessage>
             </div>
@@ -74,8 +81,10 @@
                 name="電話"
                 type="text"
                 class="form-control"
+                :class="{'is-invalid': errors.電話}"
                 placeholder="請輸入手機號碼"
-                rules="required"
+                v-model="order.user.tel"
+                :rules="isPhone"
               ></VField>
               <ErrorMessage name="電話" class="invalid_feedback"></ErrorMessage>
             </div>
@@ -87,8 +96,10 @@
                 name="email"
                 type="email"
                 class="form-control"
+                :class="{'is-invalid': errors.email}"
                 placeholder="請輸入信箱"
                 rules="email|required"
+                v-model="order.user.email"
               ></VField>
               <ErrorMessage name="email" class="invalid_feedback"></ErrorMessage>
             </div>
@@ -100,8 +111,10 @@
                 name="地址"
                 type="text"
                 class="form-control"
+                :class="{'is-invalid': errors.地址}"
                 placeholder="請輸入地址"
                 rules="required"
+                v-model="order.user.address"
               ></VField>
               <ErrorMessage name="地址" class="invalid_feedback"></ErrorMessage>
             </div>
@@ -118,9 +131,13 @@
             </div>
           </VForm>
         </div>
-        
+
         <div class="d-flex justify-content-end py-4 mb-3">
-          <a href="" class="btn btn-outline-neutral cart_btn">下一步</a>
+          <button 
+          type="submit" 
+          class="btn btn-outline-neutral cart_btn"
+          @click="onSubmit"
+          >送出訂單</button>
         </div>
       </div>
     </div>
@@ -375,6 +392,10 @@ textarea {
   .cart_count {
     justify-content: space-between;
   }
+
+  .cart_btn{
+    margin-right: 15px;
+}
 }
 
 @media screen and (min-width: 768px) {
@@ -460,12 +481,17 @@ textarea {
 import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
 import { Field, Form, ErrorMessage } from 'vee-validate'
+import Swal from 'sweetalert2'
 //import { RouterLink } from 'vue-router'
 
-// const { VITE_URL, VITE_PATH } = import.meta.env
+const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
-    return {}
+    return {
+      order:{
+        user:{} // 儲存表單購買人資料
+      } 
+    }
   },
   components: {
     VForm: Form,
@@ -478,8 +504,32 @@ export default {
     // 購物車當前列表 / 購物車所有商品總金額
   },
   methods: {
-    ...mapActions(cartStore, ['getCarts'])
+    ...mapActions(cartStore, ['getCarts']),
     // 取得購物車當前所有品項
+
+    // 電話驗證規則
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/
+      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+    },
+
+    onSubmit(){
+      const data=this.order
+      this.$http.post(`${VITE_URL}v2/api/${VITE_PATH}/order`, {data})
+      .then((res)=>{
+        console.log('表單', res.data)
+        const isOrderId=res.data.orderId
+        if(isOrderId===undefined){
+          Swal.fire({
+            text:'請確實填妥表單'
+          })
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+    }
   },
   mounted() {}
 }
