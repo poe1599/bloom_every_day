@@ -25,15 +25,7 @@ export default {
   },
 
   mounted() {
-    // this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
-    // .then((res)=>{
-    //   console.log(res)
-    // })
-    // 此處為測試用，之後要移除
-    // this.isLoading = true
-    // setTimeout(() => {
-    //   this.isLoading = false
-    // }, 1000)
+    
   }
 }
 </script>

@@ -53,7 +53,7 @@ export default {
   },
  
   mounted() {
-    this.$http.get(`${VITE_URL}/api/${VITE_PATH}/articles`).then((res) => {
+    this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
       console.log(res.data.articles)
       // this.articles = res.data.articles
       this.articles=res.data.articles.map((item)=>{

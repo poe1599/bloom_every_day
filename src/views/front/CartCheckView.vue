@@ -523,12 +523,21 @@ export default {
 
     onSubmit(){
       const data=this.order
-      this.$http.post(`${VITE_URL}/api/${VITE_PATH}/order`, {data})
+      this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data})
       .then((res)=>{
         console.log('表單', res.data)
         const isOrderId=res.data.orderId
         console.log('isOrderId',isOrderId)
-        if(isOrderId){
+        if(isOrderId===undefined){
+          Swal.fire({
+            toast:true,
+            position: 'top-star',
+            showConfirmButton:false,
+            timer:1500,
+            title:'請填妥表單再按送出！',
+            background:'#F2E7E8'
+          })
+        }else{
           Swal.fire({
             toast:true,
             position: 'top-star',
@@ -541,21 +550,47 @@ export default {
       })
       .catch((err)=>{
         console.log(err)
-        const errState=err.response.data.success
-        if(errState===false){
-          Swal.fire({
-            toast:true,
-            position: 'top-star',
-            showConfirmButton:false,
-            timer:1500,
-            title:'請填妥表單再按送出！',
-            background:'#F2E7E8'
-          })
-        }
+       
         // console.log('err.response.data.success',err.response.data.success)
       })
 
-    }
+    },
+
+    // onSubmit(){
+    //   const data=this.order
+    //   this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data})
+    //   .then((res)=>{
+    //     console.log('表單', res.data)
+    //     const isOrderId=res.data.orderId
+    //     console.log('isOrderId',isOrderId)
+    //     if(isOrderId){
+    //       Swal.fire({
+    //         toast:true,
+    //         position: 'top-star',
+    //         showConfirmButton:false,
+    //         timer:1500,
+    //         title:'成功送單！',
+    //         background:'#F2E7E8'
+    //       })
+    //     }
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //     const errState=err.response.data.success
+    //     if(errState===false){
+    //       Swal.fire({
+    //         toast:true,
+    //         position: 'top-star',
+    //         showConfirmButton:false,
+    //         timer:1500,
+    //         title:'請填妥表單再按送出！',
+    //         background:'#F2E7E8'
+    //       })
+    //     }
+    //     // console.log('err.response.data.success',err.response.data.success)
+    //   })
+
+    // }
   },
   mounted() {}
 }

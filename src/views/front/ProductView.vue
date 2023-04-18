@@ -351,7 +351,7 @@ export default {
       const { id } = this.$route.params
     
       this.$http
-        .get(`${VITE_URL}/api/${VITE_PATH}/product/${id}`)
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/product/${id}`)
         .then((res) => {
           this.perProduct = res.data.product
         })
