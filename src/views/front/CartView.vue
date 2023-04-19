@@ -77,7 +77,11 @@
         </table>
         <div class="d-flex justify-content-between py-4 mb-3">
           <RouterLink to="/products" class="btn btn-outline-neutral cart_btn">繼續購物</RouterLink>
-          <RouterLink to="/cartCheck" class="btn btn-outline-neutral cart_btn">下一步</RouterLink>
+          <RouterLink 
+          to="/cartCheck" 
+          class="btn btn-outline-neutral cart_btn"
+          @click="disableLink(carts)"
+          >下一步</RouterLink>
         </div>
       </div>
     </div>
@@ -172,6 +176,7 @@ td {
   margin-bottom: 0;
   margin-left: auto;
   margin-right: auto;
+  white-space: nowrap;
 }
 
 .form-select {
@@ -365,9 +370,8 @@ td {
 import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
 import { RouterLink } from 'vue-router'
+import Swal from 'sweetalert2'
 
-
-// const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {}
@@ -380,8 +384,28 @@ export default {
     // 購物車當前列表 / 購物車所有商品總金額
   },
   methods: {
-    ...mapActions(cartStore,['getCarts','updateCartItem','deleteCartItem'])
+    ...mapActions(cartStore,['getCarts','updateCartItem','deleteCartItem']),
     // 取得購物車當前所有品項 / 調整購物車 select 數量
+
+    disableLink(carts){
+      console.log('disableLink',carts)
+      if(carts.length===0){
+        this.$router.push('/cart')
+        Swal.fire({
+          toast:true,
+          position:'center',
+          timer:1500,
+          showConfirmButton:false,
+          title:'購物車中沒有商品唷！快去買點好東西~',
+          background:'#F2E7E8'
+
+        })
+        return
+      }else{
+        this.$router.push('/cartCheck')
+      }
+
+    }
     
   },
   mounted() {}
