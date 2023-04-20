@@ -27,7 +27,8 @@
                 <td class="col-2 col-sm-2">數量</td>
                 <td class="col-3 col-sm-4">小計</td>
               </tr>
-              <tr class="row mx-auto order_control" v-for="item in carts" :key="item.id">
+
+              <tr class="row mx-auto order_control" v-for="item in orderInfo.products" :key="item.id">
                 <td class="col-7 col-sm-6">
                   <div class="cart_product_info">
                     <div class="cart_product_img">
@@ -41,14 +42,14 @@
                   <div>{{ item.qty }}</div>
                 </td>
                 <td class="col-3 col-sm-4 order_2 order_md_0 selected_subtotal">
-                  <div>NT ${{ item.total }}</div>
+                  <div>NT ${{ item.product.price }}</div>
                 </td>
               </tr>
 
               <tr>
                 <div class="cart_count">
                   <div class="cart_total_text">總計：</div>
-                  <div class="cart_total_price">NT ${{ final_total }}</div>
+                  <div class="cart_total_price">NT ${{orderInfo.total}}</div>
                 </div>
               </tr>
             </table>
@@ -73,8 +74,8 @@
               <td class="col-5">訂購時間</td>
               <td class="col-7"></td>
             </tr>
-{{orderInfo}}
-            <!-- <tr class="row mx-auto">
+
+            <tr class="row mx-auto">
               <td class="col-5">收件人姓名</td>
               <td class="col-7">{{orderInfo.user.name}}</td>
             </tr>
@@ -89,10 +90,11 @@
             <tr class="row mx-auto">
               <td class="col-5">地址</td>
               <td class="col-7">{{orderInfo.user.address}}</td>
-            </tr> -->
+            </tr>
+
             <tr class="row mx-auto">
-              <td class="col-5"></td>
-              <td class="col-7"></td>
+              <td class="col-5">備註</td>
+              <td class="col-7">{{orderInfo.message}}</td>
             </tr>
           </table>
         </div>
@@ -425,7 +427,10 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      orderInfo: {}
+      orderInfo: {
+        user:{},
+        message:''
+      },
     }
   },
   components: {},
@@ -457,6 +462,8 @@ export default {
           .then((res) => {
             console.log('訂單資訊', res)
             this.orderInfo = res.data.order
+            
+            
           })
           .catch((err) => {
             console.log(err)
