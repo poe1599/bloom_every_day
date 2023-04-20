@@ -5,16 +5,20 @@
         <div class="step_item">
           <div class="caption">訂單資訊</div>
         </div>
-        <div class="step_item active">
+        <div class="step_item">
           <div class="caption">填寫資訊</div>
         </div>
-        <div class="step_item">
+        <div class="step_item active">
           <div class="caption">完成訂單</div>
         </div>
       </div>
       <div class="row mx-auto">
         <div class="order_info col-lg-5">
-          <h5 class="cart_h5 bg-bg-2">訂單明細</h5>
+          <h5 class="cart_h5 bg-bg-2">
+            訂單明細
+            <span class="caption text-primary">(未付款)</span>
+            <span class="caption">(已付款)</span>
+          </h5>
 
           <div class="cart_table">
             <table class="table">
@@ -24,7 +28,6 @@
                 <td class="col-3 col-sm-4">小計</td>
               </tr>
               <tr class="row mx-auto order_control" v-for="item in carts" :key="item.id">
-                <!-- 塞資料 -->
                 <td class="col-7 col-sm-6">
                   <div class="cart_product_info">
                     <div class="cart_product_img">
@@ -35,7 +38,7 @@
                 </td>
 
                 <td class="col-2 col-sm-2 order_2 order_md_0 selected_qty">
-                  <div>x {{ item.qty }}</div>
+                  <div>{{ item.qty }}</div>
                 </td>
                 <td class="col-3 col-sm-4 order_2 order_md_0 selected_subtotal">
                   <div>NT ${{ item.total }}</div>
@@ -51,94 +54,51 @@
             </table>
           </div>
         </div>
-        
+
         <div class="buyer_form col-lg-7">
-          <h5 class="cart_h5 bg-bg-2">訂購人資訊</h5>
-          <VForm 
-            class="cart_form"
-            v-slot="{errors}"
-            @submit="onSubmit"
-          >
-            <div class="form-group">
-              <label for="name" class="form-label label_style">收件人姓名</label>
-              <VField
-                id="name"
-                name="姓名"
-                type="text"
-                class="form-control"
-                :class="{'is-invalid': errors.姓名}"
-                placeholder="請輸入姓名"
-                rules="required"
-                v-model="order.user.name"
-              ></VField>
-              <ErrorMessage name="姓名" class="invalid_feedback"></ErrorMessage>
-            </div>
+          <h5 class="cart_h5 bg-bg-2">訂單資訊</h5>
+          <table class="table">
+            <tr class="row mx-auto">
+              <td class="col-5">訂單金額</td>
+              <td class="col-7">
+                <span class="text-primary"> NT ${{ orderInfo.total }} </span>
+              </td>
+            </tr>
+            <tr class="row mx-auto">
+              <td class="col-5">訂單編號</td>
+              <td class="col-7" style="word-break: break-word">{{ orderInfo.id }}</td>
+            </tr>
 
-            <div class="form-group">
-              <label for="tel" class="form-label label_style">電話</label>
-              <VField
-                id="tel"
-                name="電話"
-                type="text"
-                class="form-control"
-                :class="{'is-invalid': errors.電話}"
-                placeholder="請輸入手機號碼"
-                v-model="order.user.tel"
-                :rules="isPhone"
-              ></VField>
-              <ErrorMessage name="電話" class="invalid_feedback"></ErrorMessage>
-            </div>
-
-            <div class="form-group">
-              <label for="email" class="form-label label_style">信箱</label>
-              <VField
-                id="email"
-                name="email"
-                type="email"
-                class="form-control"
-                :class="{'is-invalid': errors.email}"
-                placeholder="請輸入信箱"
-                rules="email|required"
-                v-model="order.user.email"
-              ></VField>
-              <ErrorMessage name="email" class="invalid_feedback"></ErrorMessage>
-            </div>
-
-            <div class="form-group">
-              <label for="address" class="form-label label_style">地址</label>
-              <VField
-                id="address"
-                name="地址"
-                type="text"
-                class="form-control"
-                :class="{'is-invalid': errors.地址}"
-                placeholder="請輸入地址"
-                rules="required"
-                v-model="order.user.address"
-              ></VField>
-              <ErrorMessage name="地址" class="invalid_feedback"></ErrorMessage>
-            </div>
-
-            <div class="cart_textarea">
-              <label for="message" class="form-label label_style">備註</label>
-              <textarea
-                name="備註"
-                id="message"
-                class="w-100 form-control"
-                cols="10"
-                rows="10"
-                v-model="order.message"
-              ></textarea>
-            </div>
-          </VForm>
+            <tr class="row mx-auto">
+              <td class="col-5">訂購時間</td>
+              <td class="col-7"></td>
+            </tr>
+{{orderInfo}}
+            <!-- <tr class="row mx-auto">
+              <td class="col-5">收件人姓名</td>
+              <td class="col-7">{{orderInfo.user.name}}</td>
+            </tr>
+            <tr class="row mx-auto">
+              <td class="col-5">電話</td>
+              <td class="col-7">{{orderInfo.user.tel}}</td>
+            </tr>
+            <tr class="row mx-auto">
+              <td class="col-5">信箱</td>
+              <td class="col-7">{{orderInfo.user.email}}</td>
+            </tr>
+            <tr class="row mx-auto">
+              <td class="col-5">地址</td>
+              <td class="col-7">{{orderInfo.user.address}}</td>
+            </tr> -->
+            <tr class="row mx-auto">
+              <td class="col-5"></td>
+              <td class="col-7"></td>
+            </tr>
+          </table>
         </div>
 
         <div class="d-flex justify-content-end py-4 mb-3">
-          <button 
-          type="submit" 
-          class="btn btn-outline-neutral cart_btn"
-          @click="onSubmit"
-          >送出訂單</button>
+          <button type="submit" class="btn btn-outline-neutral cart_btn">信用卡付款</button>
         </div>
       </div>
     </div>
@@ -181,8 +141,6 @@
 .step_item:last-child::after {
   content: none;
 }
-
-
 
 /* table */
 table.table {
@@ -231,7 +189,6 @@ td {
   text-align: center;
 }
 
-
 .selected_qty {
   display: flex;
   justify-content: center;
@@ -259,6 +216,17 @@ td {
   order: 2;
 }
 
+.order_3 {
+  order: 3;
+}
+
+.order_4 {
+  order: 4;
+}
+
+.order_5 {
+  order: 5;
+}
 
 .cart_product_price {
   display: flex;
@@ -315,7 +283,6 @@ textarea {
   height: 150px;
 }
 
-
 @media screen and (min-width: 576px) {
   .step_item {
     width: 30%;
@@ -363,9 +330,9 @@ textarea {
     justify-content: space-between;
   }
 
-  .cart_btn{
+  .cart_btn {
     margin-right: 15px;
-}
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -450,7 +417,7 @@ textarea {
 <script>
 import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
-import { Field, Form, ErrorMessage } from 'vee-validate'
+
 import Swal from 'sweetalert2'
 //import { RouterLink } from 'vue-router'
 
@@ -458,24 +425,10 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      order:{
-        // 儲存表單購買人資料
-        user:{
-          name:'',
-          email:'',
-          tel:'',
-          address:''
-        },
-        message:'' 
-      } 
+      orderInfo: {}
     }
   },
-  components: {
-    VForm: Form,
-    VField: Field,
-    ErrorMessage
-    // RouterLink
-  },
+  components: {},
   computed: {
     ...mapState(cartStore, ['carts', 'final_total'])
     // 購物車當前列表 / 購物車所有商品總金額
@@ -484,49 +437,36 @@ export default {
     ...mapActions(cartStore, ['getCarts']),
     // 取得購物車當前所有品項
 
-    // 電話驗證規則
-    isPhone(value) {
-      const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
-    },
+    // 取得下訂訂單資料
+    getOrder() {
+      // 防呆
+      if (this.carts.length === 0) {
+        this.$router.push('/products')
+        Swal.fire({
+          title: '<h6 class="text-primary">購物車中沒有商品，即將返回商品頁面</h6>',
+          showConfirmButton:false,
+          timer:1000
+        })
 
-    // 送出表單 & 儲存訂購人資料
-    onSubmit(){
-      const data=this.order
-      this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data})
-      .then((res)=>{
-        
-        const isOrderId=res.data.orderId // 取得訂單 id
-        
-        if(isOrderId===undefined){
-          Swal.fire({
-            toast:true,
-            position: 'center',
-            showConfirmButton:false,
-            timer:1500,
-            title:'請填妥表單再按送出！',
-            background:'#F2E7E8'
+        return
+      } else {
+        const { id } = this.$route.params
+        console.log('id', id) // 取得訂單 id
+        this.$http
+          .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${id}`)
+          .then((res) => {
+            console.log('訂單資訊', res)
+            this.orderInfo = res.data.order
           })
-        }else{
-          this.$router.push(`/cartPay/${isOrderId}`)
-          Swal.fire({
-            toast:true,
-            position: 'center',
-            showConfirmButton:false,
-            timer:1500,
-            title:'成功送單！',
-            background:'#F2E7E8'
+          .catch((err) => {
+            console.log(err)
           })
-        }
-      })
-      .catch((err)=>{
-        console.log(err)
-       
-      })
-
-    },
-
+      }
+      
+    }
   },
-  mounted() {}
+  mounted() {
+    this.getOrder()
+  }
 }
 </script>

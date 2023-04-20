@@ -388,7 +388,7 @@ export default {
     // 取得購物車當前所有品項 / 調整購物車 select 數量
 
     disableLink(carts){
-      console.log('disableLink',carts)
+      
       if(carts.length===0){
         this.$router.push('/cart')
         Swal.fire({
