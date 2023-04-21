@@ -57,7 +57,6 @@
           <VForm 
             class="cart_form"
             v-slot="{errors}"
-            @submit="onSubmit"
           >
             <div class="form-group">
               <label for="name" class="form-label label_style">收件人姓名</label>
@@ -135,7 +134,7 @@
 
         <div class="d-flex justify-content-end py-4 mb-3">
           <button 
-          type="submit" 
+          type="button" 
           class="btn btn-outline-neutral cart_btn"
           @click="onSubmit"
           >送出訂單</button>
