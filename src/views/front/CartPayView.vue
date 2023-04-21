@@ -28,7 +28,11 @@
                 <td class="col-3 col-sm-4">小計</td>
               </tr>
 
-              <tr class="row mx-auto order_control" v-for="item in orderInfo.products" :key="item.id">
+              <tr
+                class="row mx-auto order_control"
+                v-for="item in orderInfo.products"
+                :key="item.id"
+              >
                 <td class="col-7 col-sm-6">
                   <div class="cart_product_info">
                     <div class="cart_product_img">
@@ -49,7 +53,7 @@
               <tr>
                 <div class="cart_count">
                   <div class="cart_total_text">總計：</div>
-                  <div class="cart_total_price">NT ${{orderInfo.total}}</div>
+                  <div class="cart_total_price">NT ${{ orderInfo.total }}</div>
                 </div>
               </tr>
             </table>
@@ -58,45 +62,47 @@
 
         <div class="buyer_form col-lg-7">
           <h5 class="cart_h5 bg-bg-2">訂單資訊</h5>
-          <table class="table">
-            <tr class="row mx-auto">
-              <td class="col-5">訂單金額</td>
-              <td class="col-7">
-                <span class="text-primary"> NT ${{ orderInfo.total }} </span>
-              </td>
-            </tr>
-            <tr class="row mx-auto">
-              <td class="col-5">訂單編號</td>
-              <td class="col-7" style="word-break: break-word">{{ orderInfo.id }}</td>
-            </tr>
+          <div class="orderList_table">
+            <table class="table">
+              <tr class="row mx-auto">
+                <td class="col-5">訂單金額</td>
+                <td class="col-7">
+                  <span class="text-primary"> NT ${{ orderInfo.total }} </span>
+                </td>
+              </tr>
+              <tr class="row mx-auto">
+                <td class="col-5">訂單編號</td>
+                <td class="col-7" style="word-break: break-word">{{ orderInfo.id }}</td>
+              </tr>
 
-            <tr class="row mx-auto">
-              <td class="col-5">訂購時間</td>
-              <td class="col-7"></td>
-            </tr>
+              <tr class="row mx-auto">
+                <td class="col-5">訂購時間</td>
+                <td class="col-7"></td>
+              </tr>
 
-            <tr class="row mx-auto">
-              <td class="col-5">收件人姓名</td>
-              <td class="col-7">{{orderInfo.user.name}}</td>
-            </tr>
-            <tr class="row mx-auto">
-              <td class="col-5">電話</td>
-              <td class="col-7">{{orderInfo.user.tel}}</td>
-            </tr>
-            <tr class="row mx-auto">
-              <td class="col-5">信箱</td>
-              <td class="col-7">{{orderInfo.user.email}}</td>
-            </tr>
-            <tr class="row mx-auto">
-              <td class="col-5">地址</td>
-              <td class="col-7">{{orderInfo.user.address}}</td>
-            </tr>
+              <tr class="row mx-auto">
+                <td class="col-5">收件人姓名</td>
+                <td class="col-7">{{ orderInfo.user.name }}</td>
+              </tr>
+              <tr class="row mx-auto">
+                <td class="col-5">電話</td>
+                <td class="col-7">{{ orderInfo.user.tel }}</td>
+              </tr>
+              <tr class="row mx-auto">
+                <td class="col-5">信箱</td>
+                <td class="col-7">{{ orderInfo.user.email }}</td>
+              </tr>
+              <tr class="row mx-auto">
+                <td class="col-5">地址</td>
+                <td class="col-7">{{ orderInfo.user.address }}</td>
+              </tr>
 
-            <tr class="row mx-auto">
-              <td class="col-5">備註</td>
-              <td class="col-7">{{orderInfo.message}}</td>
-            </tr>
-          </table>
+              <tr class="row mx-auto">
+                <td class="col-5">備註</td>
+                <td class="col-7">{{ orderInfo.message }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <div class="d-flex justify-content-end py-4 mb-3">
@@ -218,18 +224,6 @@ td {
   order: 2;
 }
 
-.order_3 {
-  order: 3;
-}
-
-.order_4 {
-  order: 4;
-}
-
-.order_5 {
-  order: 5;
-}
-
 .cart_product_price {
   display: flex;
   align-items: center;
@@ -256,34 +250,10 @@ td {
   color: white;
 }
 
-/* VForm */
-.cart_form {
-  background: #f5f5f5;
-  padding: 0 15px;
+.orderList_table .table>tr, td {
+  padding: 12px;
 }
 
-.form-group {
-  padding: 12px 0;
-  border-bottom: 2px solid white;
-}
-
-.label_style {
-  padding: 10px 0 0;
-}
-
-.invalid_feedback {
-  color: #ff3d33;
-}
-
-.cart_textarea {
-  background: #f5f5f5;
-  padding: 12px 0 20px;
-}
-
-textarea {
-  resize: none;
-  height: 150px;
-}
 
 @media screen and (min-width: 576px) {
   .step_item {
@@ -300,7 +270,7 @@ textarea {
   }
 
   .cart_table,
-  .cart_form {
+  .orderList_table {
     margin: auto 15px;
   }
 
@@ -428,9 +398,9 @@ export default {
   data() {
     return {
       orderInfo: {
-        user:{},
-        message:''
-      },
+        user: {},
+        message: ''
+      }
     }
   },
   components: {},
@@ -444,35 +414,24 @@ export default {
 
     // 取得下訂訂單資料
     getOrder() {
-      // 防呆
-      if (this.carts.length === 0) {
-        this.$router.push('/products')
-        Swal.fire({
-          title: '<h6 class="text-primary">購物車中沒有商品，即將返回商品頁面</h6>',
-          showConfirmButton:false,
-          timer:1000
-        })
-
-        return
-      } else {
         const { id } = this.$route.params
         console.log('id', id) // 取得訂單 id
+        
         this.$http
           .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${id}`)
           .then((res) => {
             console.log('訂單資訊', res)
             this.orderInfo = res.data.order
-            
-            
           })
           .catch((err) => {
             console.log(err)
           })
-      }
       
     }
   },
   mounted() {
+    this.getCarts() 
+    // 清空購物車：購物車 this.carts 在執行 .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data}) 之後，便會於後台清空，因此重新呼叫 this.getCarts()就會得到空的購物車資料
     this.getOrder()
   }
 }
