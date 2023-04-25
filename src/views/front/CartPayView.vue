@@ -16,8 +16,8 @@
         <div class="order_info col-lg-5">
           <h5 class="cart_h5 bg-bg-2">
             訂單明細
-            <span class="caption text-primary">(未付款)</span>
-            <span class="caption">(已付款)</span>
+            <span class="caption text-primary" v-if="is_paid">(已付款)</span>
+            <span class="caption text-primary" v-else>(未付款)</span>
           </h5>
 
           <div class="cart_table">
@@ -77,7 +77,7 @@
 
               <tr class="row mx-auto">
                 <td class="col-5">訂購時間</td>
-                <td class="col-7"></td>
+                <td class="col-7">{{ this.timeFinal }}</td>
               </tr>
 
               <tr class="row mx-auto">
@@ -106,7 +106,44 @@
         </div>
 
         <div class="d-flex justify-content-end py-4 mb-3">
-          <button type="submit" class="btn btn-outline-neutral cart_btn">信用卡付款</button>
+          <button
+            type="button"
+            class="btn btn-outline-neutral pay_btn"
+            @click="payOrder(orderInfo.id)"
+          >
+            信用卡付款
+          </button>
+        </div>
+
+        <!-- paidModal -->
+        <div
+          class="modal fade"
+          ref="paidModal"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ paidFeedback }}！</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                您的商品將於下訂後三至五天寄出，商品寄出後將以 Email
+                通知，請留意您提供的收件人信箱，日日是好日祝您購物愉快！
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" @click="closeModal()">OK</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -114,6 +151,10 @@
 </template>
 
 <style lang="scss" scoped>
+.modal-body {
+  text-align: justify;
+}
+
 .step_group {
   display: flex;
   justify-content: space-between;
@@ -240,20 +281,20 @@ td {
   padding: 10px 0;
 }
 
-.cart_btn {
+.pay_btn {
   color: #121212;
 }
 
-.cart_btn:hover {
+.pay_btn:hover {
   background: #ff3d33;
   border: 1px solid white;
   color: white;
 }
 
-.orderList_table .table>tr, td {
+.orderList_table .table > tr,
+td {
   padding: 12px;
 }
-
 
 @media screen and (min-width: 576px) {
   .step_item {
@@ -302,7 +343,7 @@ td {
     justify-content: space-between;
   }
 
-  .cart_btn {
+  .pay_btn {
     margin-right: 15px;
   }
 }
@@ -389,7 +430,7 @@ td {
 <script>
 import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
-
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import Swal from 'sweetalert2'
 //import { RouterLink } from 'vue-router'
 
@@ -397,10 +438,13 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
+      timeFinal:'',
       orderInfo: {
         user: {},
         message: ''
-      }
+      },
+      paidFeedback: '',
+      is_paid: ''
     }
   },
   components: {},
@@ -414,25 +458,57 @@ export default {
 
     // 取得下訂訂單資料
     getOrder() {
-        const { id } = this.$route.params
-        console.log('id', id) // 取得訂單 id
-        
-        this.$http
-          .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${id}`)
-          .then((res) => {
-            console.log('訂單資訊', res)
-            this.orderInfo = res.data.order
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      
+      const { id } = this.$route.params
+
+      this.$http
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${id}`)
+        .then((res) => {
+          console.log('訂單資訊', res.data.order)
+          this.orderInfo = res.data.order
+
+          // DOM 準備完成後即先執行時間轉換
+          const timeStamp = res.data.order.create_at
+          this.timeSwitch(timeStamp)
+
+          // 完成付款後再執行一次 getOrder 取得已付款狀態
+          this.is_paid = res.data.order.is_paid
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+
+    payOrder(orderId) {
+      this.$http
+        .post(`${VITE_URL}v2/api/${VITE_PATH}/pay/${orderId}`)
+        .then((res) => {
+          this.paidFeedback = res.data.message
+          // 付款後彈出視窗
+          this.paidModal.show()
+
+          // 取得 is_paid 更新後狀態
+          this.getOrder()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+
+    closeModal() {
+      this.paidModal.hide()
+    },
+
+    // 時間轉換
+    timeSwitch(timeStamp) {
+      const newTime = new Date(timeStamp * 1000)
+      this.timeFinal = newTime.toLocaleDateString()
     }
   },
   mounted() {
-    this.getCarts() 
+    this.getCarts()
     // 清空購物車：購物車 this.carts 在執行 .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data}) 之後，便會於後台清空，因此重新呼叫 this.getCarts()就會得到空的購物車資料
     this.getOrder()
+    this.paidModal = new bootstrap.Modal(this.$refs.paidModal)
   }
 }
 </script>
