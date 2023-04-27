@@ -70,9 +70,7 @@ export default {
       .then((res) => {
         this.articles = res.data.articles
 
-        setTimeout(() => {
-          this.isLoading = false
-        }, 1000)
+       this.isLoading = false
 
         this.articles = res.data.articles.map((item) => {
           const time = item.create_at
