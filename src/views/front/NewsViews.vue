@@ -6,11 +6,7 @@
         <h3 class="text-primary text-center news_h3_mobile">最新消息</h3>
       </div>
 
-      <vue-loading
-        v-model:active="isLoading"
-        :is-full-page="fullPage"
-        :opacity=1
-      >
+      <vue-loading v-model:active="isLoading" :is-full-page="fullPage" :opacity="1">
         <div class="loading_brand">
           <img src="../../assets/icon/bloomEveryDay.svg" alt="" />
 
@@ -59,7 +55,7 @@ export default {
     return {
       articles: [],
       isLoading: false,
-      fullPage:true,
+      fullPage: true
     }
   },
   components: {
@@ -73,8 +69,10 @@ export default {
       .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
       .then((res) => {
         this.articles = res.data.articles
-        
-        this.isLoading = false
+
+        setTimeout(() => {
+          this.isLoading = false
+        }, 1000)
 
         this.articles = res.data.articles.map((item) => {
           const time = item.create_at
