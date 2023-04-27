@@ -1,5 +1,4 @@
 <template>
-  <!-- <Loading :active="isLoading"> </Loading> -->
   <div class="products_wrapper">
     <div class="products_banner">
       <div class="products_banner_position">
@@ -363,7 +362,7 @@ export default {
       products: [],
       page: {}, // 存入後台 pagination 的欄位資料
       currentCategory: 'all',
-      isLoading: false
+      
     }
   },
   components: {

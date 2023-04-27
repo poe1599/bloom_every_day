@@ -1,6 +1,6 @@
 <template>
   <header>
-    <VueLoading v-model:active="isLoading"></VueLoading>
+    <!-- <VueLoading v-model:active="isLoading"></VueLoading> -->
 
   </header>
 
@@ -16,7 +16,7 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      isLoading: false
+      // isLoading: true
     }
   },
   components: {

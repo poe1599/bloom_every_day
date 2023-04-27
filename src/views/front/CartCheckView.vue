@@ -51,13 +51,24 @@
             </table>
           </div>
         </div>
-        
+
+        <vue-loading
+          v-model:active="isLoading"
+          :is-full-page="fullPage"
+          :opacity="1"
+        >
+          <div class="loading_brand">
+            <img src="../../assets/icon/bloomEveryDay.svg" alt="" />
+
+            <div class="loading_flower">
+              <img src="../../assets/icon/logo_flower.svg" alt="" />
+            </div>
+          </div>
+        </vue-loading>
+
         <div class="buyer_form col-lg-7">
           <h5 class="cart_h5 bg-bg-2">訂購人資訊</h5>
-          <VForm 
-            class="cart_form"
-            v-slot="{errors}"
-          >
+          <VForm class="cart_form" v-slot="{ errors }">
             <div class="form-group">
               <label for="name" class="form-label label_style">收件人姓名</label>
               <VField
@@ -65,7 +76,7 @@
                 name="姓名"
                 type="text"
                 class="form-control"
-                :class="{'is-invalid': errors.姓名}"
+                :class="{ 'is-invalid': errors.姓名 }"
                 placeholder="請輸入姓名"
                 rules="required"
                 v-model="order.user.name"
@@ -80,7 +91,7 @@
                 name="電話"
                 type="text"
                 class="form-control"
-                :class="{'is-invalid': errors.電話}"
+                :class="{ 'is-invalid': errors.電話 }"
                 placeholder="請輸入手機號碼"
                 v-model="order.user.tel"
                 :rules="isPhone"
@@ -95,7 +106,7 @@
                 name="email"
                 type="email"
                 class="form-control"
-                :class="{'is-invalid': errors.email}"
+                :class="{ 'is-invalid': errors.email }"
                 placeholder="請輸入信箱"
                 rules="email|required"
                 v-model="order.user.email"
@@ -110,7 +121,7 @@
                 name="地址"
                 type="text"
                 class="form-control"
-                :class="{'is-invalid': errors.地址}"
+                :class="{ 'is-invalid': errors.地址 }"
                 placeholder="請輸入地址"
                 rules="required"
                 v-model="order.user.address"
@@ -133,11 +144,9 @@
         </div>
 
         <div class="d-flex justify-content-end py-4 mb-3">
-          <button 
-          type="button" 
-          class="btn btn-outline-neutral cart_btn"
-          @click="onSubmit"
-          >送出訂單</button>
+          <button type="button" class="btn btn-outline-neutral cart_btn" @click="onSubmit">
+            送出訂單
+          </button>
         </div>
       </div>
     </div>
@@ -145,6 +154,65 @@
 </template>
 
 <style lang="scss" scoped>
+/* loading start */
+
+.loading_brand {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 61, 51, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  @media screen and (min-width: 576px) {
+    width: 250px;
+    text-align: center;
+  }
+}
+
+.loading_brand > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  @media screen and (min-width: 576px) {
+    width: 80%;
+  }
+}
+
+.loading_flower {
+  position: absolute;
+  top: -30px;
+  left: 115px;
+  z-index: -1;
+  width: 50px;
+  animation-name: rotating;
+  animation-duration: 1.5s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  @media screen and (min-width: 576px) {
+    left: 210px;
+    width: 70px;
+  }
+}
+
+.loading_flower > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* loading end */
+
 .step_group {
   display: flex;
   justify-content: space-between;
@@ -180,8 +248,6 @@
 .step_item:last-child::after {
   content: none;
 }
-
-
 
 /* table */
 table.table {
@@ -230,7 +296,6 @@ td {
   text-align: center;
 }
 
-
 .selected_qty {
   display: flex;
   justify-content: center;
@@ -257,7 +322,6 @@ td {
 .order_2 {
   order: 2;
 }
-
 
 .cart_product_price {
   display: flex;
@@ -314,7 +378,6 @@ textarea {
   height: 150px;
 }
 
-
 @media screen and (min-width: 576px) {
   .step_item {
     width: 30%;
@@ -362,9 +425,9 @@ textarea {
     justify-content: space-between;
   }
 
-  .cart_btn{
+  .cart_btn {
     margin-right: 15px;
-}
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -451,22 +514,23 @@ import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import Swal from 'sweetalert2'
-//import { RouterLink } from 'vue-router'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      order:{
+      isLoading: false,
+      fullPage:true,
+      order: {
         // 儲存表單購買人資料
-        user:{
-          name:'',
-          email:'',
-          tel:'',
-          address:''
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
         },
-        message:'' 
-      } 
+        message: ''
+      }
     }
   },
   components: {
@@ -490,41 +554,44 @@ export default {
     },
 
     // 送出表單 & 儲存訂購人資料
-    onSubmit(){
-      const data=this.order
-      this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data})
-      .then((res)=>{
-        
-        const isOrderId=res.data.orderId // 取得訂單 id
-        
-        if(isOrderId===undefined){
-          Swal.fire({
-            toast:true,
-            position: 'center',
-            showConfirmButton:false,
-            timer:1500,
-            title:'請填妥表單再按送出！',
-            background:'#F2E7E8'
-          })
-        }else{
-          this.$router.push(`/cartPay/${isOrderId}`)
-          Swal.fire({
-            toast:true,
-            position: 'center',
-            showConfirmButton:false,
-            timer:1500,
-            title:'成功送單！',
-            background:'#F2E7E8'
-          })
-        }
-      })
-      .catch((err)=>{
-        console.log(err)
-       
-      })
+    onSubmit() {
+      this.isLoading = true
 
-    },
+      const data = this.order
+      this.$http
+        .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, { data })
+        .then((res) => {
+          const isOrderId = res.data.orderId // 取得訂單 id
 
+          setTimeout(() => {
+            this.isLoading = false
+          }, 1000)
+
+          if (isOrderId === undefined) {
+            Swal.fire({
+              toast: true,
+              position: 'center',
+              showConfirmButton: false,
+              timer: 1500,
+              title: '請填妥表單再按送出！',
+              background: '#F2E7E8'
+            })
+          } else {
+            this.$router.push(`/cartPay/${isOrderId}`)
+            Swal.fire({
+              toast: true,
+              position: 'center',
+              showConfirmButton: false,
+              timer: 1500,
+              title: '成功送單！',
+              background: '#F2E7E8'
+            })
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
   mounted() {}
 }

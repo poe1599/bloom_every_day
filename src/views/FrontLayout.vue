@@ -232,7 +232,7 @@ import cartStore from '../stores/cartStore.js'
 export default {
   data() {
     return {
-      isOpen: false
+     isOpen: false
     }
   },
   methods: {

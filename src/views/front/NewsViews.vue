@@ -6,6 +6,20 @@
         <h3 class="text-primary text-center news_h3_mobile">最新消息</h3>
       </div>
 
+      <vue-loading
+        v-model:active="isLoading"
+        :is-full-page="fullPage"
+        :opacity=1
+      >
+        <div class="loading_brand">
+          <img src="../../assets/icon/bloomEveryDay.svg" alt="" />
+
+          <div class="loading_flower">
+            <img src="../../assets/icon/logo_flower.svg" alt="" />
+          </div>
+        </div>
+      </vue-loading>
+
       <div class="deco"><img src="../../assets/img/BgSec2.svg" alt="" /></div>
 
       <div class="news_body">
@@ -18,7 +32,7 @@
               <div class="news_card_body">
                 <div class="card_title">
                   <h5 class="card_title_h5">{{ article.title }}</h5>
-                  <div class="card_time caption">{{article.dateString}}</div>
+                  <div class="card_time caption">{{ article.dateString }}</div>
                 </div>
                 <div class="card_content">
                   {{ article.description }}
@@ -26,7 +40,6 @@
 
                 <div class="card_detail text-end caption">
                   <RouterLink :to="`/news/${article.id}`" class="fs-6">more</RouterLink>
-                  
                 </div>
               </div>
             </div>
@@ -44,33 +57,38 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      articles: []
+      articles: [],
+      isLoading: false,
+      fullPage:true,
     }
   },
-  components:{
+  components: {
     RouterLink
-
   },
- 
+
   mounted() {
-    this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/articles`).then((res) => {
-      console.log(res.data.articles)
-      // this.articles = res.data.articles
-      this.articles=res.data.articles.map((item)=>{
-        const time=item.create_at;
-        const date=new Date(time*1000);
-        const dateString=date.toLocaleDateString();
-        return{
-          ...item,
-          dateString
-        } 
+    this.isLoading = true
+
+    this.$http
+      .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
+      .then((res) => {
+        this.articles = res.data.articles
+        
+        this.isLoading = false
+
+        this.articles = res.data.articles.map((item) => {
+          const time = item.create_at
+          const date = new Date(time * 1000)
+          const dateString = date.toLocaleDateString()
+          return {
+            ...item,
+            dateString
+          }
+        })
       })
-
-    }).catch((err)=>{
-      console.log(err)
-    })
-
-    
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
@@ -100,6 +118,65 @@ export default {
   object-fit: cover;
   rotate: 15deg;
 }
+
+/* loading start */
+
+.loading_brand {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 61, 51, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  @media screen and (min-width: 576px) {
+    width: 250px;
+    text-align: center;
+  }
+}
+
+.loading_brand > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  @media screen and (min-width: 576px) {
+    width: 80%;
+  }
+}
+
+.loading_flower {
+  position: absolute;
+  top: -30px;
+  left: 115px;
+  z-index: -1;
+  width: 50px;
+  animation-name: rotating;
+  animation-duration: 1.5s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  @media screen and (min-width: 576px) {
+    left: 210px;
+    width: 70px;
+  }
+}
+
+.loading_flower > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* loading end */
 
 .news_h2_pc {
   display: none;

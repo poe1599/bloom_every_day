@@ -431,8 +431,7 @@ td {
 import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import Swal from 'sweetalert2'
-//import { RouterLink } from 'vue-router'
+
 
 const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
