@@ -13,6 +13,18 @@
         </div>
       </div>
     </div>
+
+    <!-- loading -->
+    <vue-loading v-model:active="isLoading" :is-full-page="fullPage" :opacity="1">
+      <div class="loading_brand">
+        <img src="../../assets/icon/bloomEveryDay.svg" alt="" />
+
+        <div class="loading_flower">
+          <img src="../../assets/icon/logo_flower.svg" alt="" />
+        </div>
+      </div>
+    </vue-loading>
+
     <div class="container">
       <div class="products_menu">
         <ul class="products_menu_list">
@@ -72,6 +84,65 @@
 </template>
 
 <style>
+/* loading start */
+
+.loading_brand {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 61, 51, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  @media screen and (min-width: 576px) {
+    width: 250px;
+    text-align: center;
+  }
+}
+
+.loading_brand > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  @media screen and (min-width: 576px) {
+    width: 80%;
+  }
+}
+
+.loading_flower {
+  position: absolute;
+  top: -30px;
+  left: 115px;
+  z-index: -1;
+  width: 50px;
+  animation-name: rotating;
+  animation-duration: 1.5s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  @media screen and (min-width: 576px) {
+    left: 210px;
+    width: 70px;
+  }
+}
+
+.loading_flower > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* loading end */
+
 .banner_h2_pc {
   display: none;
 }
@@ -351,7 +422,6 @@ img.img_hover:hover {
 </style>
 
 <script>
-
 import Pagination from '../../components/PaginationComponent.vue'
 import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
@@ -362,16 +432,18 @@ export default {
       products: [],
       page: {}, // 存入後台 pagination 的欄位資料
       currentCategory: 'all',
-      
+      isLoading: false,
+      fullPage: true
     }
   },
   components: {
     RouterLink,
-    Pagination,
-    
+    Pagination
   },
   methods: {
     getProducts(page = 1) {
+      this.isLoading = true
+
       // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
 
       const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}` // 此處 category 變數要組下列 api 用
@@ -381,6 +453,8 @@ export default {
         .then((res) => {
           this.products = res.data.products
           this.page = res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
+
+          this.isLoading = false
 
           //將點擊時取得的 category 的值(如 all, 小型花束…) 賦值給 this.currentCategory, 其值將作為 $route.query 中 category 屬性的值 (即取得當前的 query string 參數)，再透過 $router.push 來動態更新網址列的參數
           this.$router.push({
@@ -402,10 +476,8 @@ export default {
   },
 
   mounted() {
-    // this.isLoading = true
-    // setTimeout(() => {
-    //   this.isLoading = false
-    // }, 1000)
+    
+
     this.getProducts()
 
     // 一載入頁面就先判斷 this.currentCategory 的值，確保一定先取得所有的品，並把取得的所有商品的 query string 丟上網址列呈現
