@@ -46,9 +46,9 @@
 
       <div class="mobile_menu text-center" :class="{ show: isOpen }">
         <ul>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/">首頁</RouterLink></li>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/news">最新消息</RouterLink></li>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/products">所有商品</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/" @click="changePage">首頁</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/news" @click="changePage">最新消息</RouterLink></li>
+          <li class="py-3"><RouterLink class="mobile_nav" to="/products" @click="changePage">所有商品</RouterLink></li>
         </ul>
       </div>
     </div>
@@ -248,6 +248,10 @@ export default {
   methods: {
     toggleMenu() {
       this.isOpen = !this.isOpen
+    },
+
+    changePage(){
+      this.isOpen=false;
     },
 
     ...mapActions(cartStore, ['getCarts'])
