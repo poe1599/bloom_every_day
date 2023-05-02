@@ -5,7 +5,8 @@
         <h2 class="text-primary news_h2_pc">最新消息</h2>
         <h3 class="text-primary text-center news_h3_mobile">最新消息</h3>
       </div>
-
+      
+      <!-- loading -->
       <vue-loading v-model:active="isLoading" :is-full-page="fullPage" :opacity="1">
         <div class="loading_brand">
           <img src="../../assets/icon/bloomEveryDay.svg" alt="" />
@@ -70,7 +71,7 @@ export default {
       .then((res) => {
         this.articles = res.data.articles
 
-       this.isLoading = false
+        this.isLoading = false
 
         this.articles = res.data.articles.map((item) => {
           const time = item.create_at
