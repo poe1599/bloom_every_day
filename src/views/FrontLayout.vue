@@ -18,7 +18,9 @@
             <li>
               <RouterLink class="nav_link" to="/cart">
                 <i class="bi bi-cart3 nav_cart pc_cart_btn position-relative">
-                  <span class="position-absolute badge rounded-pill bg-danger pc_badge"> {{carts.length}} </span>
+                  <span class="position-absolute badge rounded-pill bg-danger pc_badge">
+                    {{ carts.length }}
+                  </span>
                 </i>
               </RouterLink>
             </li>
@@ -26,7 +28,9 @@
 
           <RouterLink class="cart_icon" to="/cart">
             <i class="bi bi-cart3 position-relative mobile_cart_btn">
-              <span class="position-absolute badge rounded-pill bg-danger mobile_badge"> {{carts.length}} </span>
+              <span class="position-absolute badge rounded-pill bg-danger mobile_badge">
+                {{ carts.length }}
+              </span>
             </i>
           </RouterLink>
 
@@ -144,9 +148,16 @@ a.mobile_nav {
   color: #ff3d33;
 }
 
+.layout_content {
+  height: 100%;
+  min-height: 100vh;
+}
+
 #footer {
   background-color: #ff3d33;
   padding: 24px 12px;
+  top: 100%;
+  position: sticky;
 }
 
 .footer {
@@ -219,20 +230,19 @@ a.mobile_nav {
 
 .layout_content {
   margin: auto;
-  //   max-width: 1296px;
 }
 </style>
 
 
 <script>
 import { RouterView, RouterLink } from 'vue-router'
-import {mapActions, mapState} from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import cartStore from '../stores/cartStore.js'
 
 export default {
   data() {
     return {
-     isOpen: false
+      isOpen: false
     }
   },
   methods: {
@@ -240,18 +250,18 @@ export default {
       this.isOpen = !this.isOpen
     },
 
-    ...mapActions(cartStore,['getCarts'])
+    ...mapActions(cartStore, ['getCarts'])
   },
   components: {
     RouterView,
     RouterLink
   },
-  computed:{
-    ...mapState(cartStore,['carts'])
+  computed: {
+    ...mapState(cartStore, ['carts'])
   },
 
-  mounted(){
-    this.getCarts();
+  mounted() {
+    this.getCarts()
   }
 }
 </script>
