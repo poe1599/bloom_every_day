@@ -127,39 +127,16 @@
             }"
             :modules="modules"
           >
-            <SwiperSlide>
-              <a href="" class="mySwiper">
+            <SwiperSlide v-for="item in randomProducts" :key="item.id">
+              <RouterLink :to="`/products/${item.id}`" class="mySwiper">
                 <div class="swiper_img">
-                  <img src="../../assets/img/img_11.jpg" alt="" />
+                  <img :src="item.imageUrl" alt="" />
                 </div>
                 <div class="swiper_text text-center">
-                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
-                  <h6 class="text-primary">NT$ 1,000</h6>
+                  <h5 class="swiper_text_h5 text-dark-text">{{ item.title }}</h5>
+                  <h6 class="text-primary">NT$ {{ item.price }}</h6>
                 </div>
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="" class="mySwiper">
-                <div class="swiper_img">
-                  <img src="../../assets/img/img_5.jpg" alt="" />
-                </div>
-
-                <div class="swiper_text text-center">
-                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
-                  <h6 class="text-primary">NT$ 1,000</h6>
-                </div>
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="" class="mySwiper">
-                <div class="swiper_img">
-                  <img src="../../assets/img/ImgSec5-4.png" alt="" />
-                </div>
-                <div class="swiper_text text-center">
-                  <h5 class="swiper_text_h5 text-dark-text">溫柔和絢</h5>
-                  <h6 class="text-primary">NT$ 1,000</h6>
-                </div>
-              </a>
+              </RouterLink>
             </SwiperSlide>
           </Swiper>
         </div>
@@ -301,7 +278,7 @@
 // intro section
 .intro {
   padding: 24px 12px;
-  background: url('../assets/img/ImgSec3.png') center center no-repeat;
+  background: url('../../assets/img/ImgSec3.png') center center no-repeat;
 }
 
 .intro_text {
@@ -734,14 +711,48 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      modules: [Pagination],
+      modules: [Pagination], // swiper
       articles: [],
-      tempArticles: []
+      allProducts: [],
+      randomProducts: []
     }
   },
   components: {
     Swiper,
     SwiperSlide
+  },
+  computed: {
+    // 呈現三筆最新的文章
+    tempArticles() {
+      return this.articles.filter((item, index) => {
+        return index < 3 //篩出前三筆(最新的三筆)
+      })
+      // tempArticles 是一個唯讀的變數，可直直渲染於畫面上
+
+      // 原先在 data 中定義的 tempArticles 與 articles 無從屬關係，改於 computed 定義後，兩者產生依賴性、關聯性，因此會在 articles 有任何變動時即時更新 tempArticles 
+    }
+  },
+  methods: {
+    getRandomProduct() {
+      this.$http
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`)
+        .then((res) => {
+          this.allProducts = res.data.products
+          while (this.randomProducts.length < 3) {
+            const index = Math.floor(Math.random() * this.allProducts.length)
+            const item = this.allProducts[index]
+
+            if (!this.randomProducts.includes(item)) {
+              this.randomProducts.push(item)
+            }
+
+            //console.log('this.randomProducts',this.randomProducts)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
   mounted() {
     // 先取得所有最新消息
@@ -759,17 +770,12 @@ export default {
             dateString
           }
         })
-        // console.log(this.articles) //確認抓到資料
-
-        // 只選出最新的三筆呈現
-        this.tempArticles = this.articles.filter((item, index) => {
-          return index < 3 //篩出前三筆(最新的三筆)
-        })
-        // console.log('tempArticles', this.tempArticles)
+        
       })
       .catch((err) => {
         console.log(err)
-      })
+      }),
+      this.getRandomProduct()
   }
 }
 </script>
