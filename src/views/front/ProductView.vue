@@ -41,8 +41,6 @@
                 @click="addToCart(perProduct.id, selectQty)"
                 
                 >
-              
-          
                 加入購物車
               </button>
             </div>
@@ -325,7 +323,6 @@ h5.detail_title {
 import { mapState, mapActions } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
 
-//import { RouterLink } from 'vue-router'
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 export default {

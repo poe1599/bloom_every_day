@@ -8,9 +8,8 @@ export default defineStore('cart', {
         return {
             carts: [],  // 購物車中的所有品項
             final_total: 0, //購物車中所有品項的總金額
-            
-        }
 
+        }
 
     },
 
@@ -48,9 +47,9 @@ export default defineStore('cart', {
 
                 if (isTotalQtyMoreThanMaxQty) {
                     Swal.fire({
-                        title:`<h6>此商品已有<span style="color:#FF3D33;"> ${cartItemQty} </span>筆在購物車中嘍！</h6><h6>同一商品購買總數上限為<span style="color:#FF3D33;"> 5 </span>筆</h6><h6>請重新調整選購數量~</h6>`,
-                        confirmButtonColor:'#FF3D33',
-                    })                   
+                        title: `<h6>此商品已有<span style="color:#FF3D33;"> ${cartItemQty} </span>筆在購物車中嘍！</h6><h6>同一商品購買總數上限為<span style="color:#FF3D33;"> 5 </span>筆</h6><h6>請重新調整選購數量~</h6>`,
+                        confirmButtonColor: '#FF3D33',
+                    })
                     return
                 }
 
@@ -67,7 +66,16 @@ export default defineStore('cart', {
 
             axios.post(`${VITE_URL}v2/api/${VITE_PATH}/cart`, { data })
                 .then((res) => {
-                    console.log('加入購物車', res.data);
+                    
+                    Swal.fire({
+                        toast: true,
+                        position: 'center',
+                        timer: 2000,
+                        title: `<h6 style="color:#ff3d33; text-align:center;">商品${res.data.message}囉！
+                        </h6>`,
+                        showConfirmButton: false,
+                        background: 'white'
+                    })
                     this.getCarts();
                     // 更新後再重新取得購物車內品項資訊
                 })
@@ -99,20 +107,17 @@ export default defineStore('cart', {
 
         // 調整購物車頁面 select 數量
         updateCartItem(item) {
-            console.log('item 數量', item.qty) // 顯示 select 選的數值
-
+            
             const data = {
                 product_id: item.product.id, // 產品的 id
                 qty: item.qty,
             }
 
-            // console.log('data, 購物車品項 id', data, item.id)
 
             axios.put(`${VITE_URL}v2/api/${VITE_PATH}/cart/${item.id}`, { data })
                 // api 要輸入購物車品項的 id
                 .then((res) => {
                     // 取得更新後的數量並更新 carts 的資料
-                    console.log('更新購物車', res.data);
                     this.getCarts();
                 })
                 .catch((err) => {
@@ -125,7 +130,16 @@ export default defineStore('cart', {
         deleteCartItem(item) {
             axios.delete(`${VITE_URL}v2/api/${VITE_PATH}/cart/${item.id}`)
                 .then((res) => {
-                    console.log('刪除購物車品項', res)
+                    const deleteMessage=res.data.message
+                    Swal.fire({
+                        toast:true,
+                        position:'center',
+                        timer:2000,
+                        showConfirmButton:false,
+                        title:`<span style="color:#FF3D33;">${{deleteMessage}}~<span>`,
+                        background:'white'
+              
+                      })
                     this.getCarts();
                 })
                 .catch((err) => {
@@ -135,8 +149,6 @@ export default defineStore('cart', {
         }
     },
 
-    getters: {
 
-    }
 
 })

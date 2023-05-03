@@ -387,17 +387,17 @@ export default {
     ...mapActions(cartStore,['getCarts','updateCartItem','deleteCartItem']),
     // 取得購物車當前所有品項 / 調整購物車 select 數量
 
-    disableLink(carts){
-      
+    disableLink(carts){  
+      // 購物車中無商品時，無法按下一步按鈕    
       if(carts.length===0){
         this.$router.push('/cart')
         Swal.fire({
           toast:true,
           position:'center',
-          timer:1500,
+          timer:2000,
           showConfirmButton:false,
-          title:'購物車中沒有商品唷！快去買點好東西~',
-          background:'#F2E7E8'
+          title:'<span style="color:#FF3D33;">購物車中沒有商品唷！快去買點好東西~<span>',
+          background:'white'
 
         })
         return

@@ -462,7 +462,6 @@ export default {
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/order/${id}`)
         .then((res) => {
-          console.log('訂單資訊', res.data.order)
           this.orderInfo = res.data.order
 
           // DOM 準備完成後即先執行時間轉換
@@ -502,11 +501,15 @@ export default {
       const newTime = new Date(timeStamp * 1000)
       this.timeFinal = newTime.toLocaleDateString()
     }
+
+    
   },
   mounted() {
     this.getCarts()
     // 清空購物車：購物車 this.carts 在執行 .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, {data}) 之後，便會於後台清空，因此重新呼叫 this.getCarts()就會得到空的購物車資料
     this.getOrder()
+
+    // 建立彈出視窗實體
     this.paidModal = new bootstrap.Modal(this.$refs.paidModal)
   }
 }
