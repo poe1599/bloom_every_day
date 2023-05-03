@@ -554,38 +554,39 @@ export default {
     },
 
     // 送出表單 & 儲存訂購人資料
-    onSubmit() {
-      this.isLoading = true
-
+    onSubmit() {   
       const data = this.order
       this.$http
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, { data })
         .then((res) => {
-          const isOrderId = res.data.orderId // 取得訂單 id
-
-          setTimeout(() => {
-            this.isLoading = false
-          }, 1000)
+          const isOrderId = res.data.orderId // 取得訂單 id         
 
           if (isOrderId === undefined) {
             Swal.fire({
               toast: true,
               position: 'center',
               showConfirmButton: false,
-              timer: 1500,
-              title: '請填妥表單再按送出！',
-              background: '#F2E7E8'
+              timer: 2000,
+              title: '<span style="color: white; text-align:center;">請填妥表單再按送出！</span>',
+              background: '#FF3D33'
             })
           } else {
+            this.isLoading = true
+
+             setTimeout(() => {
+            this.isLoading = false
+
             this.$router.push(`/cartPay/${isOrderId}`)
             Swal.fire({
               toast: true,
               position: 'center',
               showConfirmButton: false,
-              timer: 1500,
-              title: '成功送單！',
-              background: '#F2E7E8'
+              timer: 2000,
+              title: '<span style="color:#FF3D33;">成功送單！<span>',
+              background: 'white'
             })
+          }, 1000)
+            
           }
         })
         .catch((err) => {
