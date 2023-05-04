@@ -567,7 +567,7 @@ export default {
               position: 'center',
               showConfirmButton: false,
               timer: 2000,
-              title: '<span style="color: white; text-align:center;">請填妥表單再按送出！</span>',
+              title: '<h6 class="mb-0" style="color: white; text-align:center;">請填妥表單再按送出！</h6>',
               background: '#FF3D33'
             })
           } else {
@@ -582,7 +582,7 @@ export default {
               position: 'center',
               showConfirmButton: false,
               timer: 2000,
-              title: '<span style="color:#FF3D33;">成功送單！<span>',
+              title: '<h6 class="mb-0"  style="color:#FF3D33; text-align:center;">成功送單！<span>',
               background: 'white'
             })
           }, 1000)
