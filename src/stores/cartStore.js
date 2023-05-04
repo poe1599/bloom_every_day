@@ -71,7 +71,7 @@ export default defineStore('cart', {
                         toast: true,
                         position: 'center',
                         timer: 2000,
-                        title: `<h6 style="color:#ff3d33; text-align:center;">商品${res.data.message}囉！
+                        title: `<h6 class="mb-0" style="color:#ff3d33; text-align:center;">商品${res.data.message}囉！
                         </h6>`,
                         showConfirmButton: false,
                         background: 'white'
