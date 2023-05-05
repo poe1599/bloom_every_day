@@ -46,9 +46,15 @@
 
       <div class="mobile_menu text-center" :class="{ show: isOpen }">
         <ul>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/" @click="changePage">首頁</RouterLink></li>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/news" @click="changePage">最新消息</RouterLink></li>
-          <li class="py-3"><RouterLink class="mobile_nav" to="/products" @click="changePage">所有商品</RouterLink></li>
+          <li class="py-3">
+            <RouterLink class="mobile_nav" to="/" @click="changePage">首頁</RouterLink>
+          </li>
+          <li class="py-3">
+            <RouterLink class="mobile_nav" to="/news" @click="changePage">最新消息</RouterLink>
+          </li>
+          <li class="py-3">
+            <RouterLink class="mobile_nav" to="/products" @click="changePage">所有商品</RouterLink>
+          </li>
         </ul>
       </div>
     </div>
@@ -58,9 +64,8 @@
     </div>
     <!-- footer -->
     <div id="footer">
-      <div class="footer d-flex justify-content-between container">
-        <div class="copyright" style="color: #f6f6f6">日日是好日 @ Copyright | Kris</div>
-        <div class="social_media d-flex justify-content-between">
+      <div class="footer container">
+        <div class="social_media">
           <a href="" class="fb">
             <i class="bi bi-facebook" style="color: white"></i>
           </a>
@@ -68,7 +73,13 @@
           <a href="" class="ig" style="color: white">
             <i class="bi bi-instagram"></i>
           </a>
+
+          <RouterLink to="/login" style="color: white">
+            <i class="bi bi-door-open"></i>
+          </RouterLink>
         </div>
+
+        <div class="copyright" style="color: #f6f6f6">日日是好日 @ Copyright | Kris</div>
       </div>
     </div>
   </div>
@@ -164,8 +175,22 @@ a.mobile_nav {
   padding: 0;
 }
 
-.fb {
+.social_media {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+}
+
+.social_media > a {
   margin-right: 8px;
+}
+
+.social_media>a:last-child{
+  margin-right: 0;
+}
+
+.copyright {
+  text-align: center;
 }
 
 @media screen and (min-width: 576px) {
@@ -201,6 +226,24 @@ a.mobile_nav {
     top: -6px;
     right: -10px;
     font-size: 10px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .copyright {
+    order: 1;
+  }
+
+  .social_media {
+    margin-bottom: 0;
+    order: 2;
+  }
+
+  .social_media > a {
+    margin-right: 12px;
   }
 }
 
@@ -250,8 +293,8 @@ export default {
       this.isOpen = !this.isOpen
     },
 
-    changePage(){
-      this.isOpen=false;
+    changePage() {
+      this.isOpen = false
     },
 
     ...mapActions(cartStore, ['getCarts'])
