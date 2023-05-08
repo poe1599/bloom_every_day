@@ -52,7 +52,21 @@ const router = createRouter({
     },
     {
       path: '/admin',
-      component: () => import('../views/DashboardView.vue')
+      component: () => import('../views/DashboardView.vue'),
+      children:[
+        {
+          path:'articles',
+          component:()=>import('../views/admin/AdminArticles.vue')
+        },
+        {
+          path:'products',
+          component:()=>import('../views/admin/AdminProducts.vue')
+        },
+        {
+          path:'orders',
+          component:()=>import('../views/admin/AdminOrders.vue')
+        }
+      ]
 
     },
 
