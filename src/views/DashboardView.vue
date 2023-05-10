@@ -139,4 +139,11 @@ export default {
 }
 
 /* loading end */
+
+.admin_layout{
+  min-height: 100vh;
+  background: url('../assets/img/products_banner.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
 </style>
