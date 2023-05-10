@@ -6,20 +6,17 @@
           <div class="col-md-10 col-lg-8 mx-auto">
             <div class="inner_card_group">
               <div class="inner_card_head">
-                <div class="inner_news_img"><img :src="perNews.imageUrl
-" alt="" /></div>
+                <div class="inner_news_img"><img :src="perNews.imageUrl" alt="" /></div>
               </div>
               <div class="inner_card_body">
                 <div class="inner_card_title">
-                  <h5 class="inner_card_title_h5">{{perNews.title}}</h5>
+                  <h5 class="inner_card_title_h5">{{ perNews.title }}</h5>
                   <div class="inner_sub_info">
-                    <div class="inner_card_time caption">{{perNews.create_at}}</div>
-                    <small class="inner_author caption text-neutral">{{perNews.author}}</small>
+                    <div class="inner_card_time caption">{{ perNews.dateString }}</div>
+                    <small class="inner_author caption text-neutral">{{ perNews.author }}</small>
                   </div>
                 </div>
-                <div v-html="perNews.content" class="inner_card_content">
-                 
-                </div>
+                <div v-html="perNews.content" class="inner_card_content"></div>
 
                 <div class="inner_back text-end caption">
                   <RouterLink to="/news" class="fs-6">back</RouterLink>
@@ -155,29 +152,7 @@
   }
 }
 
-// @media screen and (min-width: 1200px) {
-//   // .inner_news_img {
-//   //   width: 380px;
-//   //   height: 280px;
-//   //   margin: 0;
-//   // }
-// }
 
-// @media screen and (min-width: 1400px) {
-//   .inner_card_head {
-//     width: 38%;
-//   }
-
-//   .inner_news_img {
-//     width: 360px;
-//     height: 280px;
-//     margin: 0;
-//   }
-
-//   .inner_card_body {
-//     width: 58%;
-//   }
-// }
 </style>
 
 <script>
@@ -186,7 +161,7 @@ const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      perNews:{}
+      perNews: {}
     }
   },
   components: {
@@ -195,20 +170,28 @@ export default {
   methods: {
     // 取得 id
     getDetail() {
-      const{id}=this.$route.params
-      
+      const { id } = this.$route.params
+
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/article/${id}`)
         .then((res) => {
-          this.perNews=res.data.article
+          this.perNews = res.data.article
+          console.log(this.perNews)
+
+          // 時間轉換
+          const time = res.data.article.create_at
+          const date = new Date(time * 1000)
+          const dateString = date.toLocaleDateString()
+          this.perNews.dateString=dateString; // 原物件中加入 dataString 屬性
+
         })
         .catch((err) => {
-          console.log(err.data.message)
+          console.log(err)
         })
     }
   },
   mounted() {
-    this.getDetail();
+    this.getDetail()
   }
 }
 </script>
