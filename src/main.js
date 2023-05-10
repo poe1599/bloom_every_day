@@ -35,6 +35,9 @@ Object.keys(AllRules).forEach((rule) => {
   });
 
 
+// 載入 CKEditor
+import CKEditor from '@ckeditor/ckeditor5-vue'
+
 
 
 import router from './router'
@@ -51,7 +54,10 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router) // 套用方法 $router, $route，但不包含元件，因此每頁要重新引用 RouterView, RouterLink 元件
+
 app.use(VueAxios, axios) // 使用
+
+app.use(CKEditor) // 載入 CKEditor 元件
 
 // 使用全域註冊方式註冊 vue-loading 元件
 app.component('VueLoading', Loading) 
