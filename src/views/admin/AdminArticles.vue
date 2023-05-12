@@ -112,12 +112,12 @@
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="create_at">文章建立日期{{tempArticle.create_at}}</label>
+                    <label for="create_at">文章建立日期{{ tempArticle.create_at }}</label>
                     <input
                       type="date"
                       class="form-control"
                       id="create_at"
-                      v-model="create_at"
+                      v-model="tempArticle.create_at"
                     />
                   </div>
                 </div>
@@ -187,7 +187,7 @@
           <div class="modal-content border-0">
             <div class="modal-header bg-primary text-white">
               <h5 class="modal-title">
-                <span>刪除 {{ this.tempArticle.title }}</span>
+                <span>刪除 {{ tempArticle.title }}</span>
               </h5>
               <button
                 type="button"
@@ -197,7 +197,7 @@
               ></button>
             </div>
             <div class="modal-body">
-              是否刪除 {{ this.tempArticle.title }} 這篇文章？<strong class="text-danger"></strong>
+              是否刪除 {{ tempArticle.title }} 這篇文章？<strong class="text-danger"></strong>
               (刪除後將無法恢復)。
             </div>
             <div class="modal-footer">
@@ -208,11 +208,7 @@
               >
                 取消
               </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                @click="deleteArticle(this.tempArticle.id)"
-              >
+              <button type="button" class="btn btn-danger" @click="deleteArticle(tempArticle.id)">
                 確認刪除
               </button>
             </div>
@@ -224,7 +220,7 @@
   </div>
 </template>
 <script>
-import {date} from '../../methods/date.js'
+import { date } from '../../methods/date.js'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic' // 載入 CKEditor UI 庫
@@ -260,29 +256,13 @@ export default {
         .get(`${VITE_URL}v2/api/${VITE_PATH}/admin/articles`)
         .then((res) => {
           this.articles = res.data.articles
-
-          
         })
         .catch((err) => {
           console.log(err)
         })
     },
 
-    // timeChange(time) {
-    //   // 轉成 yyyy/mm/dd 格式
-
-    //     const dateObj = new Date(time * 1000)
-
-    //     const year = dateObj.getFullYear()
-
-    //     const month = (dateObj.getMonth() + 1).toString().padStart(2, '0')
-
-    //     const date = dateObj.getDate().toString().padStart(2, '0')
-    //     this.newTime = `${year}/${month}/${date}`
-
-    //     console.log('this.newTime', this.newTime)
-
-    // },
+    
 
     // 取得指定文章 (id)：取得的單一文章內容要賦值給 this.tempArticle
     getArticleDetail(articleId) {
@@ -300,21 +280,23 @@ export default {
 
     // 確認更新文章：含「新增」、「編輯」兩行為
     confirmUpdate(item) {
-      // console.log('點擊編輯後取得當下的文章資料', item)
-
-      this.tempArticle = item
-
       // 準備「新增」的 api & method (put)
       let newUrl = `${VITE_URL}v2/api/${VITE_PATH}/admin/article`
       let method = 'post'
 
       if (!this.isNew) {
         // 如果 !this.isNew 的值為 true，表示 isNew 為 false，代表不是「新增」的文章，而是要進行「編輯」行為
-        newUrl = `${VITE_URL}v2/api/${VITE_PATH}/admin/article/${this.tempArticle.id}`
+        newUrl = `${VITE_URL}v2/api/${VITE_PATH}/admin/article/${item.id}`
         method = 'put'
       }
 
-      this.$http[method](newUrl, { data: this.tempArticle })
+      // 新增、編輯：點擊「確認」按鈕送出前，要再轉一次 create_at 格式，以符合 input type="date" 欄位格式
+      item.create_at = new Date(item.create_at).getTime() / 1000
+
+
+      // console.log({ item })
+
+      this.$http[method](newUrl, { data: item })
         // post 與 put api 都要帶相同格式的 data 參數。
         // 如果是「新增」，則 data 物件中的 this.tempArticle 為 openModal 函式中的 if 的 this.tempArticle
         .then((res) => {
