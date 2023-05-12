@@ -24,7 +24,7 @@
               <td data-th="標題">{{ article.title }}</td>
               <td data-th="作者">{{ article.author }}</td>
               <td data-th="描述">{{ article.description }}</td>
-              <td data-th="建立時間">{{ article.create_at }}</td>
+              <td data-th="建立時間">{{ date(article.create_at) }}</td>
               <td data-th="是否公開">
                 <span v-if="article.isPublic">已公開</span>
                 <span v-else>未公開</span>
@@ -112,8 +112,13 @@
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="create_at">文章建立日期</label>
-                    <input type="date" class="form-control" id="create_at" v-model="tempArticle.create_at" />
+                    <label for="create_at">文章建立日期{{tempArticle.create_at}}</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="create_at"
+                      v-model="create_at"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -219,6 +224,7 @@
   </div>
 </template>
 <script>
+import {date} from '../../methods/date.js'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic' // 載入 CKEditor UI 庫
@@ -230,7 +236,6 @@ export default {
   data() {
     return {
       articles: [],
-      create_at: 0, // 初始化建立文章的時間
 
       tempArticle: {
         // 新增 & 編輯文章用
@@ -245,24 +250,10 @@ export default {
       }
     }
   },
-  watch: {
-    // 監聽 v-for="article in articles" 中每筆 article 是否有變化，若有，就將變化後的資料拷貝 & 賦值給彈出視窗中的 this.tempArticle
-    article() {
-      this.tempArticle = { ...this.article }
-      
-      [this.create_at] = new Date(this.tempArticle.create_at * 1000).toISOString().split('T')
-      // 將原 this.tempArticle.create_at 的時間戳記 先轉換為 Date 物件，接著透過 .toISOString() 回傳一組日期字串 (例如："2023-05-13T08:30:00.000Z")，並為取得前面年月日資料，以 .split('T') 來切分成兩個部分。.split() 會回傳一個陣列，因此在「陣列解構」時將前半部的日期部分賦值給 this.create_at
-    },
 
-    create_at() {
-     const dateObj=new Date(this.create_at)
-     const year=dateObj.getFullYear()
-     const month=(dateObj.getMonth()+1).toString().padStart(2,'0')
-     const date=dateObj.getDate().toString().padStart(2,'0')
-     this.tempArticle.create_at=`${year}/${month}/${date}`
-    }
-  },
   methods: {
+    date, // 引入處理時間的函式
+
     // 取得所有文章
     getArticles() {
       this.$http
@@ -270,20 +261,28 @@ export default {
         .then((res) => {
           this.articles = res.data.articles
 
-          this.articles = res.data.articles.map((item) => {
-            const time = item.create_at
-            const date = new Date(time * 1000)
-            const dateString = date.toLocaleDateString()
-            return {
-              ...item,
-              dateString
-            }
-          })
+          
         })
         .catch((err) => {
           console.log(err)
         })
     },
+
+    // timeChange(time) {
+    //   // 轉成 yyyy/mm/dd 格式
+
+    //     const dateObj = new Date(time * 1000)
+
+    //     const year = dateObj.getFullYear()
+
+    //     const month = (dateObj.getMonth() + 1).toString().padStart(2, '0')
+
+    //     const date = dateObj.getDate().toString().padStart(2, '0')
+    //     this.newTime = `${year}/${month}/${date}`
+
+    //     console.log('this.newTime', this.newTime)
+
+    // },
 
     // 取得指定文章 (id)：取得的單一文章內容要賦值給 this.tempArticle
     getArticleDetail(articleId) {
@@ -319,8 +318,6 @@ export default {
         // post 與 put api 都要帶相同格式的 data 參數。
         // 如果是「新增」，則 data 物件中的 this.tempArticle 為 openModal 函式中的 if 的 this.tempArticle
         .then((res) => {
-          // console.log(res.data.message)
-          this.getArticles() // 更新後重新取得全部文章資料
           Swal.fire({
             toast: true,
             position: 'top-end',
@@ -329,6 +326,7 @@ export default {
             title: `<h6 class="mb-0" style="color:#FF3D33; text-align:center;">${res.data.message}</h6>`
           })
           this.articleModal.hide()
+          this.getArticles() // 更新後重新取得全部文章資料
         })
         .catch((err) => {
           const wrongMessage = err.response.data.message
