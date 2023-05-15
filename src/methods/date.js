@@ -1,5 +1,6 @@
+import dayjs from "dayjs";
+
 export function date(time) {
     // 格式為 yyyy/mm/dd
-    const localDate = new Date(time * 1000);
-    return localDate.toLocaleDateString();
+   return dayjs(time*1000).format('YYYY/MM/DD')
 }
