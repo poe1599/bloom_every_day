@@ -24,12 +24,14 @@
 import AdminNav from '../components/AdminNav.vue'
 import { RouterView } from 'vue-router'
 import Swal from 'sweetalert2'
+import setAuthFactory from '@/methods/setAuthFactory.js'
 
 const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      fullPage: true
     }
   },
   components: {
@@ -53,17 +55,16 @@ export default {
           })
         })
         .catch((err) => {
-          
           this.isLoading = true
           setTimeout(() => {
             Swal.fire({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 2000,
-            title: `<h6 class="mb-0" style="color:white; text-align:center;">驗證錯誤，請重新登入！</h6>`,
-            background: '#FF3D33'
-          })
+              toast: true,
+              position: 'center',
+              showConfirmButton: false,
+              timer: 2000,
+              title: `<h6 class="mb-0" style="color:white; text-align:center;">驗證錯誤，請重新登入！</h6>`,
+              background: '#FF3D33'
+            })
             this.isLoading = false
             this.$router.push('/login')
           }, 2000)
@@ -72,8 +73,7 @@ export default {
   },
   mounted() {
     // 登入驗證
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)loginToken\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-    this.$http.defaults.headers.common['Authorization'] = token
+    setAuthFactory(this.$http, this.$router)
 
     this.checkLogin()
   }
@@ -140,7 +140,7 @@ export default {
 
 /* loading end */
 
-.admin_layout{
+.admin_layout {
   min-height: 100vh;
   background: url('../assets/img/products_banner.jpg') no-repeat center center;
   background-size: cover;
