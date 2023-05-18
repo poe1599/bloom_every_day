@@ -27,6 +27,7 @@ export default {
         <a class="page-link" href="#"
         @click.prevent="$emit('change-page', page)"
         >{{page}}</a>
+        <!-- $emit 事件去觸發父元件的 getProducts 函式 -->
       </li>
       
       <li class="page-item" :class="{disabled: !pages.has_next}">
