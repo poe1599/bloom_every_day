@@ -297,7 +297,7 @@ export default {
 
       this.$http[method](newUrl, { data: item })
         // post 與 put api 都要帶相同格式的 data 參數。
-        // 如果是「新增」，則 data 物件中的 this.tempArticle 為 openModal 函式中的 if 的 this.tempArticle
+        // 如果是「新增」，則 data 物件中的 item 為 openModal 函式中的 if 的 this.tempArticle
         .then((res) => {
           Swal.fire({
             toast: true,
