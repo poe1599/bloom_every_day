@@ -2,8 +2,6 @@
 export default function setAuthFactory($http,$router) {
     if (!$http) return
 
-    console.log('setAuthFactory');
-
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)loginToken\s*\=\s*([^;]*).*$)|^.*$/, '$1')
     
     if (!token){
