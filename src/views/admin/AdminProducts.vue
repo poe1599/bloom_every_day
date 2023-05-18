@@ -354,12 +354,14 @@ export default {
     getProducts(page = 1) {
       this.isLoading = true
       this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/admin/products/?page=${page}`).then((res) => {
-        console.log(res.data)
-
+        
         this.products = res.data.products
         this.page = res.data.pagination //將後台 api 中取得的 pagination 物件的欄位資料傳給 this.page
 
         this.isLoading = false
+      })
+      .catch((err)=>{
+        console.log(err);
       })
     },
 

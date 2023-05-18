@@ -105,7 +105,7 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="create_at">文章建立日期{{ tempArticle.create_at }}</label>
+                  <label for="create_at">文章建立日期</label>
                   <input
                     type="date"
                     class="form-control"
