@@ -1,10 +1,13 @@
 <script>
 export default {
   props: ['pages'],
-  emits:['change-page'],
+  emits: ['change-page'],
   data() {
-    return {}
-  }
+    return {
+     
+    }
+  },
+  
 }
 </script>
 
@@ -41,6 +44,8 @@ export default {
   </nav>
 </template>
 
+
+
 <style lang="scss" scoped>
 .nav_block {
   padding: 12px 0 50px 0;
@@ -56,8 +61,9 @@ export default {
   --bs-pagination-focus-box-shadow: none;
 }
 
-.page-link.active, .active > .page-link {   
-    background-color: #FF3D33;
-    border-color: #F2E7E8;
+.page-link.active,
+.active > .page-link {
+  background-color: #ff3d33;
+  border-color: #f2e7e8;
 }
 </style>

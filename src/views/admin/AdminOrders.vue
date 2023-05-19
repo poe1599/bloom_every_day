@@ -375,6 +375,10 @@ export default {
 }
 
 /* table start */
+.wordBreak{
+    word-break: break-word;
+  }
+
 .order_table tr {
   border-bottom: 3px solid #f5f5f5;
 }
@@ -451,9 +455,7 @@ table.table.order_table th {
 }
 
 @media screen and (min-width: 768px) {
-  .wordBreak{
-    word-break: break-word;
-  }
+  
   .add_btn {
     margin-right: 36px;
   }
