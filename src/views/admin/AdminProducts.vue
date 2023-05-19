@@ -69,7 +69,7 @@
     >
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content border-0">
-          <div class="modal-header bg-dark text-white">
+          <div class="modal-header  bg-bg-2 text-dark-text">
             <h5 class="modal-title" id="exampleModalLabel">
               <span v-if="isNew">新增商品</span>
               <span v-else>編輯商品</span>
