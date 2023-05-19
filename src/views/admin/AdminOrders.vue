@@ -69,7 +69,7 @@
     >
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content border-0">
-          <div class="modal-header bg-dark text-white">
+          <div class="modal-header bg-bg-2 text-dark-text">
             <h5 class="modal-title" id="exampleModalLabel">
               <span>訂單細節</span>
             </h5>
@@ -82,58 +82,59 @@
           </div>
 
           <div class="modal-body">
-            <div class="row">
-              <div class="col-md-4">
+            <div class="row mx-auto">
+              <div class="col-md-5">
                 <h4 class="bg-bg-2" style="padding: 0 0 0 6px">用戶資料</h4>
                 <table class="table">
                   <tbody>
-                    <tr>
-                      <th style="width: 100px">姓名</th>
-                      <td>{{ tempOrder.user.name }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-3 col-md-5">姓名</td>
+                      <td class="col-9 col-md-7 wordBreak">{{ tempOrder.user.name }}</td>
                     </tr>
-                    <tr>
-                      <th>Email</th>
-                      <td>{{ tempOrder.user.email }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-3 col-md-5">Email</td>
+                      <td class="col-9 col-md-7 wordBreak">{{ tempOrder.user.email }}</td>
                     </tr>
-                    <tr>
-                      <th>電話</th>
-                      <td>{{ tempOrder.user.tel }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-3 col-md-5">電話</td>
+                      <td class="col-9 col-md-7 wordBreak">{{ tempOrder.user.tel }}</td>
                     </tr>
-                    <tr>
-                      <th>地址</th>
-                      <td>{{ tempOrder.user.address }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-3 col-md-5">地址</td>
+                      <td class="col-9 col-md-7 wordBreak">{{ tempOrder.user.address }}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-7">
                 <h4 class="bg-bg-2" style="padding: 0 0 0 6px;s">訂單細節</h4>
                 <table class="table">
                   <tbody>
-                    <tr>
-                      <th style="width: 100px">訂單編號</th>
-                      <td>{{ tempOrder.id }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-5 col-md-6">訂單編號</td>
+                      <td class="col-7 col-md-6 wordBreak">{{ tempOrder.id }}</td>
                     </tr>
-                    <tr>
-                      <th>下單時間</th>
-                      <td>{{ date(tempOrder.create_at) }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-5 col-md-6">下單時間</td>
+                      <td class="col-7 col-md-6 wordBreak">{{ date(tempOrder.create_at) }}</td>
                     </tr>
-                    <tr>
-                      <th>付款時間</th>
-                      <td>
-                        <span>{{ date(tempOrder.paid_date) }}</span>
+                    <tr class="row mx-auto">
+                      <td class="col-5 col-md-6">付款時間</td>
+                      <td class="col-7 col-md-6 wordBreak">
+                        <span v-if="tempOrder.paid_date">{{ date(tempOrder.paid_date) }}</span>
+                        <span v-else class="text-primary">時間不正確</span>
                       </td>
                     </tr>
-                    <tr>
-                      <th>付款狀態</th>
-                      <td>
+                    <tr class="row mx-auto">
+                      <td class="col-5 col-md-6">付款狀態</td>
+                      <td class="col-7 col-md-6 wordBreak">
                         <span class="text-neutral" v-if="tempOrder.is_paid">已付款</span>
                         <span v-else class="text-primary">尚未付款</span>
                       </td>
                     </tr>
-                    <tr>
-                      <th>總金額</th>
-                      <td>{{ tempOrder.total }}</td>
+                    <tr class="row mx-auto">
+                      <td class="col-5 col-md-6">總金額</td>
+                      <td class="col-7 col-md-6">{{ tempOrder.total }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -154,16 +155,38 @@
                     </tr>
                   </tbody>
                 </table>
-                <div class="text-end">
-                  <span class="text-neutral" v-if="tempOrder.is_paid">已付款</span>
-                  <span class="text-primary" v-else>未付款</span>
+                <div class="d-flex justify-content-end">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                      v-model="tempOrder.is_paid"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <span v-if="tempOrder.is_paid">已付款</span>
+                      <span v-else>未付款</span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn_confirm btn-outline-primary" @click="closeModal">
-              關閉
+            <button
+              type="button"
+              class="btn btn-outline-neutral btn_cancel"
+              data-bs-dismiss="modal"
+            >
+              取消
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn_confirm"
+              @click="confirmUpdate(tempOrder)"
+            >
+              修改付款狀態
             </button>
           </div>
         </div>
@@ -205,7 +228,7 @@
             >
               取消
             </button>
-            <button type="button" class="btn btn-danger" @click="deleteOrder()">確認刪除</button>
+            <button type="button" class="btn btn-danger" @click="deleteOrder">確認刪除</button>
           </div>
         </div>
       </div>
@@ -216,6 +239,7 @@
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import setAuthFactory from '@/methods/setAuthFactory.js'
 import { date } from '@/methods/date.js'
+import dayjs from 'dayjs'
 import Pagination from '../../components/PaginationComponent.vue'
 
 import Swal from 'sweetalert2'
@@ -262,8 +286,40 @@ export default {
       this.orderModal.show()
     },
 
-    closeModal() {
-      this.orderModal.hide()
+    // 修改付款狀態
+    confirmUpdate(tempOrder) {
+      console.log(tempOrder)
+      this.isLoading = true
+
+      const id = tempOrder.id
+
+      // 將傳入的 tempOrder 物件中 is_paid 得到的值 (隨 checkbox 勾選、v-model 綁定而不同) 賦值給 is_paid，要更新資料用
+      const data = {
+        is_paid: tempOrder.is_paid,
+        paid_date:dayjs()/1000 
+        // 當管理員勾選「已付款」後，將當下時間作為付款時間打 api
+      }
+
+      // 準備 put api
+      this.$http
+        .put(`${VITE_URL}v2/api/${VITE_PATH}/admin/order/${id}`, { data })
+        .then((res) => {
+          this.isLoading = false
+          this.getOrderList()
+          this.orderModal.hide()
+
+          Swal.fire({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
+            title: `<h6 class="mb-0" style="color:#FF3D33; text-align:center;">已更新訂單付款狀態！</h6>`
+          })
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
 
     openDeleteModal(order) {
@@ -272,10 +328,14 @@ export default {
     },
 
     deleteOrder() {
+      this.isLoading = true
       this.$http
         .delete(`${VITE_URL}v2/api/${VITE_PATH}/admin/order/${this.tempOrder.id}`)
         .then(() => {
+          this.isLoading = false
           this.delModal.hide()
+          this.getOrderList()
+
           Swal.fire({
             toast: true,
             position: 'top',
@@ -283,7 +343,6 @@ export default {
             timer: 2000,
             title: `<h6 class="mb-0" style="color:#FF3D33; text-align:center;">已刪除訂單！</h6>`
           })
-          this.getOrderList()
         })
         .catch((err) => {
           console.log(err)
@@ -392,6 +451,9 @@ table.table.order_table th {
 }
 
 @media screen and (min-width: 768px) {
+  .wordBreak{
+    word-break: break-word;
+  }
   .add_btn {
     margin-right: 36px;
   }
