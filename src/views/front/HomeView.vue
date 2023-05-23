@@ -117,12 +117,12 @@
               clickable: true
             }"
             :slides-per-view="2"
-            :centeredSlides="true"
+            :centeredSlides="false" 
             :space-between="16"
             :breakpoints="{
               '992': {
-                slidesPerView: 3,
-                spaceBetween: 48
+                slidesPerView: 3, 
+                spaceBetween: 48  
               }
             }"
             :modules="modules"
@@ -738,7 +738,7 @@ export default {
         .get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`)
         .then((res) => {
           this.allProducts = res.data.products
-          while (this.randomProducts.length < 3) {
+          while (this.randomProducts.length < 5) {
             const index = Math.floor(Math.random() * this.allProducts.length)
             const item = this.allProducts[index]
 

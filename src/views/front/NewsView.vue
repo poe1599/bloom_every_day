@@ -168,6 +168,10 @@ export default {
     RouterLink
   },
   methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0)
+    },
+
     // 取得 id
     getDetail() {
       const { id } = this.$route.params
@@ -192,6 +196,7 @@ export default {
   },
   mounted() {
     this.getDetail()
+    this.scrollToTop()
   }
 }
 </script>
