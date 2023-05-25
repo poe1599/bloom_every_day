@@ -116,7 +116,7 @@ export default defineStore('cart', {
 
             axios.put(`${VITE_URL}v2/api/${VITE_PATH}/cart/${item.id}`, { data })
                 // api 要輸入購物車品項的 id
-                .then((res) => {
+                .then(() => {
                     // 取得更新後的數量並更新 carts 的資料
                     this.getCarts();
                 })
@@ -136,7 +136,7 @@ export default defineStore('cart', {
                         position:'center',
                         timer:2000,
                         showConfirmButton:false,
-                        title:`<span style="color:#FF3D33;">${{deleteMessage}}~<span>`,
+                        title:`<span style="color:#FF3D33;">商品${deleteMessage}~<span>`,
                         background:'white'
               
                       })
