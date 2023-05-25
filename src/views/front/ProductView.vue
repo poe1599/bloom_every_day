@@ -99,7 +99,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .product_detail_group {
   padding: 60px 0 0 0;
 }
