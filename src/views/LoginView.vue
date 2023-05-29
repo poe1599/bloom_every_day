@@ -79,7 +79,7 @@ export default {
         .then((res) => {
           console.log('login', res)
           const {expired, token} =res.data
-          console.log(token)
+          
 
           // 將 token 和 expired 存到 cookie 裡
           document.cookie = `loginToken=${token}; expires=${new Date(expired)};`;
@@ -136,11 +136,12 @@ export default {
 .form-group {
   padding: 10px 0;
   border-bottom: 2px solid white;
-}
 
-.form-group:nth-child(2) {
+  &:nth-child(2) {
   border: 0;
 }
+}
+
 
 .label_style {
   padding: 10px 0 0;

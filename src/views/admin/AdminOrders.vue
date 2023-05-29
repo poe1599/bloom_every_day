@@ -296,7 +296,7 @@ export default {
       // 將傳入的 tempOrder 物件中 is_paid 得到的值 (隨 checkbox 勾選、v-model 綁定而不同) 賦值給 is_paid，要更新資料用
       const data = {
         is_paid: tempOrder.is_paid,
-        paid_date:dayjs()/1000 
+        paid_date: dayjs() / 1000
         // 當管理員勾選「已付款」後，將當下時間作為付款時間打 api
       }
 
@@ -375,12 +375,45 @@ export default {
 }
 
 /* table start */
-.wordBreak{
-    word-break: break-word;
+.wordBreak {
+  word-break: break-word;
+}
+
+.order_table {
+  tr {
+    border-bottom: 3px solid #f5f5f5;
   }
 
-.order_table tr {
-  border-bottom: 3px solid #f5f5f5;
+  th {
+    /* 手機模式隱藏桌機大標 */
+    display: none;
+  }
+
+  td {
+    padding: 3px 6px;
+    border-bottom: none;
+
+    &:before {
+      /* 手機模式標題置於左側 */
+      content: attr(data-th) '：';
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    &:not(.btn_td) {
+      /* btn 欄位以外的 td 全改為 display: block; */
+      display: block;
+    }
+  }
+}
+
+.btn_td {
+  display: flex;
+  justify-content: space-between;
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 tr > th {
@@ -389,38 +422,6 @@ tr > th {
 
 table.table.order_table th {
   white-space: nowrap;
-}
-
-.order_table th {
-  /* 手機模式隱藏桌機大標 */
-  display: none;
-}
-
-.order_table td {
-  padding: 3px 6px;
-  border-bottom: none;
-}
-
-.order_table td:before {
-  /* 手機模式標題置於左側 */
-  content: attr(data-th) '：';
-  font-weight: bold;
-  display: inline-block;
-}
-
-.order_table td:not(.btn_td) {
-  /* btn 欄位以外的 td 全改為 display: block; */
-  display: block;
-}
-
-.btn_td {
-  display: flex;
-  justify-content: space-between;
-}
-
-.btn_td div {
-  display: flex;
-  justify-content: space-between;
 }
 
 .btn.btn_edit:hover,
@@ -455,19 +456,20 @@ table.table.order_table th {
 }
 
 @media screen and (min-width: 768px) {
-  
   .add_btn {
     margin-right: 36px;
   }
 
-  .order_table th,
-  .order_table td,
-  .order_table td:not(.btn_td) {
-    display: table-cell;
-  }
+  .order_table {
+    th,
+    td,
+    td:not(.btn_td) {
+      display: table-cell;
+    }
 
-  .order_table td:before {
-    display: none;
+    td:before {
+      display: none;
+    }
   }
 
   .btn_td div {

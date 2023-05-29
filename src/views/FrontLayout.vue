@@ -89,10 +89,10 @@
 .navbar {
   position: relative;
   padding: 12px;
-}
 
-.navbar > .container {
-  padding: 0;
+  > .container {
+    padding: 0;
+  }
 }
 
 .nav_ul {
@@ -107,27 +107,24 @@
   height: 48px;
   width: 48px;
   cursor: pointer;
-}
 
-.nav_menu img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .cart_icon {
   position: absolute;
   right: 90px;
   color: #121212;
-}
 
-.cart_icon > i.mobile_cart_btn {
-  display: block;
-  font-size: 26px;
-}
-
-i.mobile_cart_btn {
-  font-style: normal;
+  > i.mobile_cart_btn {
+    display: block;
+    font-size: 26px;
+    font-style: normal;
+  }
 }
 
 .mobile_badge {
@@ -153,10 +150,10 @@ i.mobile_cart_btn {
 a.mobile_nav {
   display: block;
   color: #121212;
-}
 
-.mobile_nav:hover {
-  color: #ff3d33;
+  &:hover {
+    color: #ff3d33;
+  }
 }
 
 .layout_content {
@@ -179,14 +176,14 @@ a.mobile_nav {
   display: flex;
   justify-content: space-around;
   margin-bottom: 8px;
-}
 
-.social_media > a {
-  margin-right: 8px;
-}
+  > a {
+    margin-right: 8px;
 
-.social_media>a:last-child{
-  margin-right: 0;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .copyright {
@@ -240,10 +237,10 @@ a.mobile_nav {
   .social_media {
     margin-bottom: 0;
     order: 2;
-  }
 
-  .social_media > a {
-    margin-right: 12px;
+    > a {
+      margin-right: 12px;
+    }
   }
 }
 
@@ -257,9 +254,7 @@ a.mobile_nav {
     padding: 36px;
   }
 
-  .fb {
-    margin-right: 28px;
-  }
+  
 }
 
 .layout {

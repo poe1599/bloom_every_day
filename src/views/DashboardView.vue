@@ -26,7 +26,7 @@ import { RouterView } from 'vue-router'
 import Swal from 'sweetalert2'
 import setAuthFactory from '@/methods/setAuthFactory.js'
 
-const { VITE_URL, VITE_PATH } = import.meta.env
+const { VITE_URL } = import.meta.env
 export default {
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
     checkLogin() {
       this.$http
         .post(`${VITE_URL}v2/api/user/check`)
-        .then((res) => {
+        .then(() => {
           //   console.log('登入成功', res)
           Swal.fire({
             toast: true,
@@ -54,7 +54,7 @@ export default {
             title: `<h6 class="mb-0" style="color:#FF3D33; text-align:center;">登入成功，管理員你好！</h6>`
           })
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = true
           setTimeout(() => {
             Swal.fire({
@@ -95,14 +95,14 @@ export default {
     width: 250px;
     text-align: center;
   }
-}
 
-.loading_brand > img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  @media screen and (min-width: 576px) {
-    width: 80%;
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    @media screen and (min-width: 576px) {
+      width: 80%;
+    }
   }
 }
 
@@ -121,12 +121,12 @@ export default {
     left: 210px;
     width: 70px;
   }
-}
 
-.loading_flower > img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 @keyframes rotating {

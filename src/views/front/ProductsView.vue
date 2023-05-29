@@ -61,7 +61,9 @@
           <div class="col-md-6 col-lg-4" v-for="product in products" :key="product.id">
             <RouterLink :to="`/products/${product.id}`" class="products_card">
               <div class="products_card_head">
-                <div class="head_img"><img class="img_hover" :src="product.imageUrl" alt="" /></div>
+                <div class="head_img">
+                  <img class="img_hover" :src="product.imageUrl" alt="" />
+                </div>
               </div>
               <div class="products_card_body">
                 <h5 class="product_title">{{ product.title }}</h5>
@@ -83,7 +85,7 @@
   <Pagination :pages="page" @change-page="getProducts"></Pagination>
 </template>
 
-<style>
+<style lang="scss" scoped>
 /* loading start */
 
 .loading_brand {
@@ -98,14 +100,14 @@
     width: 250px;
     text-align: center;
   }
-}
 
-.loading_brand > img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  @media screen and (min-width: 576px) {
-    width: 80%;
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    @media screen and (min-width: 576px) {
+      width: 80%;
+    }
   }
 }
 
@@ -124,12 +126,12 @@
     left: 210px;
     width: 70px;
   }
-}
 
-.loading_flower > img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 @keyframes rotating {
@@ -154,12 +156,12 @@
 .img_group {
   width: 100%;
   height: 320px;
-}
 
-.img_group img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .img_cover {
@@ -200,10 +202,10 @@ a.products_menu_item {
   padding: 12px;
   color: #121212;
   cursor: pointer;
-}
 
-.products_menu_item:hover {
-  color: #ff3d33;
+  &:hover {
+    color: #ff3d33;
+  }
 }
 
 /* products_group 卡片區 */
@@ -218,18 +220,10 @@ a.products_menu_item {
   margin-bottom: 12px;
   padding: 15px;
   color: #121212;
-}
 
-.products_card:hover {
-  color: #121212;
-}
-
-.head_img {
-  width: 100%;
-  height: 240px;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
+  &:hover {
+    color: #121212;
+  }
 }
 
 img.img_hover {
@@ -242,11 +236,11 @@ img.img_hover {
   display: block;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease-in-out;
-}
 
-img.img_hover:hover {
-  width: 120%;
-  height: 120%;
+  &:hover {
+    width: 120%;
+    height: 120%;
+  }
 }
 
 .product_title {
@@ -269,10 +263,10 @@ img.img_hover:hover {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-}
 
-.price_group > h6 {
-  margin: 0;
+  > h6 {
+    margin: 0;
+  }
 }
 
 .product_origin_price {
@@ -288,17 +282,18 @@ img.img_hover:hover {
 }
 
 .head_img {
+  position: relative;
   width: 100%;
   height: 330px;
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
-}
 
-.head_img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .products_card_body {
@@ -355,11 +350,13 @@ img.img_hover:hover {
 
   .products_menu_item {
     transition: all 0.2s ease-in-out;
-  }
 
-  .products_menu_item:hover {
+    &:hover {
     background: #f2e7e8;
   }
+  }
+
+  
 
   .col-md-6 {
     margin-bottom: 30px;
@@ -400,9 +397,7 @@ img.img_hover:hover {
     margin-bottom: 0;
   }
 
-  .card_time.caption {
-    align-self: flex-end;
-  }
+  
 }
 
 @media screen and (min-width: 1200px) {
@@ -476,8 +471,6 @@ export default {
   },
 
   mounted() {
-    
-
     this.getProducts()
 
     // 一載入頁面就先判斷 this.currentCategory 的值，確保一定先取得所有的品，並把取得的所有商品的 query string 丟上網址列呈現

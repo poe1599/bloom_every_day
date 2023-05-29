@@ -52,11 +52,7 @@
           </div>
         </div>
 
-        <vue-loading
-          v-model:active="isLoading"
-          :is-full-page="fullPage"
-          :opacity="1"
-        >
+        <vue-loading v-model:active="isLoading" :is-full-page="fullPage" :opacity="1">
           <div class="loading_brand">
             <img src="../../assets/icon/bloomEveryDay.svg" alt="" />
 
@@ -168,14 +164,14 @@
     width: 250px;
     text-align: center;
   }
-}
 
-.loading_brand > img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  @media screen and (min-width: 576px) {
-    width: 80%;
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    @media screen and (min-width: 576px) {
+      width: 80%;
+    }
   }
 }
 
@@ -194,12 +190,12 @@
     left: 210px;
     width: 70px;
   }
-}
 
-.loading_flower > img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 @keyframes rotating {
@@ -229,24 +225,26 @@
   align-items: center;
   position: relative;
   border: 1px solid #f2e7e8;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: #f2e7e8; //#f2e7e8
+    position: absolute;
+    right: -44px;
+  }
+
+  &:last-child {
+    &::after {
+      content: none;
+    }
+  }
 }
 
 .step_item.active {
   background: #f2e7e8;
-}
-
-.step_item::after {
-  content: '';
-  display: block;
-  width: 44px;
-  height: 1px;
-  background: #f2e7e8; //#f2e7e8
-  position: absolute;
-  right: -44px;
-}
-
-.step_item:last-child::after {
-  content: none;
 }
 
 /* table */
@@ -280,13 +278,12 @@ td {
 .cart_product_img {
   width: auto;
   height: 100px;
-  // padding: 0 10px 0 0;
-}
 
-.cart_product_img > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .cart_product_title {
@@ -301,10 +298,10 @@ td {
   justify-content: center;
   align-self: center;
   padding: 0;
-}
 
-.selected_qty > div {
-  padding: 0;
+  > div {
+    padding: 0;
+  }
 }
 
 .selected_subtotal {
@@ -333,20 +330,20 @@ td {
   padding: 12px 15px;
   display: flex;
   justify-content: end;
-}
 
-.cart_count > .cart_total_text {
-  padding: 10px 0;
+  > .cart_total_text {
+    padding: 10px 0;
+  }
 }
 
 .cart_btn {
   color: #121212;
-}
 
-.cart_btn:hover {
-  background: #ff3d33;
-  border: 1px solid white;
-  color: white;
+  &:hover {
+    background: #ff3d33;
+    border: 1px solid white;
+    color: white;
+  }
 }
 
 /* VForm */
@@ -381,11 +378,11 @@ textarea {
 @media screen and (min-width: 576px) {
   .step_item {
     width: 30%;
-  }
 
-  .step_item::after {
-    width: 27px;
-    right: -28px;
+    &::after {
+      width: 27px;
+      right: -28px;
+    }
   }
 
   .cart_h5 {
@@ -437,11 +434,11 @@ textarea {
 
   .step_item {
     width: 150px;
-  }
 
-  .step_item::after {
-    width: 95px;
-    right: -96px;
+    &::after {
+      width: 95px;
+      right: -96px;
+    }
   }
 
   .d-md-flex {
@@ -520,7 +517,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      fullPage:true,
+      fullPage: true,
       order: {
         // 儲存表單購買人資料
         user: {
@@ -554,12 +551,12 @@ export default {
     },
 
     // 送出表單 & 儲存訂購人資料
-    onSubmit() {   
+    onSubmit() {
       const data = this.order
       this.$http
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/order`, { data })
         .then((res) => {
-          const isOrderId = res.data.orderId // 取得訂單 id         
+          const isOrderId = res.data.orderId // 取得訂單 id
 
           if (isOrderId === undefined) {
             Swal.fire({
@@ -567,26 +564,27 @@ export default {
               position: 'center',
               showConfirmButton: false,
               timer: 2000,
-              title: '<h6 class="mb-0" style="color: white; text-align:center;">請填妥表單再按送出！</h6>',
+              title:
+                '<h6 class="mb-0" style="color: white; text-align:center;">請填妥表單再按送出！</h6>',
               background: '#FF3D33'
             })
           } else {
             this.isLoading = true
 
-             setTimeout(() => {
-            this.isLoading = false
+            setTimeout(() => {
+              this.isLoading = false
 
-            this.$router.push(`/cartPay/${isOrderId}`)
-            Swal.fire({
-              toast: true,
-              position: 'center',
-              showConfirmButton: false,
-              timer: 2000,
-              title: '<h6 class="mb-0"  style="color:#FF3D33; text-align:center;">成功送單！<span>',
-              background: 'white'
-            })
-          }, 1000)
-            
+              this.$router.push(`/cartPay/${isOrderId}`)
+              Swal.fire({
+                toast: true,
+                position: 'center',
+                showConfirmButton: false,
+                timer: 2000,
+                title:
+                  '<h6 class="mb-0"  style="color:#FF3D33; text-align:center;">成功送單！<span>',
+                background: 'white'
+              })
+            }, 1000)
           }
         })
         .catch((err) => {

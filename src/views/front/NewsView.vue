@@ -35,6 +35,7 @@
   background: #f5f5f5;
   padding: 40px 0;
 }
+
 .inner_card_group {
   background: white;
   padding: 0 12px;
@@ -52,12 +53,12 @@
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
-}
 
-.inner_news_img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .inner_card_body {
@@ -73,13 +74,15 @@
   padding: 12px 0;
 }
 
-.inner_back a {
-  cursor: pointer;
-  color: #121212;
-}
+.inner_back {
+  a {
+    cursor: pointer;
+    color: #121212;
 
-.inner_back a:hover {
-  color: #ff3d33;
+    &:hover {
+      color: #ff3d33;
+    }
+  }
 }
 
 @media screen and (min-width: 576px) {
@@ -151,8 +154,6 @@
     margin-right: 16px;
   }
 }
-
-
 </style>
 
 <script>
@@ -186,8 +187,7 @@ export default {
           const time = res.data.article.create_at
           const date = new Date(time * 1000)
           const dateString = date.toLocaleDateString()
-          this.perNews.dateString=dateString; // 原物件中加入 dataString 屬性
-
+          this.perNews.dateString = dateString // 原物件中加入 dataString 屬性
         })
         .catch((err) => {
           console.log(err)

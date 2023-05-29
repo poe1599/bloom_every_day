@@ -12,10 +12,9 @@
           <div class="caption">完成訂單</div>
         </div>
       </div>
- 
+
       <h5 class="cart_h5 bg-bg-2">訂單資訊</h5>
 
-       
       <div class="cart_table">
         <div class="empty_cart text-center" v-if="!carts.length">
           <h6 class="m-0 py-3">購物車中目前沒有商品喔~</h6>
@@ -38,15 +37,19 @@
                 <RouterLink :to="`/products/${item.product.id}`" class="cart_product_img">
                   <img :src="item.product.imageUrl" alt="" />
                 </RouterLink>
-                <h6 class="cart_product_title">{{item.product.title}}</h6>
+                <h6 class="cart_product_title">{{ item.product.title }}</h6>
               </div>
             </td>
             <td class="col-5 col-md-2 order_4 order_md_0 cart_product_price">
-              <div>NT ${{item.product.price}}</div>
+              <div>NT ${{ item.product.price }}</div>
             </td>
             <td class="col-12 col-md-2 order_3 order_md_0 cart_select">
-              <select name="" id="" v-model="item.qty" class="form-select"
-              @change="updateCartItem(item)"
+              <select
+                name=""
+                id=""
+                v-model="item.qty"
+                class="form-select"
+                @change="updateCartItem(item)"
               >
                 <option :value="i" v-for="i in 5" :key="`${i}1235`">
                   {{ i }}
@@ -56,32 +59,31 @@
             <td class="col-7 col-md-2 order_4 order_md_0">
               <div class="cart_subtotal">
                 <span class="d-md-none cart_span">小計：</span>
-                NT ${{item.total}}
+                NT ${{ item.total }}
               </div>
             </td>
             <td class="col-2 col-md-1 order_2 order_md_0 cart_delete">
-              <button class="btn delete_btn" style="color: #121212;"
-              @click="deleteCartItem(item)"
-              >
+              <button class="btn delete_btn" style="color: #121212" @click="deleteCartItem(item)">
                 <i class="bi bi-trash3"></i>
-              </button> 
+              </button>
             </td>
           </tr>
 
           <tr>
             <div class="cart_count">
               <div class="cart_total_text">總計：</div>
-              <div class="cart_total_price">NT ${{final_total}}</div>
+              <div class="cart_total_price">NT ${{ final_total }}</div>
             </div>
           </tr>
         </table>
         <div class="d-flex justify-content-between py-4 mb-3">
           <RouterLink to="/products" class="btn btn-outline-neutral cart_btn">繼續購物</RouterLink>
-          <RouterLink 
-          to="/cartCheck" 
-          class="btn btn-outline-neutral cart_btn"
-          @click="disableLink(carts)"
-          >下一步</RouterLink>
+          <RouterLink
+            to="/cartCheck"
+            class="btn btn-outline-neutral cart_btn"
+            @click="disableLink(carts)"
+            >下一步</RouterLink
+          >
         </div>
       </div>
     </div>
@@ -105,24 +107,26 @@
   align-items: center;
   position: relative;
   border: 1px solid #f2e7e8;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: #f2e7e8; //#f2e7e8
+    position: absolute;
+    right: -44px;
+  }
+
+  &:last-child {
+    &::after {
+      content: none;
+    }
+  }
 }
 
 .step_item.active {
   background: #f2e7e8;
-}
-
-.step_item::after {
-  content: '';
-  display: block;
-  width: 44px;
-  height: 1px;
-  background: #f2e7e8; //#f2e7e8
-  position: absolute;
-  right: -44px;
-}
-
-.step_item:last-child::after {
-  content: none;
 }
 
 .empty_cart {
@@ -163,13 +167,12 @@ td {
 .cart_product_img {
   width: 143px;
   height: 200px;
-  // padding: 0 10px 0 0;
-}
 
-.cart_product_img > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .cart_product_title {
@@ -182,12 +185,12 @@ td {
 .form-select {
   color: #121212;
   border: 1px solid #808080;
-}
 
-.form-select:focus {
-  border-color: #808080;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(128, 128, 128, 0.25);
+  &:focus {
+    border-color: #808080;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(128, 128, 128, 0.25);
+  }
 }
 
 .cart_select {
@@ -237,31 +240,34 @@ td {
   padding: 12px 15px;
   display: flex;
   justify-content: end;
-}
 
-.cart_count > .cart_total_text {
-  padding: 10px 0;
+  > .cart_total_text {
+    padding: 10px 0;
+  }
 }
 
 .cart_btn {
   color: #121212;
-}
 
-.cart_btn:hover {
+  &:hover {
   background: #ff3d33;
   border: 1px solid white;
   color: white;
 }
+}
+
+
 
 @media screen and (min-width: 576px) {
   .step_item {
     width: 30%;
-  }
 
-  .step_item::after {
+    &::after {
     width: 27px;
     right: -28px;
   }
+  }
+
 
   .cart_h5 {
     margin: 12px 15px 0 15px;
@@ -299,12 +305,13 @@ td {
 
   .step_item {
     width: 150px;
-  }
 
-  .step_item::after {
+    &::after {
     width: 95px;
     right: -96px;
   }
+  }
+
 
   .d-md-flex {
     display: flex;
@@ -355,11 +362,11 @@ td {
     padding: 0 0 40px 0;
   }
 
-  .cart_product_price > div{
+  .cart_product_price > div {
     margin: auto;
   }
 
-  .cart_subtotal{
+  .cart_subtotal {
     text-align: center;
   }
 }
@@ -379,34 +386,31 @@ export default {
   components: {
     RouterLink
   },
-  computed:{
-    ...mapState(cartStore,['carts','final_total']) 
+  computed: {
+    ...mapState(cartStore, ['carts', 'final_total'])
     // 購物車當前列表 / 購物車所有商品總金額
   },
   methods: {
-    ...mapActions(cartStore,['getCarts','updateCartItem','deleteCartItem']),
+    ...mapActions(cartStore, ['getCarts', 'updateCartItem', 'deleteCartItem']),
     // 取得購物車當前所有品項 / 調整購物車 select 數量
 
-    disableLink(carts){  
-      // 購物車中無商品時，無法按下一步按鈕    
-      if(carts.length===0){
+    disableLink(carts) {
+      // 購物車中無商品時，無法按下一步按鈕
+      if (carts.length === 0) {
         this.$router.push('/cart')
         Swal.fire({
-          toast:true,
-          position:'center',
-          timer:2000,
-          showConfirmButton:false,
-          title:'<span style="color:#FF3D33;">購物車中沒有商品唷！快去買點好東西~<span>',
-          background:'white'
-
+          toast: true,
+          position: 'center',
+          timer: 2000,
+          showConfirmButton: false,
+          title: '<span style="color:#FF3D33;">購物車中沒有商品唷！快去買點好東西~<span>',
+          background: 'white'
         })
         return
-      }else{
+      } else {
         this.$router.push('/cartCheck')
       }
-
     }
-    
   },
   mounted() {}
 }

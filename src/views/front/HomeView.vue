@@ -86,7 +86,7 @@
                 <div class="fs-5">請讓我們以一束不凋的花，為您的每一天帶來美好的氛圍。</div>
               </div>
               <div class="about_text_mobile">
-                <h3 class="text-primary about_text_title_ch">關於我們</h3>
+                <h3 class="text-primary about_text_title_ch_mobile">關於我們</h3>
                 <div class="fs-6 py-2">
                   繁忙的都市生活裡，養花蒔草常受限於各種外在條件，想要用花草點綴生活中增加美感不該是一種奢望，日日是好日正是為此而誕生的。
                 </div>
@@ -117,12 +117,12 @@
               clickable: true
             }"
             :slides-per-view="2"
-            :centeredSlides="false" 
+            :centeredSlides="false"
             :space-between="16"
             :breakpoints="{
               '992': {
-                slidesPerView: 3, 
-                spaceBetween: 48  
+                slidesPerView: 3,
+                spaceBetween: 48
               }
             }"
             :modules="modules"
@@ -185,26 +185,28 @@
 <style lang="scss" scoped>
 .banner {
   background: #f5f5f5;
-  // position: relative;
   height: 665px;
-}
 
-.banner > .container {
+  > .container {
   position: relative;
 }
+}
+
 
 .banner_title {
   position: absolute;
   z-index: 1;
   top: 96px;
   white-space: nowrap;
-}
 
-.banner_title > h1 {
+  > h1 {
   font-size: 1.75rem;
   line-height: 2.125rem;
   margin-bottom: 0px;
 }
+}
+
+
 
 .banner_img {
   width: 100%; //375px
@@ -213,13 +215,15 @@
   top: 0;
   right: 0;
   left: 0;
-}
 
-.banner_img > img {
+  > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+}
+
+ 
 
 .banner_link {
   display: block;
@@ -249,11 +253,13 @@
 
 .promote_img {
   margin-bottom: 72px;
-}
 
-.promote_img > img {
+  > img {
   width: 100%;
 }
+}
+
+
 
 .promote_col_text {
   position: relative;
@@ -266,6 +272,7 @@
 }
 
 .promote_col_p {
+  position: relative;
   z-index: 1;
 }
 
@@ -306,14 +313,16 @@
   width: calc(100% - 16px);
   height: 300px;
   left: -16px;
-}
 
-.about_img > img {
+  > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 0% 50%;
 }
+}
+
+
 
 .about_text {
   position: absolute;
@@ -392,11 +401,13 @@ a.mySwiper {
 
 .item_title {
   color: #121212;
-}
 
-.item_title:hover {
+  &:hover {
   color: #ff3d33;
 }
+}
+
+
 
 .BgSec5 {
   position: absolute;
@@ -405,13 +416,15 @@ a.mySwiper {
   top: -20px;
   right: 3px;
   z-index: 1;
-}
 
-.BgSec5 img {
+   img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+}
+
+
 
 .BgSec6 {
   width: 120px;
@@ -419,13 +432,15 @@ a.mySwiper {
   position: absolute;
   top: 60%;
   left: -20px;
-}
 
-.BgSec6 img {
+   img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+}
+
+
 
 .news_title_ch_pc {
   display: none;
@@ -729,7 +744,7 @@ export default {
       })
       // tempArticles 是一個唯讀的變數，可直直渲染於畫面上
 
-      // 原先在 data 中定義的 tempArticles 與 articles 無從屬關係，改於 computed 定義後，兩者產生依賴性、關聯性，因此會在 articles 有任何變動時即時更新 tempArticles 
+      // 原先在 data 中定義的 tempArticles 與 articles 無從屬關係，改於 computed 定義後，兩者產生依賴性、關聯性，因此會在 articles 有任何變動時即時更新 tempArticles
     }
   },
   methods: {
@@ -770,7 +785,6 @@ export default {
             dateString
           }
         })
-        
       })
       .catch((err) => {
         console.log(err)

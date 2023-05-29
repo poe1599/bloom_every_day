@@ -5,7 +5,7 @@
         <h2 class="text-primary news_h2_pc">最新消息</h2>
         <h3 class="text-primary text-center news_h3_mobile">最新消息</h3>
       </div>
-      
+
       <!-- loading -->
       <vue-loading v-model:active="isLoading" :is-full-page="fullPage" :opacity="1">
         <div class="loading_brand">
@@ -90,7 +90,66 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+/* loading start */
+
+.loading_brand {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 61, 51, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  @media screen and (min-width: 576px) {
+    width: 250px;
+    text-align: center;
+  }
+
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    @media screen and (min-width: 576px) {
+      width: 80%;
+    }
+  }
+}
+
+.loading_flower {
+  position: absolute;
+  top: -30px;
+  left: 115px;
+  z-index: -1;
+  width: 50px;
+  animation-name: rotating;
+  animation-duration: 1.5s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  @media screen and (min-width: 576px) {
+    left: 210px;
+    width: 70px;
+  }
+
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* loading end */
+
 .wrapper {
   padding: 0 0 120px 0;
   background: #f5f5f5;
@@ -196,12 +255,12 @@ export default {
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
-}
 
-.news_img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .news_card_body {
@@ -217,13 +276,15 @@ export default {
   padding: 12px 0;
 }
 
-.card_detail a {
-  cursor: pointer;
-  color: #121212;
-}
+.card_detail {
+  a {
+    cursor: pointer;
+    color: #121212;
 
-.card_detail a:hover {
-  color: #ff3d33;
+    &:hover {
+      color: #ff3d33;
+    }
+  }
 }
 
 @media screen and (min-width: 576px) {

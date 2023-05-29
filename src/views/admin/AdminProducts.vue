@@ -69,7 +69,7 @@
     >
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content border-0">
-          <div class="modal-header  bg-bg-2 text-dark-text">
+          <div class="modal-header bg-bg-2 text-dark-text">
             <h5 class="modal-title" id="exampleModalLabel">
               <span v-if="isNew">新增商品</span>
               <span v-else>編輯商品</span>
@@ -353,16 +353,17 @@ export default {
     // 取得所有商品列表
     getProducts(page = 1) {
       this.isLoading = true
-      this.$http.get(`${VITE_URL}v2/api/${VITE_PATH}/admin/products/?page=${page}`).then((res) => {
-        
-        this.products = res.data.products
-        this.page = res.data.pagination //將後台 api 中取得的 pagination 物件的欄位資料傳給 this.page
+      this.$http
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/admin/products/?page=${page}`)
+        .then((res) => {
+          this.products = res.data.products
+          this.page = res.data.pagination //將後台 api 中取得的 pagination 物件的欄位資料傳給 this.page
 
-        this.isLoading = false
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
+          this.isLoading = false
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
 
     // 上傳圖片
@@ -511,8 +512,42 @@ export default {
 }
 
 /* table start */
-.product_table tr {
-  border-bottom: 3px solid #f5f5f5;
+.product_table {
+  tr {
+    border-bottom: 3px solid #f5f5f5;
+  }
+
+  th {
+    /* 手機模式隱藏桌機大標 */
+    display: none;
+  }
+
+  td {
+    padding: 3px 6px;
+    border-bottom: none;
+
+    &:before {
+      /* 手機模式標題置於左側 */
+      content: attr(data-th) '：';
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    &:not(.btn_td) {
+      /* btn 欄位以外的 td 全改為 display: block; */
+      display: block;
+    }
+  }
+}
+
+.btn_td {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 tr > th {
@@ -521,38 +556,6 @@ tr > th {
 
 table.table.product_table th {
   white-space: nowrap;
-}
-
-.product_table th {
-  /* 手機模式隱藏桌機大標 */
-  display: none;
-}
-
-.product_table td {
-  padding: 3px 6px;
-  border-bottom: none;
-}
-
-.product_table td:before {
-  /* 手機模式標題置於左側 */
-  content: attr(data-th) '：';
-  font-weight: bold;
-  display: inline-block;
-}
-
-.product_table td:not(.btn_td) {
-  /* btn 欄位以外的 td 全改為 display: block; */
-  display: block;
-}
-
-.btn_td {
-  display: flex;
-  justify-content: space-between;
-}
-
-.btn_td div {
-  display: flex;
-  justify-content: space-between;
 }
 
 .btn.btn_edit:hover,
@@ -591,14 +594,16 @@ table.table.product_table th {
     margin-right: 36px;
   }
 
-  .product_table th,
-  .product_table td,
-  .product_table td:not(.btn_td) {
-    display: table-cell;
-  }
+  .product_table {
+    th,
+    td,
+    td:not(.btn_td) {
+      display: table-cell;
+    }
 
-  .product_table td:before {
-    display: none;
+    td:before {
+      display: none;
+    }
   }
 
   .btn_td div {

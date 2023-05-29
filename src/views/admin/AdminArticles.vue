@@ -416,8 +416,42 @@ export default {
 }
 
 /* table start */
-.article_table tr {
-  border-bottom: 3px solid #f5f5f5;
+.article_table {
+  tr {
+    border-bottom: 3px solid #f5f5f5;
+  }
+
+  th {
+    /* 手機模式隱藏桌機大標 */
+    display: none;
+  }
+
+  td {
+    padding: 3px 6px;
+    border-bottom: none;
+
+    &:before {
+      /* 手機模式標題置於左側 */
+      content: attr(data-th) '：';
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    &:not(.btn_td) {
+      /* btn 欄位以外的 td 全改為 display: block; */
+      display: block;
+    }
+  }
+}
+
+.btn_td {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 tr > th {
@@ -426,38 +460,6 @@ tr > th {
 
 table.table.article_table th {
   white-space: nowrap;
-}
-
-.article_table th {
-  /* 手機模式隱藏桌機大標 */
-  display: none;
-}
-
-.article_table td {
-  padding: 3px 6px;
-  border-bottom: none;
-}
-
-.article_table td:before {
-  /* 手機模式標題置於左側 */
-  content: attr(data-th) '：';
-  font-weight: bold;
-  display: inline-block;
-}
-
-.article_table td:not(.btn_td) {
-  /* btn 欄位以外的 td 全改為 display: block; */
-  display: block;
-}
-
-.btn_td {
-  display: flex;
-  justify-content: space-between;
-}
-
-.btn_td div {
-  display: flex;
-  justify-content: space-between;
 }
 
 .btn.btn_edit:hover,
@@ -494,10 +496,13 @@ table.table.article_table th {
     margin-right: 36px;
   }
 
-  .article_table th,
-  .article_table td,
-  .article_table td:not(.btn_td) {
-    display: table-cell;
+  
+  .article_table {
+    th,
+    td,
+    td:not(.btn_td) {
+      display: table-cell;
+    }
   }
 
   .article_table td:before {

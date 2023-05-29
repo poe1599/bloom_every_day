@@ -61,8 +61,8 @@ export default {
     },
 
     // 管理者登出
-    logout(){
-      document.cookie = `loginToken=; expires=${new Date()};`;
+    logout() {
+      document.cookie = `loginToken=; expires=${new Date()};`
     }
   },
   mounted() {
@@ -78,10 +78,10 @@ export default {
 
 button.navbar-toggler {
   color: #ff3d33;
-}
 
-.navbar-toggler:focus {
-  box-shadow: 0 0 0 1px;
+  &:focus {
+    box-shadow: 0 0 0 1px;
+  }
 }
 
 .navbar-toggler-icon {
@@ -97,13 +97,16 @@ button.navbar-toggler {
 
 .nav-link {
   color: #121212;
+
+  &:not(.nav-link.active) {
+    &:hover {
+      color: #ff3d33;
+    }
+  }
 }
 
 a.nav-link.active {
   color: #ff3d33;
 }
 
-a.nav-link:not(.nav-link.active):hover {
-  color: #ff3d33;
-}
 </style>

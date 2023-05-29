@@ -171,24 +171,26 @@
   align-items: center;
   position: relative;
   border: 1px solid #f2e7e8;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: #f2e7e8; //#f2e7e8
+    position: absolute;
+    right: -44px;
+  }
+
+  &:last-child {
+    &::after {
+      content: none;
+    }
+  }
 }
 
 .step_item.active {
   background: #f2e7e8;
-}
-
-.step_item::after {
-  content: '';
-  display: block;
-  width: 44px;
-  height: 1px;
-  background: #f2e7e8; //#f2e7e8
-  position: absolute;
-  right: -44px;
-}
-
-.step_item:last-child::after {
-  content: none;
 }
 
 /* table */
@@ -222,14 +224,16 @@ td {
 .cart_product_img {
   width: auto;
   height: 100px;
-  // padding: 0 10px 0 0;
-}
 
-.cart_product_img > img {
+  > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+  
+}
+
+
 
 .cart_product_title {
   margin-bottom: 12px;
@@ -243,11 +247,12 @@ td {
   justify-content: center;
   align-self: center;
   padding: 0;
-}
 
-.selected_qty > div {
+  > div {
   padding: 0;
 }
+}
+
 
 .selected_subtotal {
   display: flex;
@@ -275,21 +280,25 @@ td {
   padding: 12px 15px;
   display: flex;
   justify-content: end;
-}
 
-.cart_count > .cart_total_text {
+  > .cart_total_text {
   padding: 10px 0;
 }
+}
+
+
 
 .pay_btn {
   color: #121212;
-}
 
-.pay_btn:hover {
+  &:hover {
   background: #ff3d33;
   border: 1px solid white;
   color: white;
 }
+}
+
+
 
 .orderList_table .table > tr,
 td {
@@ -299,12 +308,14 @@ td {
 @media screen and (min-width: 576px) {
   .step_item {
     width: 30%;
-  }
 
-  .step_item::after {
+    &::after {
     width: 27px;
     right: -28px;
   }
+  }
+
+  
 
   .cart_h5 {
     margin: 12px 15px 0 15px;
@@ -355,12 +366,14 @@ td {
 
   .step_item {
     width: 150px;
-  }
 
-  .step_item::after {
+    &::after {
     width: 95px;
     right: -96px;
   }
+  }
+
+  
 
   .d-md-flex {
     display: flex;
@@ -432,12 +445,11 @@ import { mapActions, mapState } from 'pinia'
 import cartStore from '../../stores/cartStore.js'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
-
 const { VITE_URL, VITE_PATH } = import.meta.env
 export default {
   data() {
     return {
-      timeFinal:'',
+      timeFinal: '',
       orderInfo: {
         user: {},
         message: ''
@@ -501,8 +513,6 @@ export default {
       const newTime = new Date(timeStamp * 1000)
       this.timeFinal = newTime.toLocaleDateString()
     }
-
-    
   },
   mounted() {
     this.getCarts()

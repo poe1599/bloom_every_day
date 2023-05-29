@@ -27,9 +27,7 @@
 
           <div class="detail_purchase_group">
             <div class="detail_quantity">
-              <select name="" id="" class="form-select"
-              v-model="selectQty"
-              >
+              <select name="" id="" class="form-select" v-model="selectQty">
                 <option :value="i" v-for="i in 5" :key="`${i}1235`">
                   {{ i }}
                 </option>
@@ -39,8 +37,7 @@
               <button
                 class="btn fs-6 text-center add_btn"
                 @click="addToCart(perProduct.id, selectQty)"
-                
-                >
+              >
                 加入購物車
               </button>
             </div>
@@ -109,12 +106,12 @@
   height: 380px;
   border-radius: 8px;
   overflow: hidden;
-}
 
-.detail_img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .product_detail_left {
@@ -154,12 +151,12 @@ h5.detail_title {
 .form-select {
   color: #121212;
   border: 1px solid #ffcd49;
-}
 
-.form-select:focus {
-  border-color: #ffcd49;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(255, 205, 73, 0.25);
+  &:focus {
+    border-color: #ffcd49;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(255, 205, 73, 0.25);
+  }
 }
 
 .add_btn {
@@ -169,12 +166,12 @@ h5.detail_title {
   color: white;
   transition: all 0.2s ease-in-out;
   width: 100%;
-}
 
-.add_btn:hover {
-  border: 1px solid #ff3d33;
-  background: white;
-  color: #ff3d33;
+  &:hover {
+    border: 1px solid #ff3d33;
+    background: white;
+    color: #ff3d33;
+  }
 }
 
 .purchase_notice {
@@ -186,12 +183,14 @@ h5.detail_title {
   padding: 12px 0;
 }
 
-.purchase_notice > ul {
-  padding: 12px 0;
-}
+.purchase_notice {
+  > ul {
+    padding: 12px 0;
 
-.purchase_notice > ul > li {
-  padding: 0 0 16px 0;
+    > li {
+      padding: 0 0 16px 0;
+    }
+  }
 }
 
 .list_style::before {
@@ -203,12 +202,14 @@ h5.detail_title {
   padding: 30px 15px 30px 15px;
 }
 
-.storage_notice > ul > li {
-  padding: 0 0 16px 0;
-}
+.storage_notice {
+  > ul {
+    padding: 12px 0;
 
-.storage_notice > ul {
-  padding: 12px 0;
+    > li {
+      padding: 0 0 16px 0;
+    }
+  }
 }
 
 .storage_h5 {
@@ -317,6 +318,8 @@ h5.detail_title {
     width: 1000px;
   }
 }
+
+
 </style>
 
 <script>
@@ -329,7 +332,7 @@ export default {
   data() {
     return {
       perProduct: {},
-      selectQty:1, // 商品頁下拉選單數值
+      selectQty: 1 // 商品頁下拉選單數值
     }
   },
   components: {},
@@ -346,7 +349,7 @@ export default {
     getSingleProduct() {
       // 取得產品 id
       const { id } = this.$route.params
-    
+
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/product/${id}`)
         .then((res) => {
@@ -357,16 +360,13 @@ export default {
         })
     },
 
-    ...mapActions(cartStore, ['getCarts', 'addToCart']),
-
-   
+    ...mapActions(cartStore, ['getCarts', 'addToCart'])
   },
 
   mounted() {
     this.getCarts()
     this.getSingleProduct()
     this.scrollToTop()
-    
   }
 }
 </script>
