@@ -36,7 +36,10 @@
                 </div>
 
                 <div class="card_detail text-end caption">
-                  <RouterLink :to="`/news/${article.id}`" class="fs-6">more</RouterLink>
+                  <!-- <RouterLink :to="`/news/${article.id}`" class="fs-6">more</RouterLink> -->
+                  <RouterLink :to="{ name: 'newsPage', params: { id: article.id } }" class="fs-6"
+                    >more</RouterLink
+                  >
                 </div>
               </div>
             </div>

@@ -16,6 +16,7 @@ const router = createRouter({
           component: () => import('../views/front/NewsViews.vue')
         },
         { //最新消息單頁
+          name:'newsPage',
           path: 'news/:id',
           component: () => import('../views/front/NewsView.vue')
         },
