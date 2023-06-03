@@ -2,6 +2,13 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
+  scrollBehavior: to => {
+    // https://router.vuejs.org/guide/advanced/scroll-behavior.html
+    if (to.hash) {
+      return { selector: to.hash, behavior: 'smooth' }
+    }
+    return { top: 0 }
+  },
   routes: [
     {
       path: '/',
