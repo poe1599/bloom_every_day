@@ -28,29 +28,11 @@
     <div class="container">
       <div class="products_menu">
         <ul class="products_menu_list">
-          <li>
-            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('all')"
-              >所有商品</a
-            >
-          </li>
-          <li>
-            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('小型花束')"
-              >小型花束</a
-            >
-          </li>
-          <li>
-            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('季節花束')"
-              >季節花束</a
-            >
-          </li>
-          <li>
-            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('經典花束')"
-              >經典花束</a
-            >
-          </li>
-          <li>
-            <a href="" class="products_menu_item fs-6" @click.prevent="filterCategory('好日特選')"
-              >好日特選</a
+          <li v-for="link in menuList" :key="link.category">
+            <RouterLink
+              :to="{ query: { page: '1', category: link.category } }"
+              class="products_menu_item fs-6"
+              >{{ link.text }}</RouterLink
             >
           </li>
         </ul>
@@ -82,7 +64,7 @@
     </div>
   </div>
 
-  <Pagination :pages="page" @change-page="getProducts"></Pagination>
+  <Pagination :pages="page" @change-page="pageChange"></Pagination>
 </template>
 
 <style lang="scss" scoped>
@@ -352,11 +334,9 @@ img.img_hover {
     transition: all 0.2s ease-in-out;
 
     &:hover {
-    background: #f2e7e8;
+      background: #f2e7e8;
+    }
   }
-  }
-
-  
 
   .col-md-6 {
     margin-bottom: 30px;
@@ -396,8 +376,6 @@ img.img_hover {
     padding: 0;
     margin-bottom: 0;
   }
-
-  
 }
 
 @media screen and (min-width: 1200px) {
@@ -426,9 +404,15 @@ export default {
     return {
       products: [],
       page: {}, // 存入後台 pagination 的欄位資料
-      currentCategory: 'all',
       isLoading: false,
-      fullPage: true
+      fullPage: true,
+      menuList: [
+        { category: '', text: '所有商品' },
+        { category: '小型花束', text: '小型花束' },
+        { category: '季節花束', text: '季節花束' },
+        { category: '經典花束', text: '經典花束' },
+        { category: '好日特選', text: '好日特選' }
+      ]
     }
   },
   components: {
@@ -436,52 +420,32 @@ export default {
     Pagination
   },
   methods: {
-    getProducts(page = 1) {
+    getProducts() {
       this.isLoading = true
-
-      // 以參數控制當前要呈現第幾頁 // 參數預設值為 1
-
-      const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}` // 此處 category 變數要組下列 api 用
-
+      const { page = '1', category = '' } = this.$route.query
       this.$http
-        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&${category}`)
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/products/?page=${page}&category=${category}`)
         .then((res) => {
           this.products = res.data.products
           this.page = res.data.pagination //將後台 api 中取得的 pagination 欄位資料傳給 this.page
-
           this.isLoading = false
-
-          //將點擊時取得的 category 的值(如 all, 小型花束…) 賦值給 this.currentCategory, 其值將作為 $route.query 中 category 屬性的值 (即取得當前的 query string 參數)，再透過 $router.push 來動態更新網址列的參數
-          this.$router.push({
-            query: {
-              page: this.page.current_page,
-              category: this.currentCategory // 將當下點擊到的分類傳至網址列
-            }
-          })
         })
         .catch((err) => {
           console.log(err)
         })
     },
-
-    filterCategory(category) {
-      this.currentCategory = category
-      this.getProducts()
+    pageChange(page) {
+      const { category = '' } = this.$route.query
+      this.$router.push({ query: { page, category } })
     }
   },
-
-  mounted() {
-    this.getProducts()
-
-    // 一載入頁面就先判斷 this.currentCategory 的值，確保一定先取得所有的品，並把取得的所有商品的 query string 丟上網址列呈現
-    const category = this.currentCategory === 'all' ? 'all' : `&category=${this.currentCategory}`
-
-    this.$router.push({
-      query: {
-        page: 1,
-        category // category: this.currentCategory('all')，可寫成 category, 就好
-      }
-    })
+  watch: {
+    '$route.query': {
+      handler() {
+        this.getProducts()
+      },
+      immediate: true
+    }
   }
 }
 </script>
