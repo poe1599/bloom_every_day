@@ -188,10 +188,9 @@
   height: 665px;
 
   > .container {
-  position: relative;
+    position: relative;
+  }
 }
-}
-
 
 .banner_title {
   position: absolute;
@@ -200,13 +199,11 @@
   white-space: nowrap;
 
   > h1 {
-  font-size: 1.75rem;
-  line-height: 2.125rem;
-  margin-bottom: 0px;
+    font-size: 1.75rem;
+    line-height: 2.125rem;
+    margin-bottom: 0px;
+  }
 }
-}
-
-
 
 .banner_img {
   width: 100%; //375px
@@ -217,13 +214,11 @@
   left: 0;
 
   > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
-}
-
- 
 
 .banner_link {
   display: block;
@@ -255,11 +250,9 @@
   margin-bottom: 72px;
 
   > img {
-  width: 100%;
+    width: 100%;
+  }
 }
-}
-
-
 
 .promote_col_text {
   position: relative;
@@ -315,14 +308,12 @@
   left: -16px;
 
   > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 0% 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0% 50%;
+  }
 }
-}
-
-
 
 .about_text {
   position: absolute;
@@ -403,11 +394,9 @@ a.mySwiper {
   color: #121212;
 
   &:hover {
-  color: #ff3d33;
+    color: #ff3d33;
+  }
 }
-}
-
-
 
 .BgSec5 {
   position: absolute;
@@ -417,14 +406,12 @@ a.mySwiper {
   right: 3px;
   z-index: 1;
 
-   img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
-}
-
-
 
 .BgSec6 {
   width: 120px;
@@ -433,14 +420,12 @@ a.mySwiper {
   top: 60%;
   left: -20px;
 
-   img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
-}
-
-
 
 .news_title_ch_pc {
   display: none;
@@ -748,21 +733,50 @@ export default {
     }
   },
   methods: {
-    getRandomProduct() {
+    // 一個函式只做一件事
+    getAllProducts() {
       this.$http
         .get(`${VITE_URL}v2/api/${VITE_PATH}/products/all`)
         .then((res) => {
           this.allProducts = res.data.products
-          while (this.randomProducts.length < 5) {
-            const index = Math.floor(Math.random() * this.allProducts.length)
-            const item = this.allProducts[index]
+        })
+        .then(this.getRandomProduct)
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getRandomProduct() {
+      const swiperDisplayProductNum = 5
+      if (this.allProducts.length <= swiperDisplayProductNum) {
+        this.randomProducts = JSON.parse(JSON.stringify(this.allProducts))
+        return
+      }
 
-            if (!this.randomProducts.includes(item)) {
-              this.randomProducts.push(item)
+      while (this.randomProducts.length < swiperDisplayProductNum) {
+        const index = Math.floor(Math.random() * this.allProducts.length)
+        const item = this.allProducts[index]
+
+        if (!this.randomProducts.some((i) => i.id === item.id)) {
+          this.randomProducts.push(JSON.parse(JSON.stringify(item)))
+        }
+      }
+    },
+    getArticle() {
+      // 先取得所有最新消息
+      this.$http
+        .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
+        .then((res) => {
+          // console.log(res.data.articles)
+          // 轉換時間
+          this.articles = res.data.articles.map((item) => {
+            const time = item.create_at
+            const date = new Date(time * 1000)
+            const dateString = date.toLocaleDateString()
+            return {
+              ...item,
+              dateString
             }
-
-            //console.log('this.randomProducts',this.randomProducts)
-          }
+          })
         })
         .catch((err) => {
           console.log(err)
@@ -770,26 +784,8 @@ export default {
     }
   },
   mounted() {
-    // 先取得所有最新消息
-    this.$http
-      .get(`${VITE_URL}v2/api/${VITE_PATH}/articles`)
-      .then((res) => {
-        // console.log(res.data.articles)
-        // 轉換時間
-        this.articles = res.data.articles.map((item) => {
-          const time = item.create_at
-          const date = new Date(time * 1000)
-          const dateString = date.toLocaleDateString()
-          return {
-            ...item,
-            dateString
-          }
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      }),
-      this.getRandomProduct()
+    this.getArticle()
+    this.getAllProducts()
   }
 }
 </script>
